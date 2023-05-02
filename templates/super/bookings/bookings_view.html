@@ -1,0 +1,45 @@
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title m-0" id="exampleModalCenterTitle">Booking Information</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><i class="la la-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">                 
+                    <div class="col-lg-3">Rental</div>
+                    <div class="col-lg-9">{{bookings.rental}}</div>
+                    <div class="col-lg-3">Channel </div>
+                    <div class="col-lg-9">{{bookings.channel}}</div>
+                    <div class="col-lg-3">Booking Type</div>
+                    <div class="col-lg-9">{{bookings.booking_type}}</div>   
+                    <div class="col-lg-3">Name</div>
+                    <div class="col-lg-9">{{bookings.first_name}} {{bookings.last_name}} </div>
+                    <div class="col-lg-3">Email</div>
+                    <div class="col-lg-9">{{bookings.email}}</div>
+                    <div class="col-lg-3">Phone</div>
+                    <div class="col-lg-9">{{bookings.phone}}</div>
+                    <div class="col-lg-3">Address</div>
+                    <div class="col-lg-9">{{bookings.address}}</div>
+                    <div class="col-lg-3">City</div>
+                    <div class="col-lg-9">{{bookings.city}}</div>
+                    <div class="col-lg-3">State</div>
+                    <div class="col-lg-9">{{bookings.state}}</div>
+                    <div class="col-lg-3">Country</div>
+                    <div class="col-lg-9">{{bookings.country}}</div>
+                    <div class="col-lg-3">Zip Code</div>
+                    <div class="col-lg-9">{{bookings.postal_code}}</div> 
+                    <div class="col-lg-3">CheckIn</div>
+                    <div class="col-lg-9">{{bookings.check_in}}</div>    
+                    <div class="col-lg-3">CheckOut</div>
+                    <div class="col-lg-9">{{bookings.check_out}}</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="model">Close</button>                
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Add Company</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Add Company Profile</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/channel">Company</a></li>
+                              <li class="breadcrumb-item active">Add New</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Company Profile Management</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                        
+                        <div class="col-lg-10">
+                          <form method="POST" class="post-form"   enctype="multipart/form-data" action="/super/company-insert">
+                              {% csrf_token %}
+                              
+                              <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Company Name:</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="company_name" id="id_company_name" required maxlength="100" />
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Company Logo:</label>
+                                  <div class="col-sm-9">                                      
+                                    <input type="file" name="company_logo" accept="image/*" id="id_company_logo"   >
+                                 
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Company Email:</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="company_email" id="id_company_email" required maxlength="100" />
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Company Telephone:</label>
+                                  <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="company_tel" id="id_company_tel" required maxlength="100" />
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-sm-3 col-form-label">Company Address:</label>
+                                  <div class="col-sm-9">
+                                    <textarea name="company_address" cols="30" rows="10" class="form-control"   id="id_company_address"></textarea>
+                                   </div>
+                                </div>
+                                <div class="form-group row">  
+                                  <label for="example-text-input-sm" class="col-sm-3 col-form-label "></label>
+                                  <div class="col-sm-9">  
+                                  <button type="submit" class="btn btn-primary">Save</button>
+                                  </div>
+                              </div> 
+                                
+                             
+                            
+                            </form>
+                        </div>
+                    </div>                                                                             
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  {% include 'super/base/footer.html'%}
+      </div> 
+      
+      <script src="/static/super/js/jquery.min.js"></script>
+      <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+      <script src="/static/super/js/metismenu.min.js"></script>
+      <script src="/static/super/js/waves.js"></script>
+      <script src="/static/super/js/feather.min.js"></script>
+      <script src="/static/super/js/simplebar.min.js"></script>
+      <script src="/static/super/js/jquery-ui.min.js"></script>
+      <script src="/static/super/js/moment.js"></script>
+      <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+      <script src="/static/super/js/app.js"></script>
+     
+    
+    </body>
+    
+    </html>                           
+    
+    
+    
+     
+                 

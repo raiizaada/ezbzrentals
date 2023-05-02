@@ -1,0 +1,28 @@
+<form  method="POST"  class="post-form" enctype="multipart/form-data"  action="/super/invoice-create/">{% csrf_token %}
+    <div class="columns is-centered">
+        <div class="column is-one-third">
+            <label class="col-sm-2 col-form-label">Customer:</label>  
+            {{form.customer}}
+        </div>
+
+        <div class="column is-one-third">
+            <label class="col-sm-2 col-form-label">Email:</label>  
+            {{form.customer_email}}
+        </div>
+        <div class="column is-one-third">
+            <label class="col-sm-2 col-form-label">Message:</label>  
+            {{form.message}}
+        </div>
+    </div>
+    <div class="columns is-centered">
+        <div class="column is-one-third">
+            <label class="col-sm-2 col-form-label">Address:</label>  
+            {{form.billing_address}}
+        </div>
+        <div class="column is-one-third">
+            date: <input class="input" type="date" name="date">
+        </div>
+        <div class="column is-one-third">
+            due-date: <input class="input" type="date" name="due_date">
+        </div>
+    </div>

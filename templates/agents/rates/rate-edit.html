@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Rate</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/agents/images/favicon.png">
+        <link href="/static/agents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/agents/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'agents/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'agents/base/top_nav.html' %}
+        </div>
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Add Rate</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/agents/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/agents/rate">Rate</a></li>
+                              <li class="breadcrumb-item active">Edit Rate</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Rate</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-1"></div>
+                          <div class="col-lg-9">
+                           
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/agents/rate-update/{{rate.id}}">  
+                                {% csrf_token %}  
+                            <div class="container">  
+                              <div class="form-group row">  
+                                <label class="col-sm-3 col-form-label">Rate Type:</label>  
+                                <div class="col-sm-9">  
+                                  <select name="rate_type" class="form-control">
+                                    {% for ratetype in ratetype %}
+                                        <option value="{{ratetype.id}}" {% if ratetype.id == rate.rate_type_id %} selected {% endif %}>{{ratetype.ratetype_name}}</option>
+                                    {% endfor %}
+                                  </select>
+                                </div>  
+                              </div>
+                            <div class="form-group row">  
+                            <label class="col-sm-3 col-form-label">Rate Name:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text" placeholder="Rate Name" name="rate_name" class="form-control" value="{{rate.rate_name}}"> 
+                            </div>  
+                          </div>  
+                          
+                          <div class="form-group row">  
+                            <label class="col-sm-3 col-form-label">Included Occupants:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text" placeholder="Included Occupants" name="included_occupants" class="form-control" value="{{rate.included_occupants}}">
+                            </div>  
+                          </div> 
+                          <div class="form-group row">  
+                            <label class="col-sm-3 col-form-label">Extra Person Charge - Adults:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text" placeholder="Extra Person Charge- Adults" name="extra_adult_charge" class="form-control" value="{{rate.extra_adult_charge}}">
+                            </div>  
+                          </div>  
+                          <div class="form-group row">  
+                            <label class="col-sm-3 col-form-label">Extra Person Charge - Children:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text" placeholder="Extra Person Charge - Children" name="extra_children_charge" class="form-control" value="{{rate.extra_children_charge}}">
+                            </div>  
+                          </div>
+                          <div class="form-group row">  
+                            <label class="col-sm-3 col-form-label">Weekend Surcharge:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text" placeholder="Weekend Surcharge" name="weekend_surcharge" class="form-control" value="{{rate.weekend_surcharge}}">
+                             
+                            </div>  
+                          </div>
+                   
+
+                          <div class="form-group row">  
+                            <label class="col-sm-3 col-form-label"></label>  
+                            <div class="col-sm-9">
+                            <span class="week_charege"><input type="checkbox" name="day_surcharge[]" id="day_surcharge" value="1" class="surcharge"  {% if rate.day_surcharge == 1 in list %} {{ day_surcharge.1}}checked {% endif %} />Mon</span>
+                            <span class="week_charege"><input type="checkbox" name="day_surcharge[]" id="day_surcharge" value="2" class="surcharge"  {% if rate.day_surcharge == 2 %} checked {% endif %}/>Tue</span>
+                            <span class="week_charege"><input type="checkbox" name="day_surcharge[]" id="day_surcharge" value="3" class="surcharge"  {% if rate.day_surcharge == 3 %} checked {% endif %}/>Wed</span>
+                            <span class="week_charege"><input type="checkbox" name="day_surcharge[]" id="day_surcharge" value="4" class="surcharge"  {% if rate.day_surcharge == 4 %} checked {% endif %}/>Thu</span>
+                            <span class="week_charege"><input type="checkbox" name="day_surcharge[]" id="day_surcharge" value="5" class="surcharge"  {% if rate.day_surcharge == 5 %} checked {% endif %}/>Fri</span>
+                            <span class="week_charege"><input type="checkbox" name="day_surcharge[]" id="day_surcharge" value="6" class="surcharge"  {% if rate.day_surcharge == 6 %} checked {% endif %}/>Sat</span>
+                            <span class="week_charege"><input type="checkbox" name="day_surcharge[]" id="day_surcharge" value="7" class="surcharge"  {% if rate.day_surcharge == 7 %} checked {% endif %}/>Sun</span>                             
+
+                            </div>  
+                          </div>
+                          <div class="form-group row">  
+                            <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right">Disable Rates</label>
+                            <div class="col-sm-9">  
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio3" name="disable_rates" value="1" class="custom-control-input" {% if rate.disable_rates == 1 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio3">Yes</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio4" name="disable_rates" value="0" class="custom-control-input" {% if rate.disable_rates == 0 %} checked {% endif %}>
+                              <label class="custom-control-label" for="customRadio4">No</label>
+                          </div>
+                            </div>
+                        </div>
+                        
+                          <div class="form-group row">  
+                            <label class="col-sm-3 col-form-label">Description:</label>  
+                            <div class="col-sm-9">  
+                              <textarea name="description" class="form-control" id="elm1">{{rate.description}}</textarea>
+                            </div>  
+                          </div>  
+                          <div class="form-group row">  
+                            <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right">Status</label>
+                            <div class="col-sm-9">  
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" {% if rate.status == 1 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio1">Active</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input" {% if rate.status == 0 %} checked {% endif %}>
+                              <label class="custom-control-label" for="customRadio2">InActive</label>
+                          </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">  
+                          <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right"></label>
+                          <div class="col-sm-9">  
+                          <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </div>  
+                         
+                          </div>  
+                        </form> 
+                      </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+           </div> 
+   </div> 
+   {% include 'agents/base/footer.html'%}
+  </div> 
+  
+  <script src="/static/agents/js/jquery.min.js"></script>
+  <script src="/static/agents/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/agents/js/metismenu.min.js"></script>
+  <script src="/static/agents/js/waves.js"></script>
+  <script src="/static/agents/js/feather.min.js"></script>
+  <script src="/static/agents/js/simplebar.min.js"></script>
+  <script src="/static/agents/js/jquery-ui.min.js"></script>
+  <script src="/static/agents/js/moment.js"></script>
+  <script src="/static/agents/plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="/static/agents/js/app.js"></script>
+
+</body>
+
+</html>                        

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Rental Type </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/agents/images/favicon.png">
+        <link href="/static/agents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/agents/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'agents/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'agents/base/top_nav.html' %}
+        </div>
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Rental Type</h4>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/agents/dashboard">Dashboard</a></li>                                
+                                <li class="breadcrumb-item active">Rental Type</li>
+                            </ol>
+                        </div>
+                        <div class="col-auto align-self-center">
+                            <a href="/agents/rental-type-add" class="btn btn-primary">                                           
+                                <i data-feather="plus" class="align-self-center icon-xs ml-1"></i>&nbsp; Add New
+                            </a>                            
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success border-0" role="alert">{{message}}   
+        </div>
+        {% endfor %}
+        {%endif%}
+
+ 
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        
+                        <tr>  
+                            <th>ID</th>  
+                            <th>Name</th>  
+                            <th>No of Beds</th> 
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>  
+    </thead>  
+    <tbody>
+   
+    {% for rentaltype in rentaltype %}
+    <tr>  
+        <td>{{ rentaltype.id}}</td>  
+        <td>{{ rentaltype.room_type_name}}</td>  
+        <td>{{ rentaltype.noof_beds}}</td>  
+        <td>{{ rentaltype.created_at}}</td> 
+        <td class="text-left">                                                       
+            <a href="/agents/rental-type-edit/{{ rentaltype.id}}" ><i class="las la-pen text-info font-18"></i></a>
+            <a href="/agents/rental-type-delete/{{ rentaltype.id}}" onclick="return DelItem();" ><i class="las la-trash-alt text-danger font-18"></i></a>
+        </td>
+        
+    </tr>
+    {%endfor%} 
+   
+
+    </tbody>  
+</table>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+{% include 'agents/base/footer.html'%}
+</div> 
+
+<script src="/static/agents/js/jquery.min.js"></script>
+<script src="/static/agents/js/bootstrap.bundle.min.js"></script>
+<script src="/static/agents/js/metismenu.min.js"></script>
+<script src="/static/agents/js/waves.js"></script>
+<script src="/static/agents/js/feather.min.js"></script>
+<script src="/static/agents/js/simplebar.min.js"></script>
+<script src="/static/agents/js/jquery-ui.min.js"></script>
+<script src="/static/agents/js/moment.js"></script>
+<script src="/static/agents/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/agents/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/agents/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+
+
+<script>
+
+
+
+    function DelItem() {
+  
+  
+  
+        if(!confirm("Are You Sure to delete this"))
+  
+  
+  
+        event.preventDefault();
+  
+  
+  
+    }
+  
+  
+</script>
+
+<script src="/static/agents/js/app.js"></script>  
+
+</body>
+
+</html>

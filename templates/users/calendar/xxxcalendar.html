@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Calendar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/users/images/favicon.ico">
+
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/calender/main.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body data-topbar="dark">
+        <div id="layout-wrapper">
+            {% include 'users/base/top_nav.html'%}
+            {% include 'users/base/left_sidebar.html'%}
+       
+		<div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Calendar</h4>
+            
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="/users/dashboard">Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="/users/calendar">Calendar</a></li>
+                                       
+                                    </ol>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="col-sm-9">  
+                        <select name="rental" required="" id="id_rental" class="form-control">
+                          {% for rental in rentals %}
+                              <option value="{{rental.id}}">{{rental.rental_name}}</option>
+                            {% endfor %}
+                        </select>
+                      </div>  
+                    </div>
+                    
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div class="tile row">
+                                <div class="col-md-3">
+                                    <div id="external-events">
+                                        <h4 class="mb-4"> Bookings</h4>
+                                        {% for event in events %}
+                                          <div class="external-event fc-event bg-success">
+                                              <h3>{{ event.title }}</h3>
+                                              <p>From: {{ event.start_time }}</p>
+                                              <p>To: {{ event.id }}</p>
+                                          </div>
+                                         
+                                        {% empty %}
+                                          <p>No Bookings Found</p>
+                                          
+                                        {% endfor %}
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-9">
+                                    <div id="calendar"></div>
+                                </div>
+                    
+                                <div class="modal fade show" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-primary">
+                                                <h5 class="modal-title text-white" id="exampleModalLongTitle">Add New Booking</h5>
+                                                <button id="modalClose1" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form method="post">
+                                              {% csrf_token %}
+                                              <div class="modal-body">
+                                                  <div class="form-group">
+                                                      <label for="recipient-name" class="col-form-label"> Title:</label>
+                                                      {{ form.title }}
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label for="message-text" class="col-form-label">Description:</label>
+                                                      {{ form.description }}
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label for="message-text" class="col-form-label">Start Date:</label>
+                                                      {{ form.start_time }}
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label for="message-text" class="col-form-label">End Date:</label>
+                                                      {{ form.end_time }}
+                                                  </div>
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button id="modalClose2" type="button" class="btn btn-danger">Close</button>
+                                                  <button type="submit" class="btn btn-primary">Save</button>
+                                              </div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                  </div>
+                          
+                              </div> 
+                          </div>
+              
+                {% include 'users/base/footer.html'%}
+              </div> 
+              
+              <script src="/static/users/libs/dropzone/min/dropzone.min.js"></script>
+              <script src="/static/users/libs/jquery/jquery.min.js"></script>
+              <script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+              <script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+              <script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+              <script src="/static/users/libs/node-waves/waves.min.js"></script>
+              <script src="/static/users/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
+              <script src="/static/users/js/pages/datatables.init.js"></script>
+              <script src="/static/users/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+              <script src="/static/users/js/pages/form-element.init.js"></script>
+              <script src="/static/users/libs/tinymce/tinymce.min.js"></script>
+              <script src="/static/users/js/pages/form-editor.init.js"></script>
+              <script src="/static/users/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+              <script src="/static/users/libs/twitter-bootstrap-wizard/prettify.js"></script>
+              <script src="/static/users/libs/select2/js/select2.min.js"></script>
+              <script src="/static/users/js/pages/ecommerce-add-product.init.js"></script>
+              <script src="/static/users/js/app.js"></script>
+              <script src="/static/users/calender/main.js"></script>
+              <script>
+                  document.addEventListener('DOMContentLoaded', function() {
+                    var calendarEl = document.getElementById('calendar');
+                    var today = new Date();
+
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                      headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,list'
+                      },
+                      initialDate: today,
+                      navLinks: true, // can click day/week names to navigate views
+                      selectable: true,
+                      selectMirror: true,
+                      select: function(arg) {
+                        console.log('clicked')
+                        var modal = document.getElementById('eventModal')
+                        modal.style.display = 'block'
+                        calendar.unselect()
+                      },
+                      // THIS KEY WON'T WORK IN PRODUCTION!!!
+                      // To make your own Google API key, follow the directions here:
+                      // http://fullcalendar.io/docs/google_calendar/
+                      // googleCalendarApiKey: 'AIzaSyCqCxjjLtjbtkX37aOtWB8OfwBLy_6QuYk',
+
+                      // bangladesh Holidays
+                      // events: 'bn.bd#holiday@group.v.calendar.google.com',
+                      eventClick: function(arg) {
+                        if (confirm('Are you sure you want to delete this event?')) {
+                          arg.event.remove()
+                        }
+                      },
+                      editable: true,
+                      dayMaxEvents: true, // allow "more" link when too many events
+                      events: {{ events|safe }},
+                      // events: [
+                      //   {
+                      //     title: 'All Day Event',
+                      //     start: '2021-06-26'
+                      //   },
+                      //   {
+                      //     groupId: 999,
+                      //     title: 'Repeating Event',
+                      //     start: '2020-09-16T16:00:00'
+                      //   },
+                      //   {
+                      //     title: 'Conference',
+                      //     start: '2020-09-11',
+                      //     end: '2020-09-13'
+                      //   },
+                      //   {
+                      //     title: 'Click for Google',
+                      //     url: 'http://google.com/',
+                      //     start: '2020-09-28'
+                      //   }
+                      // ]
+                    });
+
+                    calendar.render();
+                  });
+                  const closeBtn1 = document.getElementById('modalClose1');
+                  const closeBtn2 = document.getElementById('modalClose2');
+                  closeBtn1.addEventListener('click',()=>{
+                    const eventModal = document.getElementById('eventModal')
+                    eventModal.style.display = 'none';
+                  });
+                  closeBtn2.addEventListener('click',()=>{
+                    const eventModal = document.getElementById('eventModal')
+                    eventModal.style.display = 'none';
+                  });
+              </script>
+              
+              </body>
+              </html>   

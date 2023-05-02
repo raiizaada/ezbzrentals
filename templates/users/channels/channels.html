@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Channels | EZBZ Rentals</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="" name="description" />
+<meta content="" name="author" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="/static/users/images/favicon.png">
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+</head>
+<body data-layout="horizontal">
+<div id="layout-wrapper">
+{% include 'users/base/header.html'%}
+<div class="main-content">
+<div class="page-content">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+          
+            <div class="col-lg-12">
+              <h5>Channels</h5>
+            <form method="POST">{% csrf_token%}
+              <div class="col-lg-4">
+                <select class="form-control select2" name="rental_id">
+                    {% for rental in rentals %}
+                      <option value="{{rental.id}}">{{rental.rental_name}}</option>
+                    {% endfor %}
+                </select>
+                
+              </div>
+            </form>
+              <hr>
+                <div class="row">
+                  {% for channel in channels %}
+                <div class="col-lg-3">
+                    <div class="channel_list">
+                        <input type="checkbox" name="" class="form-check-input">
+                        <img src="/media/{{channel.channel_image}}" class="img-thumbnail rounded-circle avatar-xl">
+                        <h4>{{channel.channel_title}}</h4>                        
+                    </div>
+            </div>
+            {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>    
+    </div>
+</div>
+{% include 'users/base/footer.html'%} 
+</div>
+</div>
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+<script src="/static/users/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="/static/users/libs/twitter-bootstrap-wizard/prettify.js"></script>
+<script src="/static/users/libs/select2/js/select2.min.js"></script>
+<script src="/static/users/js/pages/ecommerce-add-product.init.js"></script>
+<script src="/static/users/js/app.js"></script>
+
+
+</body>
+</html>

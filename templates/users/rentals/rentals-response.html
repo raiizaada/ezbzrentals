@@ -1,0 +1,30 @@
+
+            {% for n in rental %}
+           
+            <div class="col-xl-3 col-sm-6">
+                <div class="card brdg">
+
+                    <div class="card-body rentals_image">
+                        <div class="text-center">
+                            <img src="/media/{{n.cover_image}}" alt="img-1" height="400"  class="img-fluid">
+                            <div class="flex-1 mt-3">
+                                <h5 class="text-truncate"><a  class="text-dark">{{n.rental_name}}</a></h5>
+                              
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row text-center">
+                            <div class="col-12 rental_btn">
+                                <a href="/calendar/{{n.id}}"><i class="mdi mdi-calendar-month f24"></i></a>
+                                <a href="/rentals/overview/{{n.id}}"><i class="mdi mdi-lead-pencil f24"></i></a>  
+                                <a href="/rentals/preview/{{n.id}}"><i class="mdi mdi-eye f24"></i></a>
+                                <a href="/rental-delete/{{n.id}}" onClick="return DelItem();"><i class="mdi mdi-trash-can-outline f24"></i></a>                               
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor%} 

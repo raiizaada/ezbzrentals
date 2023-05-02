@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Add User Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Add User Profile</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/user-profile">User Profile</a></li>
+                              <li class="breadcrumb-item active">Add New</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">User Profile</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">+
+                          <div class="col-lg-1"></div>
+                          <div class="col-lg-9">
+                            <form method="POST" class="post-form" action="/super/userprofile-insert" enctype="multipart/form-data">  
+                              {% csrf_token %}  
+                          <div class="container">
+                          <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">Name:</label>  
+                          <div class="col-sm-5">  
+                            <input type="text" placeholder="First Name" name="first_name" class="form-control">
+                          </div>  
+                          <div class="col-sm-4">  
+                            <input type="text" placeholder="Last Name" name="last_name" class="form-control">
+                          </div>  
+                        </div> 
+                        <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">Phone:</label>  
+                          <div class="col-sm-9">  
+                            <input type="text" placeholder="Phone" name="phone" class="form-control">
+                          </div>  
+                        </div>
+                        <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">Address:</label>  
+                          <div class="col-sm-9">  
+                            <input type="text" placeholder="Address" name="address" class="form-control">
+                          </div>  
+                        </div>  
+                          <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">City:</label>  
+                          <div class="col-sm-9">  
+                            <input type="text" name="city" class="form-control" placeholder="City">
+                          </div>  
+                        </div>  
+                          <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">State:</label>  
+                          <div class="col-sm-9">  
+                            <input type="text" name="state" class="form-control" placeholder="State">  
+                          </div>  
+                        </div>
+                        <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">Country:</label>  
+                          <div class="col-sm-9">  
+                            <input type="text" name="coutry" class="form-control" placeholder="Country">  
+                          </div>  
+                        </div>
+                        <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">Zip / Postal Code:</label>  
+                          <div class="col-sm-9">  
+                            <input type="text" name="postal_code" class="form-control" placeholder="Zip / Postal Code">  
+                          </div>  
+                        </div>
+                        <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">Property Phone Number:</label>  
+                          <div class="col-sm-9">  
+                            <input type="text" name="property_phone_number" class="form-control" placeholder="Property Phone Number">  
+                          </div>  
+                        </div>
+                        <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">Toll Free:</label>  
+                          <div class="col-sm-9">  
+                            <input type="text" name="tollfree" class="form-control" placeholder="Toll Free">  
+                          </div>  
+                        </div>
+                        <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">Website:</label>  
+                          <div class="col-sm-9">  
+                            <input type="text" name="website" class="form-control" placeholder="Website">  
+                          </div>  
+                        </div>
+                        <div class="form-group row">  
+                          <label class="col-sm-3 col-form-label">Property Logo:</label>  
+                          <div class="col-sm-9">  
+                            <input type="file" name="property_logo" class="form-control">  
+                          </div>  
+                        </div>
+                        <div class="form-group row">  
+                          <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right">Status</label>
+                          <div class="col-sm-9">  
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" checked>
+                              <label class="custom-control-label" for="customRadio1">Active</label>
+                          </div>
+                          <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio2">InActive</label>
+                        </div>
+                          </div>
+                      </div> 
+                        <div class="form-group row">  
+                          <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right"></label>
+                          <div class="col-sm-9">  
+                          <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </div>   
+                        </div> 
+                      </form> 
+                    </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+          </div> 
+        </div> 
+        {% include 'super/base/footer.html'%}
+      </div> 
+      
+      <script src="/static/super/js/jquery.min.js"></script>
+      <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+      <script src="/static/super/js/metismenu.min.js"></script>
+      <script src="/static/super/js/waves.js"></script>
+      <script src="/static/super/js/feather.min.js"></script>
+      <script src="/static/super/js/simplebar.min.js"></script>
+      <script src="/static/super/js/jquery-ui.min.js"></script>
+      <script src="/static/super/js/moment.js"></script>
+      <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+      <script src="/static/super/js/app.js"></script>
+      <script>
+        $('.change-avatar').on('click', function() { $('#fileupload').click();return false;});
+        $('.add-member').on('click', function() { $('#add-member').click();return false;});
+      </script>
+    
+    </body>
+    
+    </html>                           
+    
+    
+    
+     
+                 

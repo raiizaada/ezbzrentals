@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Discount</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+         
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Discount</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/rentals">Rental</a></li>
+                             
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                
+                <div class="col-lg-12">
+                  <h5>Discounts</h5>
+                  <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+                  <hr>
+                  {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"
+                      aria-label="Close"></button>
+                  </div>
+                  {% endfor %}
+                  {%endif%}
+                  <p><strong>Discounts for longer stays</strong></p>
+                  <form method="POST" enctype="multipart/form-data" class="post-form" action="/super/long-stay-discounts/{{longstaydiscount.id}}">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                        <label class="form-label fw6">7 nights or more (%)</label>
+                        <input type="text" class="form-control" name="seven_nights" value="{{longstaydiscount.seven_nights}}">
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">14 nights or more (%)</label>
+                        <input type="text" class="form-control" name="fourteen_nights" value="{{longstaydiscount.fourteen_nights}}">
+                      </div>
+                      </div>
+                      <div class="row mb-3">
+                        <div class="col-lg-6">
+                        <label class="form-label fw6">21 nights or more (%)</label>
+                        <input type="text" name="twenty_one_nights" class="form-control" value="{{longstaydiscount.twenty_one_nights}}">
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">28 nights or more (%)</label>
+                        <input type="text" name="twenty_eight_nights" class="form-control" value="{{longstaydiscount.twenty_eight_nights}}">
+                      </div>
+                      </div>
+                    <div class="mb-3">
+                     <input type="submit" class="btn btn-primary" value="Save">
+                      
+                    </div>
+                  </form>
+                  <hr>
+                  <p><strong>Last minute / Early bird discounts</strong></p>
+                  <form method="POST" enctype="multipart/form-data" class="post-form" action="/super/early-bird-discounts/{{earlybirddiscount.id}}">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                        <label class="form-label fw6">Booking made less than</label>
+                        <select class="form-control" name="booking_less">
+                            <option>--Select--</option>
+                            <option value="1" {% if earlybirddiscount.booking_less == "1" %} selected {% endif %}>1 day</option>
+                            <option value="2" {% if earlybirddiscount.booking_less == "2" %} selected {% endif %}>2 day</option>
+                            <option value="3" {% if earlybirddiscount.booking_less == "3" %} selected {% endif %}>3 day</option>
+                          </select>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">Apply discount of (%)</label>
+                        <input type="text" class="form-control" name="booking_less_discount" value="{{earlybirddiscount.booking_less_discount}}">
+                      </div>
+                      </div>
+                      <div class="row mb-3"><h5>Early bird discounts</h5></div>
+                      <div class="row mb-3">
+                        <div class="col-lg-6">
+                        <label class="form-label fw6">Booking made more than</label>
+                        <select class="form-control" name="booking_more">
+                            <option>--Select--</option>
+                            <option value="1" {% if earlybirddiscount.booking_more == "1" %} selected {% endif %}>1 day</option>
+                            <option value="2" {% if earlybirddiscount.booking_more == "2" %} selected {% endif %}>2 day</option>
+                            <option value="3" {% if earlybirddiscount.booking_more == "3" %} selected {% endif %}>3 day</option>
+                          </select>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">Apply discount of (%)</label>
+                        <input type="text" name="booking_more_discount" class="form-control" value="{{earlybirddiscount.booking_more_discount}}">
+                      </div>
+                      </div>
+                    <div class="mb-3">
+                     <input type="submit" class="btn btn-primary" value="Save">
+                      
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>    
+        </div>
+
+      {% include 'super/base/footer.html'%}
+    </div> 
+    
+    <script src="/static/super/js/jquery.min.js"></script>
+    <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/super/js/metismenu.min.js"></script>
+    <script src="/static/super/js/waves.js"></script>
+    <script src="/static/super/js/feather.min.js"></script>
+    <script src="/static/super/js/simplebar.min.js"></script>
+    <script src="/static/super/js/jquery-ui.min.js"></script>
+    <script src="/static/super/js/moment.js"></script>
+    <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="/static/super/js/app.js"></script>
+   
+  <script>
+    $(".alert-success").fadeTo(5000, 500).slideUp(500, function(){
+        $(".alert-success").slideUp(500);
+    });
+  </script>
+    
+  
+  
+  </body>
+  
+  </html>                        

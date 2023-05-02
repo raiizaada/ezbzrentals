@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Rentals</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Rentals List</h4>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Rentals</li>
+                            </ol>
+                        </div>
+                        <div class="col-auto align-self-center">
+                            <a href="/super/rental-add" class="btn btn-primary">                                           
+                                <i data-feather="plus" class="align-self-center icon-xs ml-1"></i>&nbsp; Add New
+                            </a>   
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table id="datatable" class="table table-bordered dt-responsive nowrap">
+                        <thead>
+                            <tr>  
+               
+                                <th>ID</th>
+                                <th>User</th> 
+                                <th>Name</th>  
+                                <th>Cover Photo</th>  
+                                <th>Date</th> 
+                                <th>Actions</th>  
+  
+                            </tr>  
+                            </thead>  
+                            <tbody>  
+                            {% for rental in rental %}
+                            <tr>  
+                                
+                                <td>{{rental.id}}</td>
+                                <td>{{rental.user_id}}</td>
+                                <td>{{rental.rental_name}}</td> 
+                                <td><img src="/media/{{rental.cover_image}}" height="40"></td>  
+                                <td>{{rental.created_at}}</td> 
+                                <td class="text-left">                                                       
+                                  <a href="/super/rental-edit/{{ rental.id }}"><i class="las la-pen text-info font-18"></i></a>
+                                  <a href="/super/rental-delete/{{ rental.id }}" onclick="return DelItem();"  ><i class="las la-trash-alt text-danger font-18"></i></a>
+                                  <div class="dropdown d-inline-block"><a class="dropdown-toggle arrow-none" id="dLabel11" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false"><i class="las la-ellipsis-v font-20 text-muted"></i></a><div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel11" style="">
+                                    <a class="dropdown-item" href="/super/rental-basic/{{rental.id}}">Basic Info</a>
+                                    <a class="dropdown-item" href="/super/rental-photo/{{rental.id}}">Photo</a>
+                                    <a class="dropdown-item" href="/super/rental-location/{{rental.id}}">Location</a>
+                                    <a class="dropdown-item" href="/super/rental-rooms/{{rental.id}}">Rooms</a>
+                                    <a class="dropdown-item" href="/super/rental-amenities/{{rental.id}}"> Amenities</a>
+                                    <a class="dropdown-item" href="/super/basic-rates/{{rental.id}}">Basic Rates</a>
+                                    <a class="dropdown-item" href="/super/seasonal-rates/{{rental.id}}">Seasonal Rates</a>
+                                    <a class="dropdown-item" href="/super/rental-discounts/{{rental.id}}">Discounts</a>
+                                    <a class="dropdown-item" href="/super/rental-additional-info/{{rental.id}}">Additional Info</a>
+                                    <a class="dropdown-item" href="/super/rental-house-rules/{{rental.id}}"> House Rules</a>
+                                    <a class="dropdown-item" href="/super/rental-policy/{{rental.id}}">Policy</a>
+                                    <a class="dropdown-item" href="/super/rental-instructions/{{rental.id}}"> Instruction</a></div></div>
+                              </td>     
+                                
+                            </tr>  
+                            {% endfor %}
+                            </tbody>  
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>           
+
+{% include 'super/base/footer.html'%}
+</div> 
+<script src="/static/super/js/jquery.min.js"></script>
+<script src="/static/super/js/bootstrap.bundle.min.js"></script>
+<script src="/static/super/js/metismenu.min.js"></script>
+<script src="/static/super/js/waves.js"></script>
+<script src="/static/super/js/feather.min.js"></script>
+<script src="/static/super/js/simplebar.min.js"></script>
+<script src="/static/super/js/jquery-ui.min.js"></script>
+<script src="/static/super/js/moment.js"></script>
+<script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/super/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/super/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="/static/super/js/app.js"></script>   
+<script>
+    $('#datatable').DataTable();
+</script>
+<script>
+
+
+
+    function DelItem() {
+  
+  
+  
+        if(!confirm("Are You Sure to delete this"))
+  
+  
+  
+        event.preventDefault();
+  
+  
+  
+    }
+  
+  
+</script>
+</body>
+</html>
+                      
+                    
+                      
+            

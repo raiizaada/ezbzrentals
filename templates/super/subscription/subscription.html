@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Subscription</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="/static/super/images/favicon.ico">
+
+        <!-- App css -->
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+        <div class="page-content">
+            <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="page-title-box">
+                  <div class="row">
+                    <div class="col">
+                      <h4 class="page-title">Pricing</h4>
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/super/">Dashboard</a></li>
+                        <li class="breadcrumb-item active"><a href="/super/pricing">pricing</li>
+                      </ol>
+                    </div>
+                    <div class="col-auto align-self-center"> <a href="/super/subscription-add" class="btn btn-primary"> <i data-feather="plus" class="align-self-center icon-xs ml-1"></i>&nbsp; Add New </a> </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success border-0" role="alert">{{message}}</div>
+            {% endfor %}
+            {%endif%}
+            
+            
+                    <div class="row">
+                        {% for sub in subscription %}
+                        
+                        <div class="col-lg-3">
+                            
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="pricingTable1 text-center">
+                                        <h6 class="title1 pt-3 pb-2 m-0">{{sub.title}}</h6>
+                                        <p class="text-muted p-3 mb-0">{{sub.subtitle}}</p>
+                                        <div class="p-3">
+                                            <h3 class="amount amount-border d-inline-block">${{sub.price}}</h3>
+                                            <small class="font-12 text-muted">/{{sub.tenure}}</small>
+                                        </div>
+                                       <hr class="hr-dashed">
+                                        <ul class="list-unstyled pricing-content-2 text-left py-3 border-0 mb-0">
+                                            {% comment %} <li>30GB Disk Space</li>
+                                            <li>30 Email Accounts</li>
+                                            <li>30GB Monthly Bandwidth</li>
+                                            <li>06 Subdomains</li>
+                                            <li>10 Domains</li> {% endcomment %}
+                                            {{sub.description|safe}}
+                                        </ul>
+                                            
+                                        <div class="text-muted text-center"> 
+                                           
+                                            <a href='/super/subscription-edit/{{ sub.id}}' class="badge badge-primary">Edit</a> 
+                                            <a href='/super/subscription-delete/{{ sub.id}}' onClick="return DelItem();" class="badge badge-danger">Delete
+                                            </a> 
+                                          </div>
+                                    </div><!--end pricingTable-->
+                                </div><!--end card-body-->
+                                
+                            </div> <!--end card-->    
+                                                         
+                        </div><!--end col-->
+                        {% endfor %} 
+
+                </div><!-- container -->
+                
+                
+
+                {% include 'super/base/footer.html'%}
+            
+        </div>
+        <!-- end page-wrapper -->
+
+        
+
+
+        <!-- jQuery  -->
+        <script src="/static/super/js/jquery.min.js"></script>
+        <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/super/js/metismenu.min.js"></script>
+        <script src="/static/super/js/waves.js"></script>
+        <script src="/static/super/js/feather.min.js"></script>
+        <script src="/static/super/js/simplebar.min.js"></script>
+        <script src="/static/super/js/jquery-ui.min.js"></script>
+        <script src="/static/super/js/moment.js"></script>
+        <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+        <script>
+
+
+
+            function DelItem() {
+          
+          
+          
+                if(!confirm("Are You Sure to delete this"))
+          
+          
+          
+                event.preventDefault();
+          
+          
+          
+            }
+          
+          
+        </script>
+
+        <!-- App js -->
+        <script src="/static/super/js/app.js"></script>
+        
+    </body>
+
+</html>

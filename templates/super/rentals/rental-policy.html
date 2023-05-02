@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Policy</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+         
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Policy</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/rentals">Rental</a></li>
+                             
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+                  <h5>Policy</h5>
+                  <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+                  <hr>
+                  {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"
+                      aria-label="Close"></button>
+                  </div>
+                  {% endfor %}
+                  {%endif%}
+                  <form method="POST" enctype="multipart/form-data" class="post-form" action="/super/rental-policy-update/{{rentalpolicy.id}}">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                     
+                        <label class="form-label fw6" for="productname">Policy Name</label>
+                        <input id="policy_name" value="{{rentalpolicy.name}}" name="name" type="text" class="form-control">
+                      </div>
+                   
+                    <div class="mb-3">
+                      <label class="form-label fw6" for="productdesc">Description</label>
+                      <textarea class="form-control" name="description" id="editor" rows="5">{{rentalpolicy.description}}</textarea>
+                    </div>
+                 
+                    <div class="mb-3">
+                     <input type="submit" class="btn btn-primary" value="Save">
+                      
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+  
+
+    {% include 'super/base/footer.html'%}
+    </div> 
+    <script src="/static/super/js/jquery.min.js"></script>
+    <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/super/js/metismenu.min.js"></script>
+    <script src="/static/super/js/waves.js"></script>
+    <script src="/static/super/js/feather.min.js"></script>
+    <script src="/static/super/js/simplebar.min.js"></script>
+    <script src="/static/super/js/jquery-ui.min.js"></script>
+    <script src="/static/super/js/moment.js"></script>
+    <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="/static/super/js/app.js"></script>
+   
+  <script>
+    $(".alert-success").fadeTo(5000, 500).slideUp(500, function(){
+        $(".alert-success").slideUp(500);
+    });
+  </script>
+  </body>
+  </html>     

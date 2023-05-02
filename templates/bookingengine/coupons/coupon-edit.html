@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Coupon</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/bookingengine/images/favicon.ico">
+
+<link href="/static/bookingengine/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body>
+        <div id="layout-wrapper">
+            {% include 'bookingengine/base/top_nav.html'%}
+            {% include 'bookingengine/base/left_sidebar.html'%}
+       
+		<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Edit Coupon</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/booking-engine/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/booking-engine/coupons">Coupon</a></li>
+                            <li class="breadcrumb-item active">Edit Coupon</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body mt-4">
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/booking-engine/coupon-update/{{coupon.id}}">  
+                                {% csrf_token %}  
+                              <div class="col-lg-10">
+                            <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Code:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text" name="code" class="form-control" value="{{coupon.code}}"> 
+                            </div>  
+                          </div>  
+                          <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Valid From:</label>  
+                            <div class="col-sm-9">  
+                              <input type="date" name="valid_from" class="form-control" value="{{coupon.valid_from|date:'Y-m-d'}}"> 
+                            </div>  
+                          </div> 
+                          <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Valid To:</label>  
+                            <div class="col-sm-9">  
+                              <input type="date" name="valid_to" class="form-control" value="{{coupon.valid_to|date:'Y-m-d'}}"> 
+                            </div>  
+                          </div>  
+                          <div class="row mb-3" >  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Type:</label>  
+                            <div class="col-sm-9">  
+                               <select name="type" id="coupon_type" class="form-control form-select" >
+                                        <option>--Select--</option>
+                                        <option value="Percentage" {% if coupon.type == 'Percentage' %} selected {% endif %}>Percentage</option>
+                                        <option value="Fixed per accommodation per day" >Fixed per accommodation per day</option>
+                                        <option value="Fixed per accommodation per stay" >Fixed per accommodation per stay</option>
+                                      </select> 
+                            </div>  
+                          </div> 
+                            <div class="row mb-3 ">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Coupon Amount:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text"  name="coupon_amount" class="form-control" value="{{coupon.coupon_amount}}">
+                            </div>  
+                          </div>  
+                          <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Rooms:</label>  
+                            <div class="col-sm-9">  
+                              <ul class="list_none">
+                                {% for room in rooms %}                              
+                                <li><input type="checkbox" name="rooms[]" class="form-check-input" value="{{room.name}}" {% if room.name in coupon.rooms %} checked {% endif %}> {{room.name}}</li>
+                                {% endfor %}
+                              </ul>
+                            </div>  
+                          </div>
+                          <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Status</label>
+                            <div class="col-sm-9">  
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="active" value="1" class="custom-control-input" {% if coupon.active == 1 %} checked {% endif %} >
+                                <label class="custom-control-label" for="customRadio1">Active</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio2" name="active" value="0" class="custom-control-input" {% if coupon.active == 0 %} checked {% endif %}>
+                              <label class="custom-control-label" for="customRadio2">InActive</label>
+                          </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">  
+                          <label for="example-text-input" class="col-sm-3 col-form-label text-right"></label>
+                          <div class="col-sm-9">  
+                          <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </div>  
+                         
+                          </div>  
+                        </form> 
+                      </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+           
+   </div> 
+   {% include 'super/base/footer.html'%}
+  </div> 
+  
+  <script src="/static/bookingengine/libs/jquery/jquery.min.js"></script>
+  <script src="/static/bookingengine/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/bookingengine/libs/metismenu/metisMenu.min.js"></script>
+  <script src="/static/bookingengine/libs/simplebar/simplebar.min.js"></script>
+  <script src="/static/bookingengine/libs/node-waves/waves.min.js"></script>
+  <script src="/static/bookingengine/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <script src="/static/bookingengine/js/pages/form-element.init.js"></script>
+  <script src="/static/bookingengine/js/app.js"></script>
+
+
+</body>
+
+</html>                        

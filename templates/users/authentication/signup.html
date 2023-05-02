@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        
+        <meta charset="utf-8" />
+        <title>Register</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <link rel="shortcut icon" href="/static/users/images/favicon.png">
+        <link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body>        
+        
+            <div class="container-fluid p-0">
+                <div class="row g-0">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        <div class="p-4 align-items-center min-vh-100 auth-body-bg">
+                            <div class="w-100">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-9">
+                                            <div class="text-center">
+                                               
+                                                    <a href="/" class="logo"><img src="/static/users/images/logo.png" height="60" alt="logo"></a>
+                                                
+                                                    <div class="mt-4">
+                                                <h4 class="font-size-18">Register account</h4>
+                                                <p class="text-muted">Get your free EZBZ Rentals account now.</p>
+                                                 {% for message in messages %}
+                                                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                                        <strong>Message:</strong> {{ message }}
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                    </div>
+                                                    {% endfor %}
+                                            </div>
+                                            </div>
+
+                                            <div>
+                                                <form class="form-horizontal auth-form my-4" method="POST" action="/signup">  {% csrf_token %}
+
+                                                    
+                    
+                                                    <div class="auth-form-group-custom mb-3">
+                                                        <i class="ri-user-2-line auti-custom-input-icon"></i>
+                                                        <label for="username">Username</label>
+                                                        <input type="text" class="form-control" name="username" placeholder="Enter your username">
+                                                    </div>
+
+                                                    <div class="auth-form-group-custom mb-3">
+                                                        <i class="ri-user-2-line auti-custom-input-icon"></i>
+                                                        <label for="firstname">First Name</label>
+                                                        <input type="text" class="form-control" name="fname" placeholder="Enter your firstname">
+                                                    </div>
+
+                                                    <div class="auth-form-group-custom mb-3">
+                                                        <i class="ri-user-2-line auti-custom-input-icon"></i>
+                                                        <label for="lastname">Last Name</label>
+                                                        <input type="text" class="form-control" name="lname" placeholder="Enter your lastname">
+                                                    </div>
+
+                                                    <div class="auth-form-group-custom mb-3">
+                                                        <i class="ri-mail-line auti-custom-input-icon"></i>
+                                                        <label for="useremail">Email</label>
+                                                        <input type="email" class="form-control" name="email" placeholder="Enter your email">
+                                                    </div>
+                            
+                                                    <div class="auth-form-group-custom mb-3">
+                                                        <i class="ri-lock-2-line auti-custom-input-icon"></i>
+                                                        <label for="userpassword">Password</label>
+                                                        <input type="password" class="form-control" name="pass1" placeholder="Enter your password">
+                                                    </div>
+                                                    <div class="auth-form-group-custom mb-3">
+                                                        <i class="ri-lock-2-line auti-custom-input-icon"></i>
+                                                        <label for="userpassword"> Confirm Password</label>
+                                                        <input type="password" class="form-control" name="pass2" placeholder="Confirm your password">
+                                                    </div>
+                            
+
+                                                    <div class="text-center">
+                                                        <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Register</button>
+                                                        <div class="mt-4">
+                                                        <p>Already have an account ? <a href="/" class="fw-medium text-primary"> Login</a> </p>
+                                                    </div>
+                                                    </div>
+
+                                             
+                                                </form>
+                                          </div>
+
+                                            <div class="mt-1 text-center">
+                                                
+                                               <p>Copyright &copy; EZBZ Rentals
+                        <script>document.write(new Date().getFullYear())</script>. All Rights Reserved.</p>
+                                            </div>
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                </div>
+            </div>      
+        
+
+       
+        <script src="/static/users/libs/jquery/jquery.min.js"></script>
+        <script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+        <script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+        <script src="/static/users/libs/node-waves/waves.min.js"></script>
+
+        <script src="/static/users/js/app.js"></script>
+
+    </body>
+</html>

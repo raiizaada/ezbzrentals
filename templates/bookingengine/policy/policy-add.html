@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Add Policy</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/users/images/favicon.ico">
+
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body>
+        <div id="layout-wrapper">
+            {% include 'users/base/top_nav.html'%}
+            {% include 'users/base/left_sidebar.html'%}
+       
+		<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Add Policy</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/users/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/users/rental-type">Policy</a></li>
+                            <li class="breadcrumb-item active">Add Policy</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body mt-4">
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/users/policy-insert">  
+                                {% csrf_token %}  
+                              <div class="col-lg-10">
+                              <div class="row mb-3">  
+                                <label for="example-search-input" class="col-sm-3 col-form-label text-right">Policy Number:</label>  
+                                <div class="col-sm-9">  
+                                  <input type="text" name="policy_number" placeholder="Policy Number" class="form-control">
+                                </div>  
+                              </div>
+                            <div class="row mb-3">  
+                            <label for="example-search-input" class="col-sm-3 col-form-label text-right">Policy Name:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text" placeholder="Policy Name" name="policy_name" class="form-control"> 
+                            </div>  
+                          </div>  
+                            <div class="row mb-3">  
+                            <label for="example-search-input" class="col-sm-3 col-form-label text-right">Policy Type:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text" placeholder="Policy Type" name="policy_type" class="form-control">
+                            </div>  
+                          </div>  
+                          <div class="row mb-3">  
+                            <label for="example-search-input" class="col-sm-3 col-form-label text-right">Policy Description:</label>  
+                            <div class="col-sm-9">  
+                              <textarea name="description" class="form-control" id="editor"></textarea>
+                            </div>  
+                          </div>  
+                          <div class="row mb-3">  
+                            <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right">Status</label>
+                            <div class="col-sm-9">  
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" checked>
+                                <label class="custom-control-label" for="customRadio1">Active</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input">
+                              <label class="custom-control-label" for="customRadio2">InActive</label>
+                          </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">  
+                          <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right"></label>
+                          <div class="col-sm-9">  
+                          <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </div>  
+                         
+                          </div>  
+                        </form> 
+                      </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+           </div> 
+    
+   {% include 'users/base/footer.html'%}
+  </div> 
+</div>
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+<script src="/static/users/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="/static/users/js/pages/form-element.init.js"></script>
+<script src="/static/users/js/app.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor
+          .create( document.querySelector( '#editor' ) );
+</script>
+</body>
+
+</html>                        

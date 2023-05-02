@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>  Rental Basic Rates </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+         
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Basic Rates</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/rentals">Rental  </a></li>
+                             
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Rental Basic Rates </h4>
+                          </div>
+                      </div>
+                  </div> 
+                  <div class="container">
+                    <div class="row">
+                      
+                      <div class="col-lg-12">
+                        <div class="card">
+                          <div class="card-body">
+                            
+                              <div class="col-lg-12">
+                                <h5>Basic Rates</h5>
+                                <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+                                <hr>
+                                {% if messages %}
+                                {% for message in messages %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                                </div>
+                                {% endfor %}
+                                {%endif%}
+                                <form method="POST" enctype="multipart/form-data" class="post-form" action="/rentals/basic-rates-update/{{basicrates.id}}">
+                                  {% csrf_token %}
+                                  
+                                  <div class="form-group row">
+                                      <div class="col-lg-6">
+                                      <label class="form-label fw6" for="productname">Currency</label>
+                                      <select name="currency" class="form-control select2" required>
+                                        {% for currency in currency %}
+                                        <option value="{{currency.code}}" {% if currency.code == basicrates.currency %} selected {% endif %}>{{currency.title}}</option>
+                                        {% endfor %}                                      
+                                        </select>
+                                        </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <div class="col-lg-6" id="tooltip-container">
+                                          <label class="form-label fw6">Basic night <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="The rate for the basic night is used whenever there are no other price rules.">
+                                            ?
+                                        </button></label>
+                                          <input type="text" name="basic_night" class="form-control" value="{{basicrates.basic_night}}">
+                                        </div>
+                                        <div class="col-lg-6"><div class="rate_night">/ <span>night</span></div></div>
+                  
+                                  </div>
+                                 
+                                  <div class="form-group row">
+                                      <div class="col-lg-6" id="tooltip-container">
+                                          <label class="form-label fw6">Weekend night <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" title="The rate for Weekend night is applied to Friday and Saturday nights.">
+                                            ?
+                                        </button></label>
+                                          <input type="text" name="weekend_night" class="form-control" value="{{basicrates.weekend_night}}">
+                                        </div>
+                                        <div class="col-lg-6"><div class="rate_night">/ <span>Friday or Saturday night</span></div></div>
+                  
+                                  </div>
+                                  <div class="form-group row">
+                                      <div class="col-lg-6" id="tooltip-container">
+                                      <label class="form-label fw6" for="productname">Number of Guests <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                                          data-bs-toggle="tooltip" data-bs-placement="top" title="Enter the value for the maximum number of guests who can stay for the Nightly rates that you have defined above.">
+                                          ?
+                                      </button></label>
+                                      <select name="guest_number" class="form-control select2" required>
+                                          <option>--Select--</option>
+                                          <option value="1" {% if basicrates.guest_number == "1" %} selected {% endif %}>1</option>
+                                          <option value="2" {% if basicrates.guest_number == "2" %} selected {% endif %}>2</option>
+                                          <option value="3" {% if basicrates.guest_number == "3" %} selected {% endif %}>3</option>
+                                          <option value="4" {% if basicrates.guest_number == "4" %} selected {% endif %}>4</option>
+                                          <option value="5" {% if basicrates.guest_number == "5" %} selected {% endif %}>5</option>
+                                          <option value="6" {% if basicrates.guest_number == "6" %} selected {% endif %}>6</option>
+                                          <option value="7" {% if basicrates.guest_number == "7" %} selected {% endif %}>7</option>
+                                          <option value="8" {% if basicrates.guest_number == "8" %} selected {% endif %}>8</option>
+                                          <option value="9" {% if basicrates.guest_number == "9" %} selected {% endif %}>9</option>
+                                          <option value="10" {% if basicrates.guest_number == "10" %} selected {% endif %}>10</option>
+                                          <option value="11" {% if basicrates.guest_number == "11" %} selected {% endif %}>11</option>
+                                          <option value="12" {% if basicrates.guest_number == "12" %} selected {% endif %}>12</option>
+                                          <option value="13" {% if basicrates.guest_number == "13" %} selected {% endif %}>13</option>
+                                          <option value="14" {% if basicrates.guest_number == "14" %} selected {% endif %}>14</option>
+                                          <option value="15" {% if basicrates.guest_number == "15" %} selected {% endif %}>15</option>
+                                          <option value="16" {% if basicrates.guest_number == "16" %} selected {% endif %}>16</option>
+                                          <option value="17" {% if basicrates.guest_number == "17" %} selected {% endif %}>17</option>
+                                          <option value="18" {% if basicrates.guest_number == "18" %} selected {% endif %}>18</option>
+                                          <option value="19" {% if basicrates.guest_number == "19" %} selected {% endif %}>19</option>
+                                          <option value="20" {% if basicrates.guest_number == "20" %} selected {% endif %}>20</option>
+                                          <option value="21" {% if basicrates.guest_number == "21" %} selected {% endif %}>21</option>
+                                          <option value="22" {% if basicrates.guest_number == "22" %} selected {% endif %}>22</option>
+                                          <option value="23" {% if basicrates.guest_number == "23" %} selected {% endif %}>23</option>
+                                          <option value="24" {% if basicrates.guest_number == "24" %} selected {% endif %}>24</option>
+                                          <option value="25" {% if basicrates.guest_number == "25" %} selected {% endif %}>25</option>
+                                          <option value="26" {% if basicrates.guest_number == "26" %} selected {% endif %}>26</option>
+                                          <option value="27" {% if basicrates.guest_number == "27" %} selected {% endif %}>27</option>
+                                          <option value="28" {% if basicrates.guest_number == "28" %} selected {% endif %}>28</option>
+                                          <option value="29" {% if basicrates.guest_number == "29" %} selected {% endif %}>29</option>
+                                          <option value="30" {% if basicrates.guest_number == "30" %} selected {% endif %}>30</option>
+                                        </select>
+                                    </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <div class="col-lg-6" id="tooltip-container">
+                                      <label class="form-label fw6" for="productname">Minimum stay <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                                          data-bs-toggle="tooltip" data-bs-placement="top" title="The minimum number of nights you require for a booking. You can adjust this for different seasons in the Special rates section.">
+                                          ?
+                                      </button></label>
+                                      
+                                      <select name="minimum_stay" class="form-control select2" required>
+                                          <option>--Select--</option>
+                                          <option value="1" {% if basicrates.minimum_stay == "1" %} selected {% endif %}>1 night</option>
+                                          <option value="2" {% if basicrates.minimum_stay == "2" %} selected {% endif %}>2 nights</option>
+                                          <option value="3" {% if basicrates.minimum_stay == "3" %} selected {% endif %}>3 nights</option>
+                                          <option value="4" {% if basicrates.minimum_stay == "4" %} selected {% endif %}>4 nights</option>
+                                          <option value="5" {% if basicrates.minimum_stay == "5" %} selected {% endif %}>5 nights</option>
+                                          <option value="6" {% if basicrates.minimum_stay == "6" %} selected {% endif %}>6 nights</option>
+                                          <option value="7" {% if basicrates.minimum_stay == "7" %} selected {% endif %}>7 nights</option>
+                                          <option value="8" {% if basicrates.minimum_stay == "8" %} selected {% endif %}>8 nights</option>
+                                          <option value="9" {% if basicrates.minimum_stay == "9" %} selected {% endif %}>9 nights</option>
+                                          <option value="10" {% if basicrates.minimum_stay == "10" %} selected {% endif %}>10 nights</option>
+                                          <option value="11" {% if basicrates.minimum_stay == "11" %} selected {% endif %}>11 nights</option>
+                                          <option value="12" {% if basicrates.minimum_stay == "12" %} selected {% endif %}>12 nights</option>
+                                          <option value="13" {% if basicrates.minimum_stay == "13" %} selected {% endif %}>13 nights</option>
+                                          <option value="14" {% if basicrates.minimum_stay == "14" %} selected {% endif %}>14 nights</option>
+                                          <option value="15" {% if basicrates.minimum_stay == "15" %} selected {% endif %}>15 nights</option>
+                                          <option value="16" {% if basicrates.minimum_stay == "16" %} selected {% endif %}>16 nights</option>
+                                          <option value="17" {% if basicrates.minimum_stay == "17" %} selected {% endif %}>17 nights</option>
+                                          <option value="18" {% if basicrates.minimum_stay == "18" %} selected {% endif %}>18 nights</option>
+                                          <option value="19" {% if basicrates.minimum_stay == "19" %} selected {% endif %}>19 nights</option>
+                                          <option value="20" {% if basicrates.minimum_stay == "20" %} selected {% endif %}>20 nights</option>
+                                          <option value="21" {% if basicrates.minimum_stay == "21" %} selected {% endif %}>21 nights</option>
+                                          <option value="22" {% if basicrates.minimum_stay == "22" %} selected {% endif %}>22 nights</option>
+                                          <option value="23" {% if basicrates.minimum_stay == "23" %} selected {% endif %}>23 nights</option>
+                                          <option value="24" {% if basicrates.minimum_stay == "24" %} selected {% endif %}>24 nights</option>
+                                          <option value="25" {% if basicrates.minimum_stay == "25" %} selected {% endif %}>25 nights</option>
+                                          <option value="26" {% if basicrates.minimum_stay == "26" %} selected {% endif %}>26 nights</option>
+                                          <option value="27" {% if basicrates.minimum_stay == "27" %} selected {% endif %}>27 nights</option>
+                                          <option value="28" {% if basicrates.minimum_stay == "28" %} selected {% endif %}>28 nights</option>
+                                          <option value="29" {% if basicrates.minimum_stay == "29" %} selected {% endif %}>29 nights</option>
+                                          <option value="30" {% if basicrates.minimum_stay == "30" %} selected {% endif %}>30 nights</option>
+                                          <option value="31" {% if basicrates.minimum_stay == "31" %} selected {% endif %}>31 nights</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6" id="tooltip-container">
+                                      <label class="form-label fw6" for="productname">Maximum stay <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                                          data-bs-toggle="tooltip" data-bs-placement="top" title="The maximum number of nights that you will accept for a booking.">
+                                          ?
+                                      </button></label>
+                                      <select name="maximum_stay" class="form-control select2" required>
+                                          <option>--Select--</option>                        
+                                          <option value="7" {% if basicrates.maximum_stay == "7" %} selected {% endif %}>7 nights</option>
+                                          <option value="8" {% if basicrates.maximum_stay == "8" %} selected {% endif %}>8 nights</option>
+                                          <option value="9" {% if basicrates.maximum_stay == "9" %} selected {% endif %}>9 nights</option>
+                                          <option value="10" {% if basicrates.maximum_stay == "10" %} selected {% endif %}>10 nights</option>
+                                          <option value="11" {% if basicrates.maximum_stay == "11" %} selected {% endif %}>11 nights</option>
+                                          <option value="12" {% if basicrates.maximum_stay == "12" %} selected {% endif %}>12 nights</option>
+                                          <option value="13" {% if basicrates.maximum_stay == "13" %} selected {% endif %}>13 nights</option>
+                                          <option value="14" {% if basicrates.maximum_stay == "14" %} selected {% endif %}>14 nights</option>
+                                          <option value="15" {% if basicrates.maximum_stay == "15" %} selected {% endif %}>15 nights</option>
+                                          <option value="16" {% if basicrates.maximum_stay == "16" %} selected {% endif %}>16 nights</option>
+                                          <option value="17" {% if basicrates.maximum_stay == "17" %} selected {% endif %}>17 nights</option>
+                                          <option value="18" {% if basicrates.maximum_stay == "18" %} selected {% endif %}>18 nights</option>
+                                          <option value="19" {% if basicrates.maximum_stay == "19" %} selected {% endif %}>19 nights</option>
+                                          <option value="20" {% if basicrates.maximum_stay == "20" %} selected {% endif %}>20 nights</option>
+                                          <option value="21" {% if basicrates.maximum_stay == "21" %} selected {% endif %}>21 nights</option>
+                                          <option value="22" {% if basicrates.maximum_stay == "22" %} selected {% endif %}>22 nights</option>
+                                          <option value="23" {% if basicrates.maximum_stay == "23" %} selected {% endif %}>23 nights</option>
+                                          <option value="24" {% if basicrates.maximum_stay == "24" %} selected {% endif %}>24 nights</option>
+                                          <option value="25" {% if basicrates.maximum_stay == "25" %} selected {% endif %}>25 nights</option>
+                                          <option value="26" {% if basicrates.maximum_stay == "26" %} selected {% endif %}>26 nights</option>
+                                          <option value="27" {% if basicrates.maximum_stay == "27" %} selected {% endif %}>27 nights</option>
+                                          <option value="28" {% if basicrates.maximum_stay == "28" %} selected {% endif %}>28 nights</option>
+                                          <option value="29" {% if basicrates.maximum_stay == "29" %} selected {% endif %}>29 nights</option>
+                                          <option value="30" {% if basicrates.maximum_stay == "30" %} selected {% endif %}>30 nights</option>
+                                          <option value="31" {% if basicrates.maximum_stay == "31" %} selected {% endif %}>31 nights</option>
+                                          <option value="32" {% if basicrates.maximum_stay == "32" %} selected {% endif %}>32 nights</option>
+                                          <option value="33" {% if basicrates.maximum_stay == "33" %} selected {% endif %}>33 nights</option>
+                                          <option value="34" {% if basicrates.maximum_stay == "34" %} selected {% endif %}>34 nights</option>
+                                          <option value="35" {% if basicrates.maximum_stay == "35" %} selected {% endif %}>35 nights</option>
+                                          <option value="36" {% if basicrates.maximum_stay == "36" %} selected {% endif %}>36 nights</option>
+                                          <option value="37" {% if basicrates.maximum_stay == "37" %} selected {% endif %}>37 nights</option>
+                                          <option value="38" {% if basicrates.maximum_stay == "38" %} selected {% endif %}>38 nights</option>
+                                          <option value="39" {% if basicrates.maximum_stay == "39" %} selected {% endif %}>39 nights</option>
+                                          <option value="40" {% if basicrates.maximum_stay == "40" %} selected {% endif %}>40 nights</option>
+                                          <option value="41" {% if basicrates.maximum_stay == "41" %} selected {% endif %}>41 nights</option>
+                                          <option value="42" {% if basicrates.maximum_stay == "42" %} selected {% endif %}>42 nights</option>
+                                          <option value="43" {% if basicrates.maximum_stay == "43" %} selected {% endif %}>43 nights</option>
+                                          <option value="44" {% if basicrates.maximum_stay == "44" %} selected {% endif %}>44 nights</option>
+                                          <option value="45" {% if basicrates.maximum_stay == "45" %} selected {% endif %}>45 nights</option>
+                                          <option value="46" {% if basicrates.maximum_stay == "46" %} selected {% endif %}>46 nights</option>
+                                          <option value="47" {% if basicrates.maximum_stay == "47" %} selected {% endif %}>47 nights</option>
+                                          <option value="48" {% if basicrates.maximum_stay == "48" %} selected {% endif %}>48 nights</option>
+                                          <option value="49" {% if basicrates.maximum_stay == "49" %} selected {% endif %}>49 nights</option>
+                                          <option value="50" {% if basicrates.maximum_stay == "50" %} selected {% endif %}>50 nights</option>
+                                          <option value="51" {% if basicrates.maximum_stay == "51" %} selected {% endif %}>51 nights</option>
+                                          <option value="52" {% if basicrates.maximum_stay == "52" %} selected {% endif %}>52 nights</option>
+                                          <option value="53" {% if basicrates.maximum_stay == "53" %} selected {% endif %}>53 nights</option>
+                                          <option value="54" {% if basicrates.maximum_stay == "54" %} selected {% endif %}>54 nights</option>
+                                          <option value="55" {% if basicrates.maximum_stay == "55" %} selected {% endif %}>55 nights</option>
+                                          <option value="56" {% if basicrates.maximum_stay == "56" %} selected {% endif %}>56 nights</option>
+                                          <option value="57" {% if basicrates.maximum_stay == "57" %} selected {% endif %}>57 nights</option>
+                                          <option value="58" {% if basicrates.maximum_stay == "58" %} selected {% endif %}>58 nights</option>
+                                          <option value="59" {% if basicrates.maximum_stay == "59" %} selected {% endif %}>59 nights</option>
+                                          <option value="60" {% if basicrates.maximum_stay == "60" %} selected {% endif %}>60 nights</option>
+                                          <option value="61" {% if basicrates.maximum_stay == "61" %} selected {% endif %}>61 nights</option>
+                                          <option value="62" {% if basicrates.maximum_stay == "62" %} selected {% endif %}>62 nights</option>
+                                          <option value="63" {% if basicrates.maximum_stay == "63" %} selected {% endif %}>63 nights</option>
+                                          <option value="64" {% if basicrates.maximum_stay == "64" %} selected {% endif %}>64 nights</option>
+                                          <option value="65" {% if basicrates.maximum_stay == "65" %} selected {% endif %}>65 nights</option>
+                                          <option value="66" {% if basicrates.maximum_stay == "66" %} selected {% endif %}>66 nights</option>
+                                          <option value="67" {% if basicrates.maximum_stay == "67" %} selected {% endif %}>67 nights</option>
+                                          <option value="68" {% if basicrates.maximum_stay == "68" %} selected {% endif %}>68 nights</option>
+                                          <option value="69" {% if basicrates.maximum_stay == "69" %} selected {% endif %}>69 nights</option>
+                                          <option value="70" {% if basicrates.maximum_stay == "70" %} selected {% endif %}>70 nights</option>
+                                          <option value="71" {% if basicrates.maximum_stay == "71" %} selected {% endif %}>71 nights</option>
+                                          <option value="72" {% if basicrates.maximum_stay == "72" %} selected {% endif %}>72 nights</option>
+                                          <option value="73" {% if basicrates.maximum_stay == "73" %} selected {% endif %}>73 nights</option>
+                                          <option value="74" {% if basicrates.maximum_stay == "74" %} selected {% endif %}>74 nights</option>
+                                          <option value="75" {% if basicrates.maximum_stay == "75" %} selected {% endif %}>75 nights</option>
+                                          <option value="76" {% if basicrates.maximum_stay == "76" %} selected {% endif %}>76 nights</option>
+                                          <option value="77" {% if basicrates.maximum_stay == "77" %} selected {% endif %}>77 nights</option>
+                                          <option value="78" {% if basicrates.maximum_stay == "78" %} selected {% endif %}>78 nights</option>
+                                          <option value="79" {% if basicrates.maximum_stay == "79" %} selected {% endif %}>79 nights</option>
+                                          <option value="80" {% if basicrates.maximum_stay == "80" %} selected {% endif %}>80 nights</option>
+                                          <option value="81" {% if basicrates.maximum_stay == "81" %} selected {% endif %}>81 nights</option>
+                                          <option value="82" {% if basicrates.maximum_stay == "82" %} selected {% endif %}>82 nights</option>
+                                          <option value="83" {% if basicrates.maximum_stay == "83" %} selected {% endif %}>83 nights</option>
+                                          <option value="84" {% if basicrates.maximum_stay == "84" %} selected {% endif %}>84 nights</option>
+                                          <option value="85" {% if basicrates.maximum_stay == "85" %} selected {% endif %}>85 nights</option>
+                                          <option value="86" {% if basicrates.maximum_stay == "86" %} selected {% endif %}>86 nights</option>
+                                          <option value="87" {% if basicrates.maximum_stay == "87" %} selected {% endif %}>87 nights</option>
+                                          <option value="88" {% if basicrates.maximum_stay == "88" %} selected {% endif %}>88 nights</option>
+                                          <option value="89" {% if basicrates.maximum_stay == "89" %} selected {% endif %}>89 nights</option>
+                                          <option value="90" {% if basicrates.maximum_stay == "90" %} selected {% endif %}>90 nights</option>
+                                          <option value="91" {% if basicrates.maximum_stay == "91" %} selected {% endif %}>91 nights</option>
+                                          <option value="92" {% if basicrates.maximum_stay == "92" %} selected {% endif %}>92 nights</option>
+                                          <option value="93" {% if basicrates.maximum_stay == "93" %} selected {% endif %}>93 nights</option>
+                                          <option value="94" {% if basicrates.maximum_stay == "94" %} selected {% endif %}>94 nights</option>
+                                          <option value="95" {% if basicrates.maximum_stay == "95" %} selected {% endif %}>95 nights</option>
+                                          <option value="96" {% if basicrates.maximum_stay == "96" %} selected {% endif %}>96 nights</option>
+                                          <option value="97" {% if basicrates.maximum_stay == "97" %} selected {% endif %}>97 nights</option>
+                                          <option value="98" {% if basicrates.maximum_stay == "98" %} selected {% endif %}>98 nights</option>
+                                          <option value="99" {% if basicrates.maximum_stay == "99" %} selected {% endif %}>99 nights</option>
+                                          <option value="100" {% if basicrates.maximum_stay == "100" %} selected {% endif %}>100 nights</option>
+                                          <option value="101" {% if basicrates.maximum_stay == "101" %} selected {% endif %}>101 nights</option>
+                                          <option value="102" {% if basicrates.maximum_stay == "102" %} selected {% endif %}>102 nights</option>
+                                          <option value="103" {% if basicrates.maximum_stay == "103" %} selected {% endif %}>103 nights</option>
+                                          <option value="104" {% if basicrates.maximum_stay == "104" %} selected {% endif %}>104 nights</option>
+                                          <option value="105" {% if basicrates.maximum_stay == "105" %} selected {% endif %}>105 nights</option>
+                                          <option value="106" {% if basicrates.maximum_stay == "106" %} selected {% endif %}>106 nights</option>
+                                          <option value="107" {% if basicrates.maximum_stay == "107" %} selected {% endif %}>107 nights</option>
+                                          <option value="108" {% if basicrates.maximum_stay == "108" %} selected {% endif %}>108 nights</option>
+                                          <option value="109" {% if basicrates.maximum_stay == "109" %} selected {% endif %}>109 nights</option>
+                                          <option value="110" {% if basicrates.maximum_stay == "110" %} selected {% endif %}>110 nights</option>
+                                          <option value="111" {% if basicrates.maximum_stay == "111" %} selected {% endif %}>111 nights</option>
+                                          <option value="112" {% if basicrates.maximum_stay == "112" %} selected {% endif %}>112 nights</option>
+                                          <option value="113" {% if basicrates.maximum_stay == "113" %} selected {% endif %}>113 nights</option>
+                                          <option value="114" {% if basicrates.maximum_stay == "114" %} selected {% endif %}>114 nights</option>
+                                          <option value="115" {% if basicrates.maximum_stay == "115" %} selected {% endif %}>115 nights</option>
+                                          <option value="116" {% if basicrates.maximum_stay == "116" %} selected {% endif %}>116 nights</option>
+                                          <option value="117" {% if basicrates.maximum_stay == "117" %} selected {% endif %}>117 nights</option>
+                                          <option value="118" {% if basicrates.maximum_stay == "118" %} selected {% endif %}>118 nights</option>
+                                          <option value="119" {% if basicrates.maximum_stay == "119" %} selected {% endif %}>119 nights</option>
+                                          <option value="120" {% if basicrates.maximum_stay == "120" %} selected {% endif %}>120 nights</option>
+                                          <option value="121" {% if basicrates.maximum_stay == "121" %} selected {% endif %}>121 nights</option>
+                                          <option value="122" {% if basicrates.maximum_stay == "122" %} selected {% endif %}>122 nights</option>
+                                          <option value="123" {% if basicrates.maximum_stay == "123" %} selected {% endif %}>123 nights</option>
+                                          <option value="124" {% if basicrates.maximum_stay == "124" %} selected {% endif %}>124 nights</option>
+                                          <option value="125" {% if basicrates.maximum_stay == "125" %} selected {% endif %}>125 nights</option>
+                                          <option value="126" {% if basicrates.maximum_stay == "126" %} selected {% endif %}>126 nights</option>
+                                          <option value="127" {% if basicrates.maximum_stay == "127" %} selected {% endif %}>127 nights</option>
+                                          <option value="128" {% if basicrates.maximum_stay == "128" %} selected {% endif %}>128 nights</option>
+                                          <option value="129" {% if basicrates.maximum_stay == "129" %} selected {% endif %}>129 nights</option>
+                                          <option value="130" {% if basicrates.maximum_stay == "130" %} selected {% endif %}>130 nights</option>
+                                          <option value="131" {% if basicrates.maximum_stay == "131" %} selected {% endif %}>131 nights</option>
+                                          <option value="132" {% if basicrates.maximum_stay == "132" %} selected {% endif %}>132 nights</option>
+                                          <option value="133" {% if basicrates.maximum_stay == "133" %} selected {% endif %}>133 nights</option>
+                                          <option value="134" {% if basicrates.maximum_stay == "134" %} selected {% endif %}>134 nights</option>
+                                          <option value="135" {% if basicrates.maximum_stay == "135" %} selected {% endif %}>135 nights</option>
+                                          <option value="136" {% if basicrates.maximum_stay == "136" %} selected {% endif %}>136 nights</option>
+                                          <option value="137" {% if basicrates.maximum_stay == "137" %} selected {% endif %}>137 nights</option>
+                                          <option value="138" {% if basicrates.maximum_stay == "138" %} selected {% endif %}>138 nights</option>
+                                          <option value="139" {% if basicrates.maximum_stay == "139" %} selected {% endif %}>139 nights</option>
+                                          <option value="140" {% if basicrates.maximum_stay == "140" %} selected {% endif %}>140 nights</option>
+                                          <option value="141" {% if basicrates.maximum_stay == "141" %} selected {% endif %}>141 nights</option>
+                                          <option value="142" {% if basicrates.maximum_stay == "142" %} selected {% endif %}>142 nights</option>
+                                          <option value="143" {% if basicrates.maximum_stay == "143" %} selected {% endif %}>143 nights</option>
+                                          <option value="144" {% if basicrates.maximum_stay == "144" %} selected {% endif %}>144 nights</option>
+                                          <option value="145" {% if basicrates.maximum_stay == "145" %} selected {% endif %}>145 nights</option>
+                                          <option value="146" {% if basicrates.maximum_stay == "146" %} selected {% endif %}>146 nights</option>
+                                          <option value="147" {% if basicrates.maximum_stay == "147" %} selected {% endif %}>147 nights</option>
+                                          <option value="148" {% if basicrates.maximum_stay == "148" %} selected {% endif %}>148 nights</option>
+                                          <option value="149" {% if basicrates.maximum_stay == "149" %} selected {% endif %}>149 nights</option>
+                                          <option value="150" {% if basicrates.maximum_stay == "150" %} selected {% endif %}>150 nights</option>
+                                          <option value="151" {% if basicrates.maximum_stay == "151" %} selected {% endif %}>151 nights</option>
+                                          <option value="152" {% if basicrates.maximum_stay == "152" %} selected {% endif %}>152 nights</option>
+                                          <option value="153" {% if basicrates.maximum_stay == "153" %} selected {% endif %}>153 nights</option>
+                                          <option value="154" {% if basicrates.maximum_stay == "154" %} selected {% endif %}>154 nights</option>
+                                          <option value="155" {% if basicrates.maximum_stay == "155" %} selected {% endif %}>155 nights</option>
+                                          <option value="156" {% if basicrates.maximum_stay == "156" %} selected {% endif %}>156 nights</option>
+                                          <option value="157" {% if basicrates.maximum_stay == "157" %} selected {% endif %}>157 nights</option>
+                                          <option value="158" {% if basicrates.maximum_stay == "158" %} selected {% endif %}>158 nights</option>
+                                          <option value="159" {% if basicrates.maximum_stay == "159" %} selected {% endif %}>159 nights</option>
+                                          <option value="160" {% if basicrates.maximum_stay == "160" %} selected {% endif %}>160 nights</option>
+                                          <option value="161" {% if basicrates.maximum_stay == "161" %} selected {% endif %}>161 nights</option>
+                                          <option value="162" {% if basicrates.maximum_stay == "162" %} selected {% endif %}>162 nights</option>
+                                          <option value="163" {% if basicrates.maximum_stay == "163" %} selected {% endif %}>163 nights</option>
+                                          <option value="164" {% if basicrates.maximum_stay == "164" %} selected {% endif %}>164 nights</option>
+                                          <option value="165" {% if basicrates.maximum_stay == "165" %} selected {% endif %}>165 nights</option>
+                                          <option value="166" {% if basicrates.maximum_stay == "166" %} selected {% endif %}>166 nights</option>
+                                          <option value="167" {% if basicrates.maximum_stay == "167" %} selected {% endif %}>167 nights</option>
+                                          <option value="168" {% if basicrates.maximum_stay == "168" %} selected {% endif %}>168 nights</option>
+                                          <option value="169" {% if basicrates.maximum_stay == "169" %} selected {% endif %}>169 nights</option>
+                                          <option value="170" {% if basicrates.maximum_stay == "170" %} selected {% endif %}>170 nights</option>
+                                          <option value="171" {% if basicrates.maximum_stay == "171" %} selected {% endif %}>171 nights</option>
+                                          <option value="172" {% if basicrates.maximum_stay == "172" %} selected {% endif %}>172 nights</option>
+                                          <option value="173" {% if basicrates.maximum_stay == "173" %} selected {% endif %}>173 nights</option>
+                                          <option value="174" {% if basicrates.maximum_stay == "174" %} selected {% endif %}>174 nights</option>
+                                          <option value="175" {% if basicrates.maximum_stay == "175" %} selected {% endif %}>175 nights</option>
+                                          <option value="176" {% if basicrates.maximum_stay == "176" %} selected {% endif %}>176 nights</option>
+                                          <option value="177" {% if basicrates.maximum_stay == "177" %} selected {% endif %}>177 nights</option>
+                                          <option value="178" {% if basicrates.maximum_stay == "178" %} selected {% endif %}>178 nights</option>
+                                          <option value="179" {% if basicrates.maximum_stay == "179" %} selected {% endif %}>179 nights</option>
+                                          <option value="180" {% if basicrates.maximum_stay == "180" %} selected {% endif %}>180 nights</option>
+                                        </select>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <div class="col-lg-12" id="tooltip-container">
+                                        <label class="form-label fw6">Check-in days <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                                          data-bs-toggle="tooltip" data-bs-placement="top" title="This will define the days that a guest can choose to check-in to your property. Be as flexible as possible to maximise your occupancy.">
+                                          ?
+                                      </button></label>
+                                      <div class="row">
+                                        <div class="col-lg-12 checkin_list">
+                                      <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch1" name="checkin_days[]" value="Sun" {% if "Sun" in basicrates.checkin_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch1">Sun</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch2" name="checkin_days[]" value="Mon" {% if "Mon" in basicrates.checkin_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch2">Mon</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch3" name="checkin_days[]" value="Tue" {% if "Tue" in basicrates.checkin_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch3">Tue</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch4" name="checkin_days[]" value="Wed" {% if "Wed" in basicrates.checkin_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch4">Wed</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch5" name="checkin_days[]" value="Thu" {% if "Thu" in basicrates.checkin_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch5">Thu</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch6" name="checkin_days[]" value="Fri" {% if "Fri" in basicrates.checkin_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch6">Fri</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch7" name="checkin_days[]" value="Sat" {% if "Sat" in basicrates.checkin_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch7">Sat</label>                        
+                                     </div>
+                                    </div>
+                                  </div>
+                                      </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-lg-12" id="tooltip-container">
+                                        <label class="form-label fw6">Check-out days <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                                          data-bs-toggle="tooltip" data-bs-placement="top" title="Define the days that a guest can choose to check-out from your property. Be as flexible as possible to maximise your occupancy.">
+                                          ?
+                                      </button></label>
+                                    <div class="row">
+                                    <div class="col-lg-12 checkin_list">
+                                    <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch8" name="checkout_days[]" value="Sun" {% if "Sun" in basicrates.checkout_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch8">Sun</label>                        
+                                    </div>
+                                    <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch9" name="checkout_days[]" value="Mon" {% if "Mon" in basicrates.checkout_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch9">Mon</label>                        
+                                    </div>
+                                    <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch10" name="checkout_days[]" value="Tue" {% if "Tue" in basicrates.checkout_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch10">Tue</label>                        
+                                    </div>
+                                    <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch11" name="checkout_days[]" value="Wed" {% if "Wed" in basicrates.checkout_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch11">Wed</label>                        
+                                    </div>
+                                    <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch12" name="checkout_days[]" value="Thu" {% if "Thu" in basicrates.checkout_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch12">Thu</label>                        
+                                    </div>
+                                    <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch13" name="checkout_days[]" value="Fri" {% if "Fri" in basicrates.checkout_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch13">Fri</label>                        
+                                    </div>
+                                    <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch14" name="checkout_days[]" value="Sat" {% if "Sat" in basicrates.checkout_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch14">Sat</label>                        
+                                    </div>
+                                    </div>
+                                  </div>
+                                 </div>
+                                </div>
+                  
+                                  <div class="mb-3">
+                                   <input type="submit" class="btn btn-primary" value="Save">
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>    
+                  </div>
+                </div>
+            </div>
+        </div>
+    
+   
+{% include 'super/base/footer.html'%}
+</div> 
+
+<script src="/static/super/js/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/super/js/metismenu.min.js"></script>
+<script src="/static/super/js/waves.js"></script>
+<script src="/static/super/js/feather.min.js"></script>
+<script src="/static/super/js/simplebar.min.js"></script>
+<script src="/static/super/js/jquery-ui.min.js"></script>
+<script src="/static/super/js/moment.js"></script>
+<script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/super/js/app.js"></script>
+<script>
+$(".alert-success").fadeTo(3000, 500).slideUp(500, function(){
+    $(".alert-success").slideUp(500);
+});
+</script>
+
+
+
+</body>
+
+</html>                        

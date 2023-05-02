@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Update Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/users/images/favicon.png">
+
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body data-layout="horizontal">
+        <div id="layout-wrapper">
+        {% include 'users/base/header.html'%}
+       
+		<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"><b>Profile</b></h4>
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+            </div>
+                {% endfor %}
+                {%endif%}
+                <form method="POST" enctype="multipart/form-data" class="post-form" action="/profile-update/{{users.id}}"> {% csrf_token %}   
+                    <div class="row">
+                         
+            
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="validationCustom01" class="form-label">First name</label>
+                                <input type="text" name="first_name" class="form-control" id="validationCustom01"
+                                    placeholder="First name" value="{{users.first_name}}" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="validationCustom02" class="form-label">Last name</label>
+                                <input type="text" name="last_name"  class="form-control" id="validationCustom02"
+                                    placeholder="Last name" value="{{users.last_name}}" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="validationCustom02" class="form-label">Profile Photo </label>
+                                <input type="file" name="profile_photo"  class="form-control" id="validationCustom02"
+                                   value="{{users.profile_photo}">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                    <div class="col-md-9">
+                        <div class="mb-3">
+                            <label for="validationCustom01" class="form-label">Address</label>
+                            <input type="text" name="address" class="form-control" id="validationCustom01"
+                                placeholder="Enter Address" value="{{users.address}}" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="mb-3">
+                            <label for="validationCustom01" class="form-label">Postal / Zip code</label>
+                            <input type="text" name="postal_code" class="form-control" id="validationCustom01"
+                                placeholder="Enter Zip" value="{{users.postal_code}}" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="validationCustom04" class="form-label">City</label>
+                                <input type="text" name="city"  class="form-control" id="validationCustom04"
+                                    placeholder="Enter City" value="{{users.city}}" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid city.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="validationCustom05" class="form-label">State</label>
+                                <input type="text" name="state"  class="form-control" id="validationCustom05"
+                                    placeholder="Enter State" value="{{users.state}}" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid zip.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="validationCustom03" class="form-label">Country</label>
+                                <select name="country" class="form-select">
+                                    {% for country in country %}
+                                    <option value="{{country.code}}">{{country.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="validationCustom03" class="form-label">Phone</label>
+                                <input type="text" name="phone"  class="form-control" id="validationCustom04"
+                                placeholder="Enter Phone" value="{{users.phone}}" required>
+                                
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="validationCustom04" class="form-label">Contact No.</label>
+                                <input type="text" name="property_phone_number"  class="form-control" id="validationCustom04"
+                                    placeholder="Enter Property Phone NO." value="{{users.property_phone_number}}" required>
+                                
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="validationCustom05" class="form-label">Toll Free</label>
+                                <input type="text" name="tollfree"  class="form-control" id="validationCustom05"
+                                    placeholder="Enter Toll Free No" value="{{users.tollfree}}"  required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid zip.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="validationCustom03" class="form-label">Website</label>
+                                    <input type="text" name="website"  class="form-control" id="validationCustom04"
+                                    placeholder="Enter Website Url" value="{{users.website}}" required>
+                                    
+    
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="validationCustom04" class="form-label">
+                                        Number of properties</label>
+                                    <input type="text" name="no_of_properties"  class="form-control" id="validationCustom04"
+                                        placeholder="No of Properties" value="{{users.no_of_properties}}" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid city.
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="validationCustom05" class="form-label">Your role at the property</label>
+                                   <select name="property_role" class="form-select">
+                                    {% for role in propertyrole %}
+                                    <option value="{{role.title}}">{{role.title}}</option>
+                                    {% endfor %}
+                                   </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label for="validationCustom01" class="form-label">Describe Yourself</label>
+                                        <textarea class="form-control" name="description" id="elm1" rows="5">{{users.description}}</textarea>
+                                        <div class="valid-feedback">
+                                            Looks good!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                    
+                    <div>
+                        <button class="btn btn-primary" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+        <!-- end card -->
+    </div> <!-- end col -->
+    {% include 'super/base/footer.html'%}
+</div> 
+
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+<script src="/static/users/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="/static/users/js/pages/form-element.init.js"></script>
+<script src="/static/users/js/app.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor
+          .create( document.querySelector( '#elm1' ) );
+</script>
+<script>
+    $(".alert-success").fadeTo(3000, 500).slideUp(500, function(){
+        $(".alert-success").slideUp(500);
+    });
+</script>
+</body>
+
+</html>      

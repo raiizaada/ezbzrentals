@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Subscription</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Update Subscription</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/subscription">subscription</a></li>
+                              <li class="breadcrumb-item active">Add New</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Subscription Management</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" class="post-form" action="/super/subscription-update/{{subscription.id}}"> {% csrf_token %} 
+                        <div class="row">
+                          <div class="col-lg-10">
+                            <div class="container"> 
+  
+                            <div class="form-group row">  
+                                <label class="col-sm-3 col-form-label">Title:</label>  
+                                <div class="col-sm-9">  
+                                  <input type="text" name="title" class="form-control" placeholder="Enter Title" rows="1" required="" id="id_title" value="{{subscription.title}}">
+                                </div>  
+                            </div>
+  
+                            <div class="form-group row">  
+                                <label class="col-sm-3 col-form-label">Sub-Title:</label>  
+                                <div class="col-sm-9">  
+                                    <input type="text" name="subtitle" class="form-control" placeholder="Enter Title" rows="1" required="" id="id_subtitle" value="{{subscription.subtitle}}">
+                                </div>  
+                            </div>
+  
+                            <div class="form-group row">  
+                                <label class="col-sm-3 col-form-label">Price:</label>  
+                                <div class="col-sm-9">  
+                                <input type="number" name="price" class="form-control" placeholder="Enter Title" rows="1" required="" id="id_price" value="{{subscription.price}}">
+                                </div>  
+                            </div>  
+                            <div class="form-group row">  
+                                <label class="col-sm-3 col-form-label">Tenure:</label>  
+                                <div class="col-sm-9">  
+                                  <input type="text" name="tenure" class="form-control" placeholder="Enter Tenure" rows="1" required="" id="id_tenure" value="{{subscription.tenure}}">
+                                </div>  
+                              </div>  
+  
+                              
+  
+                                                         
+                            <div class="form-group row">  
+                            <label class="col-sm-3 col-form-label" >Description:</label>  
+                            <div class="col-sm-9" >  
+                                <textarea name="description" cols="30" rows="10" class="form-control" id="elm1">{{subscription.description}}</textarea>   
+                            </div>   
+                            </div> 
+                              
+                            <div class="form-group row">  
+                            <label for="example-text-input-sm" class="col-sm-3 col-form-label">Status</label>
+                            <div class="col-sm-9">  
+                                <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" {% if subscription.status == 1 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio1">Active</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input" {% if subscription.status == 0 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio2">InActive</label>
+                            </div>
+                            </div>
+                            </div> 
+                            <div class="form-group row">  
+                              <label for="example-text-input-sm" class="col-sm-3 col-form-label "></label>
+                              <div class="col-sm-9">  
+                              <button type="submit" class="btn btn-primary">Save</button>
+                              </div>
+                            </div>    
+                        </div>
+                      </div>
+                    </form> 
+                  </div>
+              </div> 
+          </div>
+      </div>
+  </div>
+  
+</div> 
+{% include 'super/base/footer.html'%}
+</div>
+<script src="/static/super/js/jquery.min.js"></script>
+<script src="/static/super/js/bootstrap.bundle.min.js"></script>
+<script src="/static/super/js/metismenu.min.js"></script>
+<script src="/static/super/js/waves.js"></script>
+<script src="/static/super/js/feather.min.js"></script>
+<script src="/static/super/js/simplebar.min.js"></script>
+<script src="/static/super/js/jquery-ui.min.js"></script>
+<script src="/static/super/js/moment.js"></script>
+<script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/super/js/app.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+            .create( document.querySelector( '#elm1' ) );
+  </script>
+</body>
+</html>   
+                   
+               
+          
+                     
+                         
+
+                      

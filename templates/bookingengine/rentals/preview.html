@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Overview</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="" name="description" />
+<meta content="" name="author" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="/static/users/images/favicon.png">
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/magnific-popup/magnific-popup.css" rel="stylesheet" type="text/css" />
+</head>
+<body data-layout="horizontal">
+<div id="layout-wrapper">
+    {% include 'bookingengine/base/top_nav.html'%}
+<div class="main-content">    
+<div class="page-content">   
+<div class="container-fluid">
+   
+    <div class="row mb-4">
+        <div class="popup-gallery preview_gallery">
+            {% for photo in gallery %}
+            <a class="float-start" href="/media/{{photo.image}}" title="Project 1">
+                <div class="img-fluid">
+                    <img src="/media/{{photo.image}}"alt="img-1">
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    
+    </div>
+  
+  <div class="row">    
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+            
+            <div class="row">
+               
+                <div class="col-xl-9">
+                    <div class="mt-4 mt-xl-3">
+                        
+                        <h2 class="mt-1 mb-3">{{room.name}}</h2>
+                        <p>{{room.description|safe}}</p>
+                        <hr class="my-4">
+                        <div class="row">
+                            <div class="col-lg-12">
+                              
+                                        <div class="row">
+                                            <div class="preview_list">
+                                                <div class="mt-4 mt-md-0">
+                                                    <div class="avatar-sm mb-3 icon_center">
+                                                        <span class="avatar-title bg-light rounded-circle text-primary font-size-24">
+                                                            <i class="mdi mdi-home-city"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-1 align-self-center overflow-hidden">
+                                                        <h5>Apartment</h5>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="preview_list">
+                                                <div class="mt-4 mt-md-0">
+                                                    <div class="avatar-sm mb-3 icon_center">
+                                                        <span class="avatar-title bg-light rounded-circle text-primary font-size-24">
+                                                            <i class="fas fa-users"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-1 align-self-center overflow-hidden">
+                                                        <h5>Guests</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="preview_list">
+                                                <div class="mt-4 mt-md-0">
+                                                    <div class="avatar-sm mb-3 icon_center">
+                                                        <span class="avatar-title bg-light rounded-circle text-primary font-size-24">
+                                                            <i class="fas fa-door-open"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-1 align-self-center overflow-hidden">
+                                                        <h5>Rooms</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="preview_list">
+                                                <div class="mt-4 mt-md-0">
+                                                    <div class="avatar-sm mb-3 icon_center">
+                                                        <span class="avatar-title bg-light rounded-circle text-primary font-size-24">
+                                                            <i class="mdi mdi-bed-king-outline"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-1 align-self-center overflow-hidden">
+                                                        <h5>Beds</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="preview_list">
+                                                <div class="mt-4 mt-md-0">
+                                                    <div class="avatar-sm mb-3 icon_center">
+                                                        <span class="avatar-title bg-light rounded-circle text-primary font-size-24">
+                                                            <i class="fas fa-bath"></i>
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-1 align-self-center overflow-hidden">
+                                                        <h5>Bathroom</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                </div>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="mt-4">
+                            <h5 class="font-size-14 mb-3"><i class="fas fa-home"></i> About this property</h5>
+                            <div class="product-desc">
+                            <p>{{rental.rental_description|safe}}</p>
+                               
+                              
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="mt-4">
+                            <h5 class="font-size-14 mb-3"><i class="far fa-calendar-alt"></i> Check-in/Check-out </h5>
+                            <div class="product-desc">
+                               
+                                <p>Check-in :12.00 </p>
+                                <p>Check-out : 11.00</p>
+                            
+                              
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                        <div class="row">
+                            <h5 class="font-size-14"><i class="fas fa-couch"></i> Amenities</h5>
+                            <div class="col-md-4">
+                                <ul class="list-unstyled product-desc-list">
+                                        {% for amenities in my_lists %}
+                                            <li><i class="mdi mdi-sync text-primary me-1 align-middle font-size-16"></i> {{ amenities }}</li>
+                                            {% if forloop.counter|divisibleby:4 %} 
+                                        </ul>
+                                    </div> 
+                                    <div class="col-md-4">
+                                      <ul class="list-unstyled product-desc-list">   
+                                          {% endif %}
+                                       {%endfor%}
+                                      </ul>                  
+                                    </div> 
+                        </div>
+                        <hr class="my-4">
+                        <div class="row">
+                            <h5 class="font-size-14"><i class="mdi mdi-bed-king-outline"></i> Tags</h5>
+                            <div class="col-md-4">
+                               
+                                    <ul class="list-unstyled product-desc-list">
+                                        <li><i class="mdi mdi-sync text-primary me-1 align-middle font-size-16"></i> {{room.tags}}</li>
+                                        
+                                    </ul>
+
+                            </div>
+
+                           
+                        </div>
+                        <hr class="my-4">
+                        <div class="row">
+                            <h5 class="font-size-14"><i class="fas fa-list"></i> Bed Type</h5>
+                            <div class="col-md-4">
+                              
+                                    <ul class="list-unstyled product-desc-list">
+                                        <li><i class="mdi mdi-sync text-primary me-1 align-middle font-size-16"></i> 
+                                           {{room.bed_types}}</li>
+                                       
+                                    </ul>
+                             
+
+                            </div>
+
+                            
+                          
+                            <p>If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <form method="post">
+                        <div class="preview_right">
+                            <h1><span>From</span> <span class="night_price">₹{{room.price}}</span><span>/ night</span></h1>
+                        <div class="row mb-3">                            
+                            <div class="col-lg-6">
+                                <label class="form-label fw6">Check-in date<span class="strict">*</span></label>
+                                <div class="input-group" id="datepicker2">
+                                    <input type="text" class="form-control" placeholder="dd M, yyyy"
+                                        data-date-format="dd M, yyyy" data-date-container='#datepicker2'
+                                        data-provide="datepicker" data-date-autoclose="true">
+
+                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                </div>
+                              </div>
+                              <div class="col-lg-6">
+                                <label class="form-label fw6">Check-out date<span class="strict">*</span></label>
+                                <div class="input-group" id="datepicker2">
+                                    <input type="text" class="form-control" placeholder="dd M, yyyy"
+                                        data-date-format="dd M, yyyy" data-date-container='#datepicker2'
+                                        data-provide="datepicker" data-date-autoclose="true">
+
+                                    <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-12">
+                            <label class="form-label fw6">Guests<span class="strict">*</span></label>
+                            <select name="rental_type" class="form-select" required="">
+                              <option>--Select--</option>
+                              
+                            </select>
+                          </div>
+                        </div>
+                          </div>
+                    </form>
+                </div>
+            </div>
+          
+
+            <hr class="my-4">
+
+            <div class="mt-4">
+                <h5 class="font-size-14 mb-3"><i class="mdi mdi-calendar-remove-outline"></i>Guests Allowed: </h5>
+                <div class="product-desc">
+                    <p>Adults: {{ room.no_of_adult}}</p>
+                    <p>Children:{{ room.no_of_child}}</p>
+                    <p>Max Guest:{{ room.max_guest}}</p>
+                   
+                  
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="mt-4">
+                <h5 class="font-size-14 mb-3"><i class="mdi mdi-map-marker-multiple-outline"></i> Location</h5>
+                <div class="product-desc">
+                    <p>{{profile.address}} {{profile.city}} {{profile.state}} {{profile.country}} {{profile.postal}}</p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224369.0356241299!2d77.26107968931252!3d28.516681711128083!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5a43173357b%3A0x37ffce30c87cc03f!2sNoida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1672854548643!5m2!1sen!2sin" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerroom="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>    
+    </div>
+    </div>
+{% include 'users/base/footer.html'%} 
+</div>
+</div>
+
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+<script src="/static/users/js/app.js"></script>
+<script src="/static/users/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+<script src="/static/users/js/pages/lightbox.init.js"></script>
+
+</body>
+</html>

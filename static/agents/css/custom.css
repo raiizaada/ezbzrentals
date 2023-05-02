@@ -1,0 +1,121 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,400i,700);
+body{
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  background: #f9f9f9;
+}
+.simplebar-content-wrapper{
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.gallery_box{
+    background-color: #fff;
+    margin-bottom: 20px;
+    width: 19%;
+    text-align: center;
+    margin-right: 30px;
+    padding: 20px;
+    border: 1px solid #eee;
+  }
+  .gallery_box img{
+    height: 150px;
+  }
+  .gallery_box .gallery_sort{
+    width: 75%;
+    float: left;
+  }
+  .gallery_box .gallery_times{
+    position: absolute;
+    right: auto;
+    left: 18%;
+    top: 12%;
+  }
+  .gallery_box .gallery_plusicon{
+    font-size: 62px;
+    padding-top: 70px;
+    color: #bbb;
+  }
+  .logo-admin img{
+    height: 30px;
+  }
+  .btn{
+    padding: .375rem 2.0rem;
+  }
+body.dark-sidenav .left-sidenav {
+    background-color: #01010a;
+}
+.left-sidenav-menu{padding: 0px;}
+.left-sidenav-menu li.mm-active a{
+  border-left: 5px solid #3f51b5;
+  background: #3d3d3d;
+  padding: 10px 10px;
+  border-radius: 0px;
+}
+.left-sidenav-menu li.mm-active .nav-second-level a{
+  border-left: 0px;
+}
+.left-sidenav-menu li.mm-active .nav-second-level{
+  background: #3d3d3d;
+}
+.left-sidenav-menu li{margin-top: 0px;}
+.left-sidenav-menu li>a{padding: 10px 10px;}
+.left-sidenav-menu li>a .menu-icon{color: #fff;}
+body.dark-sidenav .left-sidenav-menu li>a{color: #fff;}
+body.dark-sidenav .left-sidenav-menu li.mm-active .nav-item.active a.nav-link.active{color: #fff;}
+.left-sidenav-menu li>a.active .menu-icon{color: #fff;}
+body.dark-sidenav .left-sidenav-menu li.mm-active .nav-item.active a.nav-link.active i {
+  color: #fff;
+}
+body.dark-sidenav .left-sidenav-menu li>a i {
+  color: #a9baca;
+}
+.left-sidenav .brand{
+  background:#01010a;
+}
+.navbar-custom {
+  background: #01010a;
+}
+.button-menu-mobile{
+  color: #fff !important;
+}
+.navbar-custom .nav-link{
+  color: #fff;
+}
+.btn-primary {
+  color: #FFF;
+  background-color: #3f51b5;
+  border-color: #3f51b5;
+}
+.btn-primary:hover {
+  color: #FFF;
+  background-color: #3f51b5;
+  border-color: #3f51b5;
+}
+.form-control{
+  border: 1px solid #ced4da;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  color: #fff;
+  border-color: #3f51b5;
+  background-color: #3f51b5;
+}
+.channel_box img{
+  max-width: 100%;
+  height: 240px;
+}
+.badge {
+  line-height: 11px;
+}
+.card-body{
+  padding: 0.80rem;
+}
+.rental_box img{
+  max-width: 100%;
+  height: 240px;
+}
+.week_charege{margin-right: 20px;}
+.surcharge{margin-right:6px;}
+.brdn{border:0px;background: transparent;}
+.navbar-custom .topbar-nav li.show .nav-link {
+  background-color: #3f51b5;
+  color: #fff;
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Company</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/users/images/favicon.png">
+
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body>
+        <div id="layout-wrapper">
+            {% include 'users/base/top_nav.html'%}
+            {% include 'users/base/left_sidebar.html'%}
+       
+		<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Edit Company</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="company.html">Company</a></li>
+                            <li class="breadcrumb-item active">Edit Company</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                            <form method="POST" class="post-form"   enctype="multipart/form-data" action="/users/company-update/{{company.id}}">
+                                {% csrf_token %}
+                                
+                                <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label text-right">Company Name:</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" class="form-control" name="company_name" id="id_company_name" required maxlength="100" value="{{ company.company_name }}"/>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label text-right">Company Logo:</label>
+                                    <div class="col-sm-9">                                      
+                                      <input type="file" name="company_logo" accept="image/*" id="id_company_logo"   >
+                                      <br>
+                                      <img src="/media/{{ company.company_logo }}" height="40">
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label text-right">Company Email:</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" class="form-control" name="company_email" id="id_company_email" required maxlength="100" value="{{ company.company_email }}"/>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label text-right">Company Telephone:</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" class="form-control" name="company_tel" id="id_company_tel" required maxlength="100" value="{{ company.company_tel }}"/>
+                                    </div>
+                                  </div>
+                                  <div class="row mb-3">
+                                    <label class="col-sm-3 col-form-label text-right">Company Address:</label>
+                                    <div class="col-sm-9">
+                                      <textarea name="company_Editress" cols="30" rows="10" class="form-control"   id="id_company_Editress">{{ company.company_Editress}}"</textarea>
+                                     </div>
+                                  </div>
+                                  <div class="row mb-3">  
+                                    <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right "></label>
+                                    <div class="col-sm-9">  
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    </div>
+                                </div> 
+                                  
+                               
+                              
+                              </form>
+                          </div>
+                      </div>                                                                             
+                  </div>
+              </div>
+          </div>
+      </div>
+      {% include 'users/base/footer.html'%}
+    </div> 
+    
+    <script src="/static/users/libs/jquery/jquery.min.js"></script>
+    <script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+    <script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+    <script src="/static/users/libs/node-waves/waves.min.js"></script>
+    <script src="/static/users/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+    <script src="/static/users/js/pages/form-element.init.js"></script>
+    <script src="/static/users/js/app.js"></script>
+
+</body>
+
+</html> 

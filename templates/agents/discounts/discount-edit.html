@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Discount</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/agents/images/favicon.png">
+        <link href="/static/agents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/agents/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'agents/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'agents/base/top_nav.html' %}
+        </div>
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Update Discounts</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/agents/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/agents/discounts">Discounts</a></li>
+                              <li class="breadcrumb-item active">Edit Discounts</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Discounts</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-2"></div>
+                          <div class="col-lg-8">
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/agents/discount-update/{{discount.id}}">  
+                                {% csrf_token %}  
+                                <input type="hidden" name="id" class="form-control"> 
+                            <div class="container">  
+                        
+                                <div class="form-group row">  
+                                    <label class="col-sm-2 col-form-label">Name:</label>  
+                                    <div class="col-sm-10">  
+                                      <input type="text" placeholder="Discounts Name" name="discounts_name" class="form-control" value="{{discount.discounts_name}}"> 
+                                    </div>  
+                                  </div>
+                                  <div class="form-group row">  
+                                    <label class="col-sm-2 col-form-label">Discount Type:</label>  
+                                    <div class="col-sm-10">  
+                                      <select name="discount_type" class="form-control">
+                                        {% for discounttype in discounttype %}
+                                        <option value="{{discounttype.id}}" {% if discounttype.id == rate.discount_type_id %} selected {% endif %}>{{discounttype.discounttype_name}}</option>
+                                    {% endfor %}
+                                      </select>
+                                    </div>  
+                                  </div>
+                                  <div class="form-group row">  
+                                    <label class="col-sm-2 col-form-label">Amount:</label>  
+                                    <div class="col-sm-10">  
+                                      <input type="text" placeholder="Discounts Amount" name="discounts_amount" class="form-control" value="{{discount.discounts_amount}}"> 
+                                    </div>  
+                                  </div>
+                          <div class="form-group row">  
+                            <label for="example-text-input-sm" class="col-sm-2 col-form-label text-right">Status</label>
+                            <div class="col-sm-10">  
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input"  {% if discount.status == 1 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio1">Active</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input"  {% if discount.status == 0 %} checked {% endif %}>
+                              <label class="custom-control-label" for="customRadio2">InActive</label>
+                          </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">  
+                          <label for="example-text-input-sm" class="col-sm-2 col-form-label text-right"></label>
+                          <div class="col-sm-10">  
+                          <button type="submit" class="btn btn-primary">Update</button>
+                          </div>
+                      </div>  
+                         
+                          </div>  
+                        </form> 
+                      </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+           </div> 
+   </div> 
+   {% include 'agents/base/footer.html'%}
+  </div> 
+  <script src="/static/agents/js/jquery.min.js"></script>
+  <script src="/static/agents/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/agents/js/metismenu.min.js"></script>
+  <script src="/static/agents/js/waves.js"></script>
+  <script src="/static/agents/js/feather.min.js"></script>
+  <script src="/static/agents/js/simplebar.min.js"></script>
+  <script src="/static/agents/js/jquery-ui.min.js"></script>
+  <script src="/static/agents/js/moment.js"></script>
+  <script src="/static/agents/plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="/static/agents/js/app.js"></script>
+
+
+</body>
+
+</html>                        

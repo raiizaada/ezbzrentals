@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Create Invoice </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Invoice</h4>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="/super/invoice">Invoice</a></li>
+                                <li class="breadcrumb-item active">Create</li>
+                            </ol>
+                        </div>
+                    </div>                                                          
+                </div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <form  method="POST"  class="post-form" enctype="multipart/form-data"  action="/super/invoice-create/">{% csrf_token %} 
+                    <div class="card-body invoice-head"> 
+                        <div class="row">
+                            <div class="col-md-4 align-self-center">                                                
+                                <img src="/static/super/images/logo.png" alt="logo-small" class="logo-sm mr-1" height="80">                                            
+                               
+                                
+                            </div> 
+                            <div class="col-md-8">
+                                    
+                                <ul class="list-inline mb-0 contact-detail float-right">                                                   
+                                    <li class="list-inline-item">
+                                        <div class="pl-3">
+                                            <i class="mdi mdi-web"></i>
+                                            <p class="text-muted mb-0">Apex Websoft</p>
+                                            <p class="text-muted mb-0">apexwebsoft.com</p>
+                                        </div>                                                
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <div class="pl-3">
+                                            <i class="mdi mdi-phone"></i>
+                                            <p class="text-muted mb-0">9873218141</p>
+                                            <p class="text-muted mb-0">7303699947</p>
+                                        </div>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <div class="pl-3">
+                                            <i class="mdi mdi-map-marker"></i>
+                                            <p class="text-muted mb-0">D13 Sec-3,</p>
+                                            <p class="text-muted mb-0">Noida, Up 201301 INDIA.</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div> 
+                        </div>  
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="">
+                                    <h6 class="mb-0"><b>Order Date:</b> 11/05/2020</h6>
+                                    <h6><b>Order ID :</b> # 23654789</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> 
+                                    <address class="font-13">
+                                        <strong class="font-14">Billed To:</strong>
+                                    </address> 
+                                    <div class="row mb-2">
+                                        <div class="col-md-6">  
+                                            <input type="text" name="customer" class="form-control" placeholder="Company Name" required="" id="id_customer">                                            
+                                        </div>
+                                        <div class="col-md-6">  
+                                            <input type="text" name="customer_email" class="form-control" placeholder="Email" required="" id="id_customer_email">                                           
+                                        </div> 
+                                    </div>  
+                                    <div class="row mb-2">
+                                        <div class="col-md-6"> 
+                                            <input type="tel" name="message" class="form-control" placeholder="Phone" required="" id="id_message">
+                                        </div>
+                                        <div class="col-md-6"> 
+                                            <input type="text" name="billing_address" class="form-control" placeholder="Address" required="" id="id_billing_address"> 
+                                        </div>
+                                    </div> 
+                                
+                            </div>
+                            
+                                                                     
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="table-responsive project-invoice">
+                                    <table class="table table-bordered mb-0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Product/Service</th>
+                                                <th>Description</th>
+                                                <th>QTY</th>
+                                                 <th>RATE</th>
+                                                <th>AMOUNT ($)</th>
+                                                <th>
+                                                    <div class="input-group-append">
+                                                        <button  class="button is-small btn btn-success add-form-row ">+</button>&nbsp;
+                                                    </div>
+                                                </th> 
+                                            </tr>
+                                        </thead>
+                                        <tbody>                                         
+                                            {{ formset.management_form }}
+                                            {% for form in formset %}
+                                            <tr>
+                                                <td>{{form.service}}</td>
+                                                <td>{{form.description}}</td>
+                                                <td>{{form.quantity}}</td>
+                                                <td>{{form.rate}}</td>
+                                                <td class="amount"></td>
+                                                <td>
+                                                    <div class="input-group-append">
+                                                       
+                                                        <button  onclick = "remove()" class="button is-small btn btn-warning remove-form-row">-</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}  
+                                        </thead>                                      
+                                        </tbody>
+                                    </table>
+                                </div>                                         
+                            </div>                                    
+                        </div>
+
+                        <hr>
+                       
+                            <div class="col-lg-12 align-self-end">
+                                <div class="float-right" style="width: 7%;">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                         </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        
+    
+</div>
+        {% include 'super/base/footer.html'%}
+    </div>
+    <script src="/static/super/js/jquery.min.js"></script>
+    <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/super/js/metismenu.min.js"></script>
+    <script src="/static/super/js/waves.js"></script>
+    <script src="/static/super/js/feather.min.js"></script>
+    <script src="/static/super/js/simplebar.min.js"></script>
+    <script src="/static/super/js/jquery-ui.min.js"></script>
+    <script src="/static/super/js/moment.js"></script>
+
+<script type="text/javascript">
+    $('table input').on("input", function () {
+        var total = []
+        var $tr = $(this).closest('tr');
+        var textValue1 = $("input.rate", $tr).val();
+        var textValue2 = $('input.quantity', $tr).val();
+        amt = textValue1 * textValue2;
+        // console.log(amt);
+        $('.amount', $tr).html(amt);
+        calc_total();
+    });
+
+    function calc_total() {
+        var sum = 0;
+        $(".amount").each(function () {
+            sum += parseFloat($(this).text());
+        });
+        console.log(sum);
+        $('#total').text(sum);
+    }
+</script>
+
+
+<script type="text/javascript">
+    function updateElementIndex(el, prefix, ndx) {
+        var id_regex = new RegExp('(' + prefix + '-\\d+)');
+        var replacement = prefix + '-' + ndx;
+        if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+        if (el.id) el.id = el.id.replace(id_regex, replacement);
+        if (el.name) el.name = el.name.replace(id_regex, replacement);
+    }
+    function cloneMore(selector, prefix) {
+        var newElement = $(selector).clone(true);
+        //console.log(newElement);
+        var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+        newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function () {
+            var name = $(this).attr('name')
+            if (name) {
+                name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                var id = 'id_' + name;
+                $(this).attr({ 'name': name, 'id': id }).val('').removeAttr('checked');
+            }
+        });
+        newElement.find('label').each(function () {
+            var forValue = $(this).attr('for');
+            if (forValue) {
+                forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                $(this).attr({ 'for': forValue });
+            }
+        });
+        total++;
+        $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+        $(selector).after(newElement);
+       
+        return false;
+    }
+    function deleteForm(prefix, btn) {
+        var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+        if (total > 1) {
+            btn.closest('.form-row').remove();
+            var forms = $('.form-row');
+            $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+            for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                $(forms.get(i)).find(':input').each(function () {
+                    updateElementIndex(this, prefix, i);
+                });
+            }
+        }
+        return false;
+    }
+    $(document).on('click', '.add-form-row', function (e) {
+        e.preventDefault();
+        cloneMore('table tbody tr:last', 'form');
+        return false;
+    });
+    $(document).on('click', '.remove-form-row', function (e) {
+        e.preventDefault();
+        deleteForm('form', $(this));
+        return false;
+    });
+</script>
+<script> 
+    function remove() {
+        $('table tbody tr:last-child').remove();
+    }
+</script> 
+ 
+
+
+
+<script  type="text/javascript"> 
+    var date = new Date(); 
+    var dd = date.getDate(); 
+    var mm = date.getMonth() + 1; 
+    var yyyy = date.getFullYear(); 
+    var newDate = dd + "-" + mm + "-" +yyyy; 
+    var p = document.getElementById("myId"); 
+    p.innerHTML = newDate; 
+    </script> 
+    <script src="/static/super/js/app.js"></script>
+
+</body>
+
+</html>                         
+
+
+
+
+                       

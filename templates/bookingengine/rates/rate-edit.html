@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Rate</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/bookingengine/images/favicon.ico">
+
+<link href="/static/bookingengine/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body>
+        <div id="layout-wrapper">
+            {% include 'bookingengine/base/top_nav.html'%}
+            {% include 'bookingengine/base/left_sidebar.html'%}
+       
+		<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Edit Rate</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/booking-engine/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/booking-engine/rate">Rate</a></li>
+                            <li class="breadcrumb-item active">Edit Rate</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body mt-4">
+
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/booking-engine/rate-update/{{rate.id}}">  
+                                {% csrf_token %}  
+                              <div class="col-lg-10">
+                                <div class="row mb-3">  
+                                  <label for="example-text-input" class="col-sm-3 col-form-label text-right">Title:</label>  
+                                   <div class="col-sm-9">  
+                                     <input type="text"  name="title" class="form-control" value="{{rate.title}}" disabled> 
+                                   </div>  
+                                 </div>  
+                              <div class="row mb-3">  
+                               <label for="example-text-input" class="col-sm-3 col-form-label text-right">Rooms:</label>  
+                                <div class="col-sm-9">  
+                                  <select name="rooms" class="form-control" disabled>
+                                    {% for rooms in rooms %}
+                                        <option value="{{rooms.id}}" {% if rooms.id == rate.rooms_id %} selected {% endif %} >{{rooms.name}} </option>
+                                      {% endfor %}
+                                  </select>
+                                </div>  
+                              </div>
+                              <div class="row mb-3">  
+                                <label for="example-text-input" class="col-sm-3 col-form-label text-right">Season:</label>  
+                                 <div class="col-sm-9">  
+                                   <select name="seasons" class="form-control" disabled>
+                                     {% for season in seasons %}
+                                         <option value="{{season.id}}" {% if season.id == rate.seasons_id %} selected {% endif %}>{{season.title}}</option>
+                                       {% endfor %}
+                                   </select>
+                                 </div>  
+                               </div>
+
+                               <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="table-responsive project-invoice">
+                                        <table class="table table-bordered mb-0">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th class="col-sm-3 col-form-label text-right">Adults</th>
+                                                    <th class="col-sm-3 col-form-label text-right">Children</th>
+                                                    <th class="col-sm-3 col-form-label text-right">Price per night</th>
+                                                    <th>
+                                                        <div class="input-group-append">
+                                                            <button  class="button is-small btn btn-success add-form-row ">+</button>&nbsp;
+                                                        </div>
+                                                    </th> 
+                                                </tr>
+                                            </thead>
+                                            <tbody>                                         
+                                                <tr>
+                                                    <td> <input type="text" name="adults" class="form-control" value="{{rate.adults}}" ></td>
+                                                    <td><input type="text" name="children" class="form-control" value="{{rate.children}}" ></td>
+                                                    <td><input type="text" name="price_per_night" class="form-control" value="{{rate.price_per_night}}" ></td>
+                                                    <td><input type="text" name="total_rate" class="form-control" value="{{rates}}" ></td>
+                                                    <td><input type="text" name="total_rate" class="form-control" value="{{rates}}" ></td>
+                                                    <td>
+                                                        <div class="input-group-append">
+                                                            <button  onclick = "remove()" class="button is-small btn btn-warning remove-form-row">-</button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                             
+                                            </thead>                                      
+                                            </tbody>
+                                        </table>
+                                    </div>                                         
+                                </div>                                    
+                            </div>
+
+                        <div class="row mb-3">  
+                          <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right"></label>
+                          <div class="col-sm-9">  
+                          <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </div>  
+                         
+                          </div>  
+                        </form> 
+                      </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+           </div> 
+   </div> 
+   {% include 'bookingengine/base/footer.html'%}
+  </div> 
+  
+  <script src="/static/bookingengine/libs/jquery/jquery.min.js"></script>
+  <script src="/static/bookingengine/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/bookingengine/libs/metismenu/metisMenu.min.js"></script>
+  <script src="/static/bookingengine/libs/simplebar/simplebar.min.js"></script>
+  <script src="/static/bookingengine/libs/node-waves/waves.min.js"></script>
+  <script src="/static/bookingengine/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <script src="/static/bookingengine/js/pages/form-element.init.js"></script>
+  <script src="/static/bookingengine/js/app.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor
+          .create( document.querySelector( '#elm1' ) );
+</script>
+<script type="text/javascript">
+  function updateElementIndex(el, prefix, ndx) {
+      var id_regex = new RegExp('(' + prefix + '-\\d+)');
+      var replacement = prefix + '-' + ndx;
+      if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+      if (el.id) el.id = el.id.replace(id_regex, replacement);
+      if (el.name) el.name = el.name.replace(id_regex, replacement);
+  }
+  function cloneMore(selector, prefix) {
+      var newElement = $(selector).clone(true);
+     // console.log(newElement);
+      var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+      newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function () {
+          var name = $(this).attr('name')
+          if (name) {
+              name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+              var id = 'id_' + name;
+              $(this).attr({ 'name': name, 'id': id }).val('').removeAttr('checked');
+          }
+      });
+      newElement.find('label').each(function () {
+          var forValue = $(this).attr('for');
+          if (forValue) {
+              forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+              $(this).attr({ 'for': forValue });
+          }
+      });
+      total++;
+      $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+      $(selector).after(newElement);
+     
+      return false;
+  }
+  function deleteForm(prefix, btn) {
+      var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+      if (total > 1) {
+          btn.closest('.form-row').remove();
+          var forms = $('.form-row');
+          $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+          for (var i = 0, formCount = forms.length; i < formCount; i++) {
+              $(forms.get(i)).find(':input').each(function () {
+                  updateElementIndex(this, prefix, i);
+              });
+          }
+      }
+      return false;
+  }
+  $(document).on('click', '.add-form-row', function (e) {
+      e.preventDefault();
+      cloneMore('table tbody tr:last', 'form');
+      return false;
+  });
+  $(document).on('click', '.remove-form-row', function (e) {
+      e.preventDefault();
+      deleteForm('form', $(this));
+      return false;
+  });
+</script>
+<script> 
+  function remove() {
+      $('table tbody tr:last-child').remove();
+  }
+</script> 
+
+</body>
+
+</html>                        

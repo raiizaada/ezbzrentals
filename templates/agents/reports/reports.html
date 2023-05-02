@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Reports</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/agents/images/favicon.png">
+        <link href="/static/agents/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+        <link href="/static/agents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/agents/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'agents/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'agents/base/top_nav.html' %}
+        </div>
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Reports</h4>
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/agents/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item active"><a href="/agents/reports">Reports</a></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="row mb-3">
+                            {% csrf_token%}
+                            <div class="col-1 text-right pt-2">From:</div>
+                            <div class="col-2"><input type="date" name="from_date" id="fromdate" class="dp-list form-control"/></div>
+                            <div class="col-1 text-right pt-2">To:</div>
+                            <div class="col-2"><input type="date" name="to_date" id="todate" class="form-control"></div>
+                            <div class="col-1 text-right pt-2">User:</div>
+                            <div class="col-2"><select 
+                        data-placeholder="Choose ..."  name="user_id" id="id_user_id"  class="form-control">
+                            {% for user in users %}
+                            <option value="{{user.id}}">{{user.username}}</option> 
+                            {% endfor %}
+                          </select> </div>
+                          <div class="col-2"><input type="submit" value="Search" class="btn btn-primary"/> </div>
+                        </div>
+                    </form>
+                
+                        <table class="table table-bordered dt-responsive nowrap">
+                        <thead>
+                            <tr>  
+               
+                                <th>ID</th>
+                                <th>Type</th>  
+                                <th>First Name</th>  
+                                <th>Last Name</th> 
+                                <th>Date</th>  
+                               
+                                
+                                
+                            </tr>  
+                            </thead>  
+                            <tbody>  
+                            {% for booking in data %}
+                            <tr>  
+                                
+                                <td>{{booking.id}}</td>
+                                <td>{{booking.booking_type}}</td>
+                                <td>{{booking.first_name}}</td> 
+                                <td>{{booking.last_name}}</td>  
+                                <td>{{booking.created_at}}</td>      
+                               
+                                
+                                
+                            </tr>  
+                            {% endfor %}
+                            </tbody>  
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>           
+
+{% include 'agents/base/footer.html'%}
+</div> 
+<script src="/static/agents/js/jquery.min.js"></script>
+<script src="/static/agents/js/bootstrap.bundle.min.js"></script>
+<script src="/static/agents/js/metismenu.min.js"></script>
+<script src="/static/agents/js/waves.js"></script>
+<script src="/static/agents/js/feather.min.js"></script>
+<script src="/static/agents/js/simplebar.min.js"></script>
+<script src="/static/agents/js/jquery-ui.min.js"></script>
+<script src="/static/agents/js/moment.js"></script>
+<script src="/static/agents/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/agents/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/agents/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="/static/agents/js/app.js"></script>   
+<script>
+    $('#datatable').DataTable();
+</script>
+</body>
+</html>
+                      
+                    
+                      
+            

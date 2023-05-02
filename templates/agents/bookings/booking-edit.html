@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Booking </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/agents/images/favicon.png">
+        <link href="/static/agents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/agents/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'agents/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'agents/base/top_nav.html' %}
+        </div>
+         
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Edit Bookings</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/agents/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/agents/bookings">Bookings</a></li>
+                              <li class="breadcrumb-item active">Edit Bookings</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Bookings</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">                   
+                      <div class="row">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                          <form method="post" enctype="multipart/form-data" class="post-form" action="/agents/booking-update/{{bookings.id}}"> 
+                            {% csrf_token %} 
+                          <div class="container">                             
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Rental<span class="strict">*</span></label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="rental" class="form-control" placeholder="Rental"  id="id_rental" value="{{ bookings.rental}}">
+                              </div>  
+                            </div>
+
+                            <div class="form-group row">  
+                                <label class="col-sm-2 col-form-label">Channel:</label>  
+                                <div class="col-sm-10">  
+                                  <select name="channel"  id="id_channel" class="form-control">
+                                    {% for channel in channels %}
+                                        <option value="{{channel.id}}" {% if channel.id == channel.channels_id %} selected {% endif %}>{{channel.channel_title}}</option>
+                                    {% endfor %}
+                                  </select>
+                                </div>  
+                              </div> 
+
+                              <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Type:<span class="strict">*</span></label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="booking_type" class="form-control" placeholder="Booking Type" required="" id="id_booking_type"  value="{{ bookings.booking_type}}">  
+                              </div>   
+                            </div> 
+                             
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Name:</label>  
+                              <div class="col-sm-5">  
+                                <input type="text" placeholder="First Name" name="first_name" id="id_first_name" class="form-control" value="{{bookings.first_name}}">
+                              </div>  
+                              <div class="col-sm-5">  
+                                <input type="text" placeholder="Last Name" name="last_name" id="id_last_name" class="form-control" value="{{bookings.last_name}}">
+                              </div>  
+                            </div> 
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Phone:</label>  
+                              <div class="col-sm-10">  
+                                <input type="text" placeholder="Phone" name="phone" class="form-control" value="{{bookings.phone}}">
+                              </div>  
+                            </div>
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Address:</label>  
+                              <div class="col-sm-10">  
+                                <input type="text" placeholder="Address" name="address" class="form-control" value="{{bookings.address}}">
+                              </div>  
+                            </div>  
+                              <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">City:</label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="city" class="form-control" placeholder="City" value="{{bookings.city}}">
+                              </div>  
+                            </div>  
+                              <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">State:</label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="state" class="form-control" placeholder="State" value="{{bookings.state}}">  
+                              </div>  
+                            </div>
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Country:</label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="country" class="form-control" placeholder="coutry" value="{{bookings.country}}">  
+                              </div>  
+                            </div>
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Zip / Postal Code:</label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="postal_code" class="form-control" placeholder="Zip / Postal Code" value="{{bookings.postal_code}}">  
+                              </div>  
+                            </div>
+
+                            <div class="form-group row">  
+                                <label class="col-sm-2 col-form-label">CheckIn:<span class="strict">*</span></label>  
+                                <div class="col-sm-10">  
+                                  <input type="datetime-local" name="check_in" class="form-control"  required="" id="id_check_in"  value="{{ bookings.check_in}}">  
+                                </div>   
+                              </div> 
+
+                            <div class="form-group row">  
+                                <label class="col-sm-2 col-form-label">CheckOut:<span class="strict">*</span></label>  
+                                <div class="col-sm-10">  
+                                  <input type="datetime-local" name="check_out" class="form-control" required="" id="id_check_out"  value="{{ bookings.check_out}}">  
+                                </div>   
+                              </div> 
+                           
+                            <div class="form-group row">  
+                              <label for="example-text-input-sm" class="col-sm-2 col-form-label ">Status:</label>
+                              <div class="col-sm-10">  
+                                <div class="custom-control custom-radio">
+                                  <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" {% if bookings.status == 1 %} checked {% endif %}>
+                                  <label class="custom-control-label" for="customRadio1">Active</label>
+                              </div>
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input" {% if bookings.status == 0 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio2">InActive</label>
+                            </div>
+                              </div>
+                          </div> 
+                            <div class="form-group row">  
+                                      <label for="example-text-input-sm" class="col-sm-2 col-form-label text-right"></label>
+                                      <div class="col-sm-10">  
+                                      <button type="submit" class="btn btn-primary">Update</button>
+                                      </div>
+                                  </div> 
+                                </div>
+                        </form> 
+                        
+                      </div>
+                   
+                  </div>
+              </div> 
+          </div>
+      </div>
+  </div>
+ 
+</div> 
+{% include 'agents/base/footer.html'%}
+</div>
+<script src="/static/agents/js/jquery.min.js"></script>
+<script src="/static/agents/js/bootstrap.bundle.min.js"></script>
+<script src="/static/agents/js/metismenu.min.js"></script>
+<script src="/static/agents/js/waves.js"></script>
+<script src="/static/agents/js/feather.min.js"></script>
+<script src="/static/agents/js/simplebar.min.js"></script>
+<script src="/static/agents/js/jquery-ui.min.js"></script>
+<script src="/static/agents/js/moment.js"></script>
+<script src="/static/agents/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/agents/js/app.js"></script>
+
+</body>
+</html>              

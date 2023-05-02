@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Country</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Update Country</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/country">Country</a></li>
+                              <li class="breadcrumb-item active">Edit Country</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Country</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-2"></div>
+                          <div class="col-lg-8">
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/super/country-update/{{country.id}}">  
+                                {% csrf_token %}  
+                               
+                            <div class="container">  
+                        
+                            <div class="form-group row">  
+                            <label class="col-sm-2 col-form-label">Name:</label>  
+                            <div class="col-sm-10">  
+                              <input type="text" placeholder="Name" name="name" class="form-control" value="{{country.name}}"> 
+                            </div>  
+                          </div>
+                          <div class="form-group row">  
+                            <label class="col-sm-2 col-form-label">Code:</label>  
+                            <div class="col-sm-10">  
+                              <input type="text" placeholder="Code" name="code" class="form-control" value="{{country.code}}"> 
+                            </div>  
+                          </div>
+                          <div class="form-group row">  
+                            <label class="col-sm-2 col-form-label">Dialing Code:</label>  
+                            <div class="col-sm-10">  
+                              <input type="text" placeholder="Code" name="country_code" class="form-control" value="{{country.country_code}}"> 
+                            </div>  
+                          </div> 
+                          <div class="form-group row">  
+                            <label for="example-text-input-sm" class="col-sm-2 col-form-label text-right">Status</label>
+                            <div class="col-sm-10">  
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input"{% if country.status == 1 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio1">Active</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input" {% if country.status == 0 %} checked {% endif %}>
+                              <label class="custom-control-label" for="customRadio2">InActive</label>
+                          </div>
+                            </div>
+                        </div> 
+        
+                        <div class="form-group row">  
+                          <label for="example-text-input-sm" class="col-sm-2 col-form-label text-right"></label>
+                          <div class="col-sm-10">  
+                          <button type="submit" class="btn btn-primary">Update</button>
+                          </div>
+                      </div>  
+                         
+                          </div>  
+                        </form> 
+                      </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+           </div> 
+   </div> 
+   {% include 'super/base/footer.html'%}
+  </div> 
+  
+  <script src="/static/super/js/jquery.min.js"></script>
+  <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/super/js/metismenu.min.js"></script>
+  <script src="/static/super/js/waves.js"></script>
+  <script src="/static/super/js/feather.min.js"></script>
+  <script src="/static/super/js/simplebar.min.js"></script>
+  <script src="/static/super/js/jquery-ui.min.js"></script>
+  <script src="/static/super/js/moment.js"></script>
+  <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="/static/super/js/app.js"></script>
+
+
+</body>
+
+</html>                        

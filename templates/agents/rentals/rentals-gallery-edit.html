@@ -1,0 +1,68 @@
+{% include 'base/header.html'%}
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Update Photos</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="#">Rental Gallery</a></li>
+                              <li class="breadcrumb-item active">Edit Photos</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Rental Gallery</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">
+                          
+                          <div class="col-lg-10">
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/add-rentals-gallery">  
+                              {% csrf_token %} 
+                              <div class="form-group row">  
+                                <label class="col-sm-3 col-form-label">Rental Id:</label>  
+                                <div class="col-sm-9">  
+                                    <input type="text" class="form-control" name="gallery_rental_id" id="id_gallery_rental_id" required maxlength="20" value="{{ employee.gallery_rental_id }}"/>
+                                </div>  
+                              </div>  
+                              <div class="form-group row">  
+                                <label class="col-sm-3 col-form-label">Image:</label>  
+                                <div class="col-sm-9">  
+                                    <input type="text" class="form-control" name="gallery_image" id="id_gallery_image" required maxlength="20" value="{{ employee.gallery_image }}"/>
+                                </div>  
+                              </div>  
+                                 <div class="form-group row">  
+                                <label class="col-sm-3 col-form-label">Status:</label>  
+                                <div class="col-sm-9">  
+                                    <input type="text" class="form-control" name="gallery_status " id="id_gallery_status " required maxlength="20" value="{{ employee.gallery_status  }}"/>
+                                </div>   
+                              </div>  
+                              <div class="col-offset-2">
+                                  <button type="submit" class="btn btn-primary">Update</button>
+                              </div>
+                              </form>
+                          </div>
+                      </div>                                                                             
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+{% include 'base/footer.html'%}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Add Channel</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/agents/images/favicon.png">
+        <link href="/static/agents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/agents/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'agents/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'agents/base/top_nav.html' %}
+        </div>
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Edit Rental Type</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/agents/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/agents/rental-type">Rental Type</a></li>
+                              <li class="breadcrumb-item active">Edit Rental Type</li>
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Rental Type</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">                   
+                      <div class="row">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                          <form method="post" enctype="multipart/form-data" class="post-form" action="/agents/rental-type-update/{{ rentaltype.id}}"> 
+                            {% csrf_token %} 
+                          <div class="container">                             
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Room Type Name<span class="strict">*</span></label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="room_type_name" class="form-control" placeholder="Enter Room Type Name"  id="room_name" value="{{ rentaltype.room_type_name}}">
+                              </div>  
+                            </div>
+
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">No of beds<span class="strict">*</span></label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="noof_beds" class="form-control" placeholder="No of beds" required="" id="noof_beds"  value="{{ rentaltype.noof_beds}}">  
+                              </div>  
+                            </div> 
+
+                              <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Max. Occupancy<span class="strict">*</span></label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="max_occupancy" class="form-control" placeholder="Enter Max Occupancy" required="" id="max_occupancy"  value="{{ rentaltype.max_occupancy}}">  
+                              </div>   
+                            </div> 
+                             
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">No of Rooms<span class="strict">*</span></label>  
+                              <div class="col-sm-10">  
+                                <input type="text" name="noof_rooms" class="form-control" placeholder="Enter No of rooms" required="" id="noof_rooms"  value="{{ rentaltype.noof_rooms}}">  
+                              </div>   
+                            </div> 
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label">Upload Picture<span class="strict">*</span></label>  
+                              <div class="col-sm-10">  
+                                <input type="file" name="picture" class="form-control">
+                                <br>
+                                <img src="/media/{{ rentaltype.picture }}" height="40">   
+                              </div>   
+                            </div> 
+                            <div class="form-group row">  
+                              <label class="col-sm-2 col-form-label" >Description:</label>  
+                              <div class="col-sm-10" >  
+                                <textarea name="rental_description" cols="30" rows="10" class="form-control" id="elm1"> {{ rentaltype.rental_description}}</textarea>   
+                              </div>   
+                            </div> 
+                            <div class="form-group row">  
+                              <label for="example-text-input-sm" class="col-sm-3 col-form-label ">Status</label>
+                              <div class="col-sm-9">  
+                                <div class="custom-control custom-radio">
+                                  <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" {% if rentaltype.status == 1 %} checked {% endif %}>
+                                  <label class="custom-control-label" for="customRadio1">Active</label>
+                              </div>
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input" {% if rentaltype.status == 0 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio2">InActive</label>
+                            </div>
+                              </div>
+                          </div> 
+                            <div class="form-group row">  
+                                      <label for="example-text-input-sm" class="col-sm-2 col-form-label text-right"></label>
+                                      <div class="col-sm-10">  
+                                      <button type="submit" class="btn btn-primary">Update</button>
+                                      </div>
+                                  </div> 
+                                </div>
+                        </form> 
+                        
+                      </div>
+                   
+                  </div>
+              </div> 
+          </div>
+      </div>
+  </div>
+ 
+</div> 
+{% include 'agents/base/footer.html'%}
+</div>
+<script src="/static/agents/js/jquery.min.js"></script>
+<script src="/static/agents/js/bootstrap.bundle.min.js"></script>
+<script src="/static/agents/js/metismenu.min.js"></script>
+<script src="/static/agents/js/waves.js"></script>
+<script src="/static/agents/js/feather.min.js"></script>
+<script src="/static/agents/js/simplebar.min.js"></script>
+<script src="/static/agents/js/jquery-ui.min.js"></script>
+<script src="/static/agents/js/moment.js"></script>
+<script src="/static/agents/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/agents/js/app.js"></script>
+
+</body>
+</html>              

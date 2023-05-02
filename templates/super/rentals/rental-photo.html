@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Photo | ezbz rentals</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.ico">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css" />
+        <link href ="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+
+    </head>
+
+    <body class="dark-sidenav">
+      <div class="left-sidenav">
+          {% include 'super/base/left_sidebar.html' %}
+      </div>
+      
+
+      <div class="page-wrapper">
+          <div class="topbar">            
+            {% include 'super/base/top_nav.html' %}
+          </div>
+
+
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-title-box">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="page-title">Photo</h4>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="/super/rentals">Rentals</a></li>
+                                            <li class="breadcrumb-item active">Photo</li>
+                                        </ol>
+                                    </div>
+                                </div>                                                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-body">
+                            <h5>Photo</h5>
+                            <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+                            <hr>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                        </div>
+                            {% endfor %}
+                            {%endif%}
+                            <div class="row" id="sortable"> 
+                              <div class="col-lg-12">
+                               <div class="dropzone_field">
+                                <div class="js-upload-photos">
+                                <i class="fas fa-cloud-upload-alt f42"></i>
+                                <h3>
+                                  Drag and drop more images or click here to upload
+                                </h3>
+                                <p><em>(Make sure to upload at least 10 photos in jpeg or png format with a minimum dimension of 1024x768)</em></p>
+                              </div>
+                              <input id="fileupload" type="file" name="image" multiple
+                              style="display: none;"
+                              data-url="http://127.0.0.1:8000/rentals-gallery-insert/{{rental.id}}"
+                              data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+                               </div></div>
+                              <div class="" id="Table">
+                              {% for photo in photos %}
+                            
+                                    <div data-pk="{{ photo.id }}" class="rentals_gallery" style="cursor: move;" data-placement="left">
+                                      <img src="/media/{{photo.image}}" class="img-fluid">  
+                                      <div class="rentals_anch">
+                                        <a href="/delete-gallery/{{ photo.id }}" class="ancgal" onclick="return DelItem();"><i class="mdi mdi-trash-can-outline f24"></i></a>                    
+                                      </div>
+                                    </div>
+                                    
+                              {% endfor%}        
+                           
+                            
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+              
+              {% include 'users/base/footer.html'%} 
+              </div>
+              <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title">Uploading...</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;">0%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> 
+              <script src="/static/super/js/jquery.min.js"></script>
+              <script src ="https://code.jquery.com/jquery-1.10.2.js"></script>
+              <script src ="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script> 
+              <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+              <script src="/static/super/js/metismenu.min.js"></script>
+              <script src="/static/super/js/waves.js"></script>
+              <script src="/static/super/js/feather.min.js"></script>
+              <script src="/static/super/js/simplebar.min.js"></script>
+              <script src="/static/super/js/jquery-ui.min.js"></script>
+              <script src="/static/super/js/moment.js"></script>
+              <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+              <script src="/static/super/js/app.js"></script>  
+              <script src="/static/users/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+              <script src="/static/users/js/pages/form-element.init.js"></script>
+              <script src="/static/users/js/jquery.ui.widget.js"></script>
+              <script src="/static/users/js/jquery.iframe-transport.js"></script>
+              <script src="/static/users/js/jquery.fileupload.js"></script>
+              <script src="/static/users/js/basic-upload.js"></script>
+             
+              
+              <script type="text/javascript" charset="utf-8">
+              
+                  $(document).ready(function() {
+                    $('#Table').sortable({
+                     update: function(event, ui) {
+                      sort =[];
+                      window.CSRF_TOKEN = "{{ csrf_token }}";
+                      $('#Table').children().each(function(){
+                        sort.push({'pk':$(this).data('pk'),'order':$(this).index()})
+                
+                    });
+                
+                
+                    $.ajax({
+                      url: "/sort",
+                      type: "post",
+                      datatype:'json',
+                      data:{'sort':JSON.stringify(sort),
+                       'csrfmiddlewaretoken': window.CSRF_TOKEN
+                      },
+                
+                    });
+                     console.log(sort)
+                      },
+                    }).disableSelection();
+                    });
+                </script>
+                <script>
+              
+              
+              
+                  function DelItem() {
+                
+                
+                
+                      if(!confirm("Are You Sure to delete this"))
+                
+                
+                
+                      event.preventDefault();
+                
+                
+                
+                  }
+                
+                
+                 </script>
+                 <script>
+                  $(".alert-success").fadeTo(5000, 500).slideUp(500, function(){
+                      $(".alert-success").slideUp(500);
+                  });
+                </script>
+              </body>
+              </html>
+              

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Rooms</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="" name="description" />
+<meta content="" name="author" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="/static/users/images/favicon.png">
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+</head>
+<body data-layout="horizontal">
+<div id="layout-wrapper">
+{% include 'users/base/header.html'%}
+<div class="main-content">
+<div class="page-content">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-3 mrgbp brdr">
+              {% include 'users/rentals/rental_nav.html'%}
+            </div>
+            <div class="col-lg-9">
+              <h5>Rooms</h5>
+              <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+              <hr>
+              {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"
+                  aria-label="Close"></button>
+              </div>
+              {% endfor %}
+              {%endif%}
+              <ul>
+                {% for bed in data2  %}
+                <li>{{bed.bednumb}} {{bed.bedtitle}}</li>
+                {% endfor %}
+               
+              </ul>
+              <a href="" class="btn btn-primary right-bar-toggle waves-effect" data-bs-toggle="modal" data-bs-target="#Rentalbed">Add Beds</a>
+              <hr>
+              <ul>
+                {% for room in data %}
+                <li>{{room.roomnumb}}{{room.roomtitle}}</li>
+              {% endfor %}
+              </ul>
+              
+              <a href="" class="btn btn-primary right-bar-toggle waves-effect" data-bs-toggle="modal" data-bs-target="#rentalroom">Add Rooms</a>
+              <hr>
+              <h5>Other Rooms</h5>
+              <div class="row mb-3">
+                <form method="post" action="/rentals/other-rooms-update/{{rentalotherroom.id}}" enctype="multipart/form-data">
+                {% csrf_token %}
+                 <div class="row">
+                <div class="col-lg-4">
+                  <ul class="list_none">
+                    {% for otherroom in otherrooms %}
+                    <li><input type="checkbox" class="form-check-input" value="{{otherroom.title}}" name="other_rooms[]" {% if otherroom.title in rentother %} checked="checked" {% endif %}> {{otherroom.title}}</li>
+                      {% if forloop.counter|divisibleby:7 %}
+                  </ul>
+                </div> 
+                <div class="col-lg-4">
+                  <ul class="list_none">   
+                      {% endif %}
+                   {%endfor%}
+                  </ul>                  
+                </div> 
+              </div>      
+                <br>
+                  <input type="submit" class="btn btn-primary" value="Save">     
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>    
+    </div>
+</div>
+{% include 'users/base/footer.html'%} 
+</div>
+</div>
+
+
+
+<div class="modal fade" id="rentalroom" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+  <form method="POST" action="/update-rooms/{{rental.id}}"> 
+    {% csrf_token %}
+
+    {% if rentalroomid %}
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Edit rooms</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <p>What other rooms does your rental have? Whichever rooms you choose here will be shown on your website.</p>
+
+         
+          <div class="table-responsive">
+            <table class="table table-centered mb-0 table-nowrap">                
+                <tbody>
+                  <tr><td colspan="2"><strong>{{amntype.title}}</strong></td></tr>
+                  {% for item in data %}
+                    <tr>
+                        <td>
+                          {{item.roomtitle}} 
+                        </td>
+                        <td>
+                            <div style="width: 120px;" class="product-cart-touchspin">
+                              <input type="hidden" name="title" id="room{{ forloop.counter }}" value="{{ item.roomtitle}}" readonly>
+                              <input data-toggle="touchspin" type="text"  name="no_of_rooms" class="touchspin" min="0" value="{{item.roomnumb}}">
+                            </div>
+                        </td>  
+                      </tr>
+
+                      {%endfor%}
+                </tbody>
+            </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-light waves-effect"
+              data-bs-dismiss="modal">Close</button>
+          <button id="update-btn" type="submit"
+              class="btn btn-primary waves-effect waves-light">Save
+              </button>
+      </div>
+   </div>
+
+   {% else %}
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="exampleModalScrollableTitle">Add rooms</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>What other rooms does your rental have? Whichever rooms you choose here will be shown on your website.</p>
+
+            {% for amntype in roomtype %}
+            <div class="table-responsive">
+              <table class="table table-centered mb-0 table-nowrap">                
+                  <tbody>
+                    <tr><td colspan="2"><strong>{{amntype.title}}</strong></td></tr>
+                    {% for room in rooms %}
+                    {% if amntype.id == room.room_type_id %}     
+                      <tr>
+                          <td>
+                            {{room.title}}
+                          </td>
+                          <td>
+                              <div style="width: 120px;" class="product-cart-touchspin">
+                                <input type="hidden" name="title" id="room{{ forloop.counter }}" value="{{ room.title }}" readonly>
+                                <input data-toggle="touchspin" type="text" name="no_of_rooms" class="touchspin" min="0" value="1" >
+                              </div>
+                          </td>
+                           
+                        </tr>
+                        {% endif %}
+                        {%endfor%}
+                  </tbody>
+              </table>
+          </div>
+          {% endfor %}
+         
+        
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light waves-effect"
+                data-bs-dismiss="modal">Close</button>
+            <button  type="submit"
+                class="btn btn-primary waves-effect waves-light">Save
+                </button>
+        </div>
+    </div>
+  {% endif %}
+</form>
+</div>
+</div>
+
+
+<div class="modal fade" id="Rentalbed" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle1" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+  <form method="POST" action="/insert-beds/{{rental.id}}">
+    {% csrf_token %}
+    {% if rentalbedid %}
+    <div class="modal-content">
+      <div class="modal-header">
+          <h5 class="modal-title mt-0" id="exampleModalScrollableTitle1">Edit beds</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <p>What other rooms does your rental have? Whichever rooms you choose here will be shown on your website.</p>
+         
+          <div class="table-responsive">
+            <table class="table table-centered mb-0 table-nowrap">                
+                <tbody>
+                  {% for bed in data2 %}
+                    <tr>
+                        <td>
+                          {{bed.bedtitle}}
+                        </td>
+                        <td>
+                            <div style="width: 120px;" class="product-cart-touchspin">
+                              <input type="hidden" name="name" id="bed{{ forloop.counter }}" value="{{bed.bedtitle}}" readonly>
+                              <input data-toggle="touchspin" type="text"  name="no_of_beds" class="touchspin" min="0" value="{{bed.bednumb}}">
+                            </div>
+                        </td>
+                        
+                    </tr>
+                    {% endfor %}
+                    
+       
+                </tbody>
+            </table>
+        </div>
+       
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-light waves-effect"
+              data-bs-dismiss="modal">Close</button>
+          <button type="submit"
+              class="btn btn-primary waves-effect waves-light">Save
+              </button>
+      </div>
+    </div>
+
+    {% else %}
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="exampleModalScrollableTitle1">Add beds</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>What other rooms does your rental have? Whichever rooms you choose here will be shown on your website.</p>
+           
+            <div class="table-responsive">
+              <table class="table table-centered mb-0 table-nowrap">                
+                  <tbody>
+                    {% for bed in bed %}
+                      <tr>
+                          <td>
+                            {{bed.title}}
+                          </td>
+                          <td>
+                              <div style="width: 120px;" class="product-cart-touchspin">
+                                <input type="hidden" name="name" id="bed{{ forloop.counter }}" value="{{bed.title}}" readonly>
+                                <input data-toggle="touchspin" type="text"  name="no_of_beds" class="touchspin" min="0" value="1">
+                              </div>
+                          </td>
+                          
+                      </tr>
+                      {% endfor %}
+                      
+         
+                  </tbody>
+              </table>
+          </div>
+         
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light waves-effect"
+                data-bs-dismiss="modal">Close</button>
+            <button type="submit"
+                class="btn btn-primary waves-effect waves-light">Save
+                </button>
+        </div>
+    </div>
+    {% endif %}
+  </form>
+
+</div>
+</div>
+
+
+
+
+
+
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+<script src="/static/users/js/pages/ecommerce-add-product.init.js"></script>
+<script src="/static/users/js/app.js"></script>
+<script src="/static/users/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="/static/users/js/pages/ecommerce-cart.init.js"></script>
+<script>
+  $(".alert-success").fadeTo(3000, 500).slideUp(500, function(){
+      $(".alert-success").slideUp(500);
+  });
+</script>
+
+
+{% comment %} <script>
+$(document).ready(function() {
+  $('#update-btn').click(function() {
+    var data = {};
+    $('.touchspin').each(function() {
+      var roomName = $(this).attr('name');
+      var numRooms = $(this).val();
+      data[roomName] = numRooms;
+    });
+    $.ajax({
+      type: 'POST',
+      url: '/update-rooms/86',
+      data: {
+        'room_data': JSON.stringify(data),
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+      },
+      success: function(response) {
+        alert('Rooms updated successfully!');
+      }
+    });
+  });
+});
+</script> {% endcomment %}
+
+
+
+</body>
+</html>

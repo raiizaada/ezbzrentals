@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Bookings</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/users/images/favicon.png">
+        <link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="/static/users/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/users/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/users/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/users/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body data-layout="horizontal">
+        <div id="layout-wrapper">
+            {% include 'users/base/header.html'%}
+       
+	
+<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Bookings</h4>
+                  
+
+                    <div class="page-title-right">
+                         <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Bookings</li>
+                        </ol>
+                        
+                                      
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success border-0" role="alert">{{message}}   
+        </div>
+        {% endfor %}
+        {%endif%}
+ 
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+    <tr>  
+        <th>Booking ID</th>
+        <th>Channel</th>
+        <th>Rental</th>
+        <th>Name</th>
+        <th>Check-in</th>
+        <th>Check-out</th>
+        <th>Date</th>
+        <th>Actions</th>        
+    </tr>  
+    </thead>  
+    <tbody>  
+    {% for booking in bookings %}
+    <tr>  
+        <td><a href="/users/reservation/{{booking.id}}" class="text-dark fw-bold">#{{booking.id}}</a> </td>
+        <td><img src="https://www.ezbzrentals.com/public/images/channels/1671563781.png" class="img-thumbnail rounded-circle avatar-sm"></td>
+        <td>{{booking.rental}}</td>
+        <td>{{booking.first_name}}</td>
+        <td>{{booking.check_in}}</td>
+        <td>{{booking.check_out}}</td>
+        <td>{{booking.created_at}}</td>
+        <td id="tooltip-container1">
+        <a href="/reservation/{{booking.id}}" class="me-3 text-primary"
+                                                data-bs-container="#tooltip-container1" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="View"><i
+                                                    class="mdi mdi-eye font-size-18"></i></a>
+                                            
+        </td>
+        
+        
+    </tr>  
+    {% endfor %}
+
+    </tbody>  
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% include 'users/base/footer.html'%}
+</div> 
+</div>
+<div id="csrf">
+    {% csrf_token %}
+</div>
+<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title m-0" id="exampleModalCenterTitle">Booking Information</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><i class="fa fa-times"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="BookingView"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm close" data-dismiss="model">Close</button>                
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+<script src="/static/users/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/static/users/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/users/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/static/users/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="/static/users/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/static/users/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script src="/static/users/js/pages/datatables.init.js"></script>
+<script src="/static/users/js/app.js"></script>
+
+<script>
+
+
+
+    function DelItem() {
+  
+  
+  
+        if(!confirm("Are You Sure to delete this"))
+  
+  
+  
+        event.preventDefault();
+  
+  
+  
+    }
+  
+  
+</script>
+
+<script>
+    $(function () {
+        $('button[id^="ViewBtn"]').click(function (e) {
+            e.preventDefault();
+            $("#bookingModal").modal("show");
+        });
+        
+    });
+
+    $(document).ready(function() { 
+        $('button[id^="ViewBtn"]').click(function(e) { 
+            e.preventDefault();
+            var BtnID = $(this).attr('value'); 
+           //alert(BtnID);
+           $.ajax({
+            type : 'POST',
+            url :  "/users/booking-view/"+BtnID,
+            headers: {'X-CSRFToken': document.getElementById('csrf').querySelector('input').value},
+            success : function(response){
+              //  console.log(response);
+               $('#BookingView').html(response);
+            },
+
+            error : function(response){
+                //console.log(response)
+            }
+        });
+
+        }); 
+        $('.close').click(function(){
+            $("#bookingModal").modal('hide'); 
+        });
+    });  
+</script>
+</body>
+</html> 
+  

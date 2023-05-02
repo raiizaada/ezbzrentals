@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Add Rentals</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/bookingengine/images/favicon.ico">
+        <link href="/static/bookingengine/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <link href="/static/bookingengine/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/bookingengine/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/bookingengine/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="/static/bookingengine/css/custom.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="layout-wrapper">
+            {% include 'bookingengine/base/top_nav.html'%}
+            {% include 'bookingengine/base/left_sidebar.html'%}
+		<div class="main-content">
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0">Add Rentals</h4>
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="/bookingengine/dashboard">Dashboard</a></li>
+                                        <li class="breadcrumb-item"><a href="/bookingengine/rentals">Rentals</a></li>
+                                        <li class="breadcrumb-item active">Add Rentals</li>
+                                    </ol>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body mt-5">
+                                    <form method="post" enctype="multipart/form-data" class="post-form" action="/booking-engine/room-insert"> 
+                                        {% csrf_token %} 
+                                    <div class="col-lg-10">
+                                    <div class="row mb-3">
+                                        <label for="example-text-input" class="col-sm-3 col-form-label text-right">Name<span class="strict">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="text"
+                                                id="room_name" name="name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="example-tel-input" class="col-sm-3 col-form-label text-right">Upload Image<span class="strict">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input class="form-control" type="file" name="image" multiple accept="image/*">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="example-url-input" class="col-sm-3 col-form-label text-right">Price<span class="strict">*</span></label>
+                                        <div class="col-sm-9">
+                                           <input type="text" name="price" class="form-control" required="" id="price">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="example-url-input" class="col-sm-3 col-form-label text-right">Size<span class="strict">*</span></label>
+                                        <div class="col-sm-9">
+                                           <input type="text" name="size" class="form-control"  required="" id="size">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="example-url-input" class="col-sm-3 col-form-label text-right">View<span class="strict">*</span></label>
+                                        <div class="col-sm-9">
+                                           <input type="text" name="view" class="form-control"  required="" id="view">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="example-url-input" class="col-sm-3 col-form-label text-right">Bed Type<span class="strict">*</span></label>
+                                        <div class="col-sm-9">
+                                           <input type="text" name="bed_types" class="form-control"  required="" id="bed_type">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">  
+                                        <label for="example-text-input" class="col-sm-3 col-form-label text-right">Category:</label>  
+                                         <div class="col-sm-9">  
+                                           <select name="categories" class="form-control form-select">
+                                            <option>--Select--</option>
+                                             {% for category in category %}
+                                                 <option value="{{category.name}}">{{category.name}}</option>
+                                               {% endfor %}
+                                           </select>
+                                         </div>  
+                                       </div>
+                                       <div class="row mb-3">  
+                                        <label for="example-text-input" class="col-sm-3 col-form-label text-right">Amenities:</label>  
+                                         <div class="col-sm-9">  
+                                            <ul class="list_none">
+                                  
+                                                {%for amenities in amenities %}
+                                                                               
+                                                <li><input type="checkbox" name="amenities[]" class="form-check-input" value="{{amenities.title}}" {% if amenities.title in rentalamenities.amenities %} checked {% endif %}> {{amenities.title}}</li>
+                                               
+                                                {% endfor %}
+                                              </ul>
+                                         </div>  
+                                       </div>
+                                       <div class="row mb-3">  
+                                        <label for="example-text-input" class="col-sm-3 col-form-label text-right">Tags:</label>  
+                                         <div class="col-sm-9">  
+                                           <select name="tags" class="form-control form-select">
+                                            <option>--Select--</option>
+                                             {% for tag in tag %}
+                                                 <option value="{{tag.name}}">{{tag.name}}</option>
+                                               {% endfor %}
+                                           </select>
+                                         </div>  
+                                       </div>
+                                    
+                                    <div class="row mb-2">
+                                        <label for="example-search-input" class="col-sm-3 col-form-label text-right">No of Adults<span class="strict">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="no_of_adult" class="form-control"  required="" id="no_of_adult">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="example-search-input" class="col-sm-3 col-form-label text-right">No of Child<span class="strict">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="no_of_child" class="form-control"  required="" id="no_of_child">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="example-email-input" class="col-sm-3 col-form-label text-right">Max. Occupancy<span class="strict">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="max_guest" class="form-control"  required="" id="max_guest">
+                                        </div>
+                                    </div>           
+                                    <div class="row mb-3">  
+                                        <label for="example-search-input" class="col-sm-3 col-form-label text-right"> Description:</label>  
+                                        <div class="col-sm-9">  
+                                          <textarea name="description" class="form-control" id="editor"></textarea>
+                                        </div>  
+                                      </div> 
+                                    <div class="row mb-3">  
+                                        <label for="example-tel-input" class="col-sm-3 col-form-label text-right">Status</label>
+                                        <div class="col-sm-9">  
+                                          <div class="custom-control custom-radio">
+                                            <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" checked>
+                                            <label class="custom-control-label" for="customRadio1">Active</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                          <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input">
+                                          <label class="custom-control-label" for="customRadio2">InActive</label>
+                                      </div>
+                                        </div>
+                                    </div> 
+                                     <div class="row mb-3">
+                                        <label for="example-tel-input" class="col-sm-3 col-form-label text-right"></label>
+                                        <div class="col-sm-9">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                                                    Submit
+                                                                </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+  {% include 'bookingengine/base/footer.html'%}
+</div> 
+</div>
+<script src="/static/bookingengine/libs/dropzone/min/dropzone.min.js"></script>
+<script src="/static/bookingengine/libs/jquery/jquery.min.js"></script>
+<script src="/static/bookingengine/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/bookingengine/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/bookingengine/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/bookingengine/libs/node-waves/waves.min.js"></script>
+<script src="/static/bookingengine/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
+<script src="/static/bookingengine/js/pages/datatables.init.js"></script>
+<script src="/static/bookingengine/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="/static/bookingengine/js/pages/form-element.init.js"></script>
+<script src="/static/bookingengine/libs/tinymce/tinymce.min.js"></script>
+<script src="/static/bookingengine/js/pages/form-editor.init.js"></script>
+<script src="/static/bookingengine/libs/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+<script src="/static/bookingengine/libs/twitter-bootstrap-wizard/prettify.js"></script>
+<script src="/static/bookingengine/libs/select2/js/select2.min.js"></script>
+<script src="/static/bookingengine/js/pages/ecommerce-add-product.init.js"></script>
+<script src="/static/bookingengine/js/app.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+<script>
+  ClassicEditor
+          .create( document.querySelector( '#editor' ) );
+</script>
+<script>
+    function previewFile(input){
+        var file = $("input[type=file]").get(0).files[0];
+        if(file){
+          var reader = new FileReader();
+          reader.onload = function(){
+              $("#previewImg").attr("src", reader.result);
+          }
+          reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+</body>
+</html>   
+                   
+               
+          
+                     
+                         
+
+                      

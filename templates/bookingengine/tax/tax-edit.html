@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Tax</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/bookingengine/images/favicon.ico">
+
+<link href="/static/bookingengine/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body>
+        <div id="layout-wrapper">
+            {% include 'bookingengine/base/top_nav.html'%}
+            {% include 'bookingengine/base/left_sidebar.html'%}
+       
+		<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Edit Tax</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/booking-engine/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/booking-engine/tax">Tax</a></li>
+                            <li class="breadcrumb-item active">Edit Tax</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body mt-4">
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/booking-engine/tax-update/{{tax.id}}">  
+                                {% csrf_token %}  
+                              <div class="col-lg-10">
+                            <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Title:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text" name="title" class="form-control" value="{{tax.title}}"> 
+                            </div>  
+                          </div>  
+                          <div class="row mb-3" >  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Type:</label>  
+                            <div class="col-sm-9">  
+                               <select name="type" id="cleaning_basis" class="form-control form-select" >
+                                        <option>--Select--</option>
+                                        <option value="Per guest / per day" {% if tax.type == 'Per guest / per day' %} selected {% endif %} >Per guest / per day</option>
+                                        <option value="Per accommodation / per day" {% if tax.type == "Per accommodation / per day" %} selected {% endif %} >Per accommodation / per day</option>
+                                        <option value="Per accommodation (%)" {% if tax.type == "Per accommodation (%)"  %} selected {% endif %} >Per accommodation (%)</option>
+                                      </select> 
+                            </div>  
+                          </div> 
+                          <div class="row mb-3 " id="Peradult" style="display: none;" >  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Per adult:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text"  name="per_adult" class="form-control" value="{{tax.per_adult}}" >
+                            </div>  
+                          </div>  
+                          <div class="row mb-3 " id="Perchild" style="display: none;">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Per child:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text"  name="per_child" class="form-control" value="{{tax.per_child}}" >
+                            </div>  
+                          </div>   
+                            <div class="row mb-3 " id="Amount" style="display: none;">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Amount:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text"  name="amount" class="form-control" value="{{tax.amount}}">
+                            </div>  
+                          </div>  
+                           <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Limit:</label>  
+                            <div class="col-sm-9">  
+                              <input type="text"  name="limit" class="form-control" value="{{tax.limit}}">
+                            </div>  
+                          </div> 
+                          <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Include:</label>  
+                            <div class="col-sm-9"> 
+                              <input type="hidden" name="include" value="0" id="IncludeCheck1"  {% if tax.include == 0 %} checked {% endif %} />  
+                              <input type="checkbox" class="form-check-input" name="include" id="IncludeCheck"  {% if tax.include == 1 %} checked {% endif %}> 
+                            </div>  
+                          </div> 
+                          <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Rooms:</label>  
+                            <div class="col-sm-9">  
+                              <ul class="list_none">
+                                {% for room in rooms %}                              
+                                <li><input type="checkbox" name="rooms[]" class="form-check-input" value="{{room.name}}" {% if room.name in tax.rooms %} checked {% endif %}> {{room.name}}</li>
+                                {% endfor %}
+                              </ul>
+                            </div>  
+                          </div>
+                          <div class="row mb-3">  
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Status</label>
+                            <div class="col-sm-9">  
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" {% if tax.status == 1 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio1">Active</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input" {% if tax.status == 0 %} checked {% endif %}>
+                              <label class="custom-control-label" for="customRadio2">InActive</label>
+                          </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">  
+                          <label for="example-text-input" class="col-sm-3 col-form-label text-right"></label>
+                          <div class="col-sm-9">  
+                          <button type="submit" class="btn btn-primary">Save</button>
+                          </div>
+                      </div>  
+                         
+                          </div>  
+                        </form> 
+                      </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+           
+   </div> 
+   {% include 'super/base/footer.html'%}
+  </div> 
+  
+  <script src="/static/bookingengine/libs/jquery/jquery.min.js"></script>
+  <script src="/static/bookingengine/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/bookingengine/libs/metismenu/metisMenu.min.js"></script>
+  <script src="/static/bookingengine/libs/simplebar/simplebar.min.js"></script>
+  <script src="/static/bookingengine/libs/node-waves/waves.min.js"></script>
+  <script src="/static/bookingengine/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <script src="/static/bookingengine/js/pages/form-element.init.js"></script>
+  <script src="/static/bookingengine/js/app.js"></script>
+  <script>
+  $(document).ready(function(){
+    $('#cleaning_basis').on('change', function(){
+      var getSelectValue = $(this).val();
+     
+    if(getSelectValue == "Per accommodation / per day"  || getSelectValue == "Per accommodation (%)" ){
+      document.getElementById("Amount").style.display="flex";
+    }else{
+        document.getElementById("Amount").style.display="none";
+        
+    }
+  });
+  });
+</script>
+<script>
+  $(document).ready(function(){
+    $('#cleaning_basis').on('change', function(){
+      var getSelectValue = $(this).val();
+     
+    if(getSelectValue == "Per guest / per day"){
+      document.getElementById("Peradult").style.display="flex";
+      document.getElementById("Perchild").style.display="flex";
+     
+    }else{
+      document.getElementById("Peradult").style.display="none";
+      document.getElementById("Perchild").style.display="none";
+      
+    }
+  });
+  });
+</script> 
+
+</body>
+
+</html>                        

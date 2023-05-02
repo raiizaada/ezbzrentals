@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>EZBZ Rentals | Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/media/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body class="account-body accountbg">
+        <div class="container">
+            <div class="row vh-100 d-flex justify-content-center">
+                <div class="col-12 align-self-center">
+                    <div class="row">
+                        <div class="col-lg-5 mx-auto">
+                            <div class="card">
+                                <div class="card-body p-0 auth-header-box">
+                                    <div class="text-center p-3">
+                                        <a href="/" class="logo logo-admin">
+                                            <img src="/static/super/images/logo-white.png" alt="logo" class="auth-logo">
+                                        </a>                                       
+                                    </div>
+                                </div>   
+                                <div class="card-body">
+                                    <ul class="nav-border nav nav-pills" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active font-weight-semibold" data-toggle="tab" href="#LogIn_Tab" role="tab">Log In</a>
+                                        </li>
+                                       
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active p-3 pt-3" id="LogIn_Tab" role="tabpanel">
+                                         {% for message in messages %}
+                                                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                                        <strong>Error!</strong> {{ message }}
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                    </div>
+                                                    {% endfor %}                                        
+                                            <form class="form-horizontal auth-form my-4" action="/super/" method="POST">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <label for="username">Username</label>
+                                                    <div class="input-group mb-3">                                                                                         
+                                                        <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                                    </div>                                    
+                                                </div>
+                    
+                                                <div class="form-group">
+                                                    <label for="userpassword">Password</label>                                            
+                                                    <div class="input-group mb-3">                                  
+                                                        <input type="password" class="form-control" name="password" id="pass" placeholder="Enter password">
+                                                    </div>                               
+                                                </div>
+                    
+                                                <div class="form-group mb-0 row">
+                                                    <div class="col-12 mt-2">
+                                                        <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                                    </div>
+                                                </div> 
+                                            </form>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div class="card-body text-center">
+                                    <span class="text-muted d-none d-sm-inline-block">Copyrights &copy; EZBZ Rentals 2023. All Rights Reserved.</span>                                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+        <script src="/static/super/js/jquery.min.js"></script>
+        <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/super/js/waves.js"></script>
+        <script src="/static/super/js/feather.min.js"></script>
+        <script src="/static/super/js/simplebar.min.js"></script>
+        <script>
+        $(".alert-success").fadeTo(3000, 500).slideUp(500, function(){
+            $(".alert-success").slideUp(500);
+        });
+        </script>
+
+        
+    </body>
+
+</html>
+
+
+
+
+
+

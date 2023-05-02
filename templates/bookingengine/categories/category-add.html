@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Add Category</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/bookingengine/images/favicon.ico">
+
+<link href="/static/bookingengine/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body>
+        <div id="layout-wrapper">
+            {% include 'bookingengine/base/top_nav.html'%}
+            {% include 'bookingengine/base/left_sidebar.html'%}
+       
+<div class="main-content">
+  <div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Add Category</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/booking-engine/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/booking-engine/activity">Category</a></li>
+                            <li class="breadcrumb-item active">Add Category</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body mt-5">
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/booking-engine/category-insert">  
+                              {% csrf_token %}  
+                            <div class="col-lg-10"> 
+                            <div class="row mb-3">  
+                              <label class="col-sm-3 col-form-label text-right">Name:</label>  
+                              <div class="col-sm-9">  
+                                <input type="text" name="name" class="form-control">
+                              </div>  
+                            </div> 
+                            <div class="row mb-3">
+                                <label for="example-tel-input" class="col-sm-3 col-form-label text-right">Description</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" id="elm1" name="description"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-3">  
+                              <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right">Status</label>
+                              <div class="col-sm-9">  
+                                <div class="custom-control custom-radio">
+                                  <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" checked>
+                                  <label class="custom-control-label" for="customRadio1">Active</label>
+                              </div>
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio2">InActive</label>
+                            </div>
+                              </div>
+                          </div> 
+                            
+                          <div class="row mb-3">  
+                            <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right"></label>
+                            <div class="col-sm-9">  
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                            </div>
+                          </form>  
+                    </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+        </div> 
+        {% include 'bookingengine/base/footer.html'%}
+      </div> 
+      <script src="/static/bookingengine/libs/jquery/jquery.min.js"></script>
+      <script src="/static/bookingengine/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="/static/bookingengine/libs/metismenu/metisMenu.min.js"></script>
+      <script src="/static/bookingengine/libs/simplebar/simplebar.min.js"></script>
+      <script src="/static/bookingengine/libs/node-waves/waves.min.js"></script>
+      <script src="/static/bookingengine/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+      <script src="/static/bookingengine/js/pages/form-element.init.js"></script>
+      <script src="/static/bookingengine/js/app.js"></script>
+  
+  </body>
+  </html>
+    
+     
+ 
+ 

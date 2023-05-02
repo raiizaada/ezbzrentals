@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Season</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/bookingengine/images/favicon.ico">
+
+<link href="/static/bookingengine/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/libs/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+<link href="/static/bookingengine/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body>
+        <div id="layout-wrapper">
+            {% include 'bookingengine/base/top_nav.html'%}
+            {% include 'bookingengine/base/left_sidebar.html'%}
+       
+<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Edit Season</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/booking-engine/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/booking-engine/seasons">Seasons</a></li>
+                            <li class="breadcrumb-item active">Edit Season</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body mt-5">
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/booking-engine/season-update/{{season.id}}">  
+                              {% csrf_token %}  
+                            <div class="col-lg-10"> 
+                                <div class="row mb-3">  
+                                    <label class="col-sm-3 col-form-label text-right">Title:</label>  
+                                    <div class="col-sm-9">  
+                                      <input type="text" class="form-control"  name="title" id="id_title" value="{{season.title}}" >  
+                                    </div>  
+                                    </div>  
+                                <div class="row mb-3">  
+                                    <label class="col-sm-3 col-form-label text-right">Start date:</label>  
+                                    <div class="col-sm-9" id="datepicker1">  
+                                        <input type="text" name="start_date" class="form-control" placeholder="dd M, yyyy"
+                                        data-date-format="dd M, yyyy" data-date-container='#datepicker1'
+                                        data-provide="datepicker" value="{{season.start_date}}" >
+                                    </div>  
+                                  </div>
+                                <div class="row mb-3">  
+                                    <label class="col-sm-3 col-form-label text-right">End date:</label>  
+                                    <div class="col-sm-9" id="datepicker1">  
+                                        <input type="text" name="end_date" class="form-control" placeholder="dd M, yyyy"
+                                        data-date-format="dd M, yyyy" data-date-container='#datepicker1'
+                                        data-provide="datepicker" value="{{season.end_date}}" >
+                                    </div>  
+                                </div>
+                                <div class="row mb-3">
+                                   
+                                        <label class="col-sm-3 col-form-label text-right">Applied for days :</label>
+                                      
+                                        <div class="col-sm-9">
+                                      <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch1" name="applied_for_days[]" value="Sun"{% if "Sun" in season.applied_for_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch1">Sun</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch2" name="applied_for_days[]" value="Mon" {% if "Mon" in season.applied_for_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch2">Mon</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch3" name="applied_for_days[]" value="Tue" {% if "Tue" in season.applied_for_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch3">Tue</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch4" name="applied_for_days[]" value="Wed" {% if "Wed" in season.applied_for_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch4">Wed</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch5" name="applied_for_days[]" value="Thu" {% if "Thu" in season.applied_for_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch5">Thu</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch6" name="applied_for_days[]" value="Fri" {% if "Fri" in season.applied_for_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch6">Fri</label>                        
+                                     </div>
+                                     <div class="form-check form-switch mb-1" dir="ltr">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch7" name="applied_for_days[]" value="Sat" {% if "Sat" in season.applied_for_days %} checked {% endif %}>
+                                        <label class="form-check-label" for="customSwitch7">Sat</label>                        
+                                     </div>
+                                    </div>
+                                  </div>
+                                
+                            <div class="row mb-3">  
+                              <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right">Status :</label>
+                              <div class="col-sm-9">  
+                                <div class="custom-control custom-radio">
+                                  <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input"  {% if season.status == 1 %} checked {% endif %}>
+                                  <label class="custom-control-label" for="customRadio1">Active</label>
+                              </div>
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input"  {% if season.status == 0 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio2">InActive</label>
+                            </div>
+                              </div>
+                          </div> 
+                            
+                          <div class="row mb-3">  
+                            <label for="example-text-input-sm" class="col-sm-3 col-form-label text-right"></label>
+                            <div class="col-sm-9">  
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                            </div>
+                          </form>  
+                      
+                         
+                    </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+        </div> 
+        {% include 'bookingengine/base/footer.html'%}
+      </div> 
+      <script src="/static/bookingengine/libs/jquery/jquery.min.js"></script>
+      <script src="/static/bookingengine/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="/static/bookingengine/libs/metismenu/metisMenu.min.js"></script>
+      <script src="/static/bookingengine/libs/simplebar/simplebar.min.js"></script>
+      <script src="/static/bookingengine/libs/node-waves/waves.min.js"></script>
+      <script src="/static/bookingengine/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+      <script src="/static/bookingengine/js/pages/form-element.init.js"></script>
+      <script src="/static/bookingengine/libs/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+      <script src="/static/bookingengine/js/app.js"></script>
+        </body>
+  </body>
+  </html>
+    
+     
+ 
+ 

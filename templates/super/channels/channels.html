@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Channels </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+<div class="page-content">
+<div class="container-fluid">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="page-title-box">
+      <div class="row">
+        <div class="col">
+          <h4 class="page-title">Channels</h4>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/super/">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="/super/channels">Channel</li>
+          </ol>
+        </div>
+        <div class="col-auto align-self-center"> <a href="/super/channel-add" class="btn btn-primary"> <i data-feather="plus" class="align-self-center icon-xs ml-1"></i>&nbsp; Add New </a> </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success border-0" role="alert">{{message}}</div>
+{% endfor %}
+{%endif%}
+
+<div class="row">
+ 
+   {% for chn in employees %}
+                     
+  <div class="col-lg-3">
+    <div class="card client-card channel_box">
+      <div class="card-body text-center"> <img src="/media/{{chn.channel_image}}" alt="user" class="w3-round"></a>
+        <h5 class="client-name">{{ chn.channel_title}}</h5>
+        <div class="text-muted text-center"> 
+          <a href='/super/channels' class="badge badge-primary">View</a>
+          <a href='/super/channel-edit/{{ chn.id}}' class="badge badge-primary">Edit</a> 
+          <a href='/super/channel-delete/{{ chn.id}}' onClick="return DelItem();" class="badge badge-danger">Delete
+          </a> 
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor%} 
+</div>
+
+</div> 
+{% include 'super/base/footer.html'%}
+</div>
+<script src="/static/super/js/jquery.min.js"></script>
+<script src="/static/super/js/bootstrap.bundle.min.js"></script>
+<script src="/static/super/js/metismenu.min.js"></script>
+<script src="/static/super/js/waves.js"></script>
+<script src="/static/super/js/feather.min.js"></script>
+<script src="/static/super/js/simplebar.min.js"></script>
+<script src="/static/super/js/jquery-ui.min.js"></script>
+<script src="/static/super/js/moment.js"></script>
+<script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/super/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/super/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+
+
+<script>
+
+
+
+    function DelItem() {
+  
+  
+  
+        if(!confirm("Are You Sure to delete this"))
+  
+  
+  
+        event.preventDefault();
+  
+  
+  
+    }
+  
+  
+</script>
+
+<script src="/static/super/js/app.js"></script>  
+
+  </body>
+
+  </html> 

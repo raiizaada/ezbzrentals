@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Edit Rental Type</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/users/images/favicon.png">
+
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body>
+        <body data-layout="horizontal">
+            <div id="layout-wrapper">
+                {% include 'users/base/header.html'%}
+       
+		<div class="main-content">
+<div class="page-content">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Edit Rental Type</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/users/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="/users/rental-type">Rental Type</a></li>
+                            <li class="breadcrumb-item active">Edit Rental Type</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body mt-4">
+
+                      
+                        <form method="post" enctype="multipart/form-data" class="post-form" action="/users/rental-type-update/{{ rentaltype.id}}"> 
+                            {% csrf_token %}
+                        <div class="col-lg-10">
+                        <div class="row mb-3">
+                            <label for="example-text-input" class="col-sm-3 col-form-label text-right">Room Type Name<span class="strict">*</span></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" placeholder="Enter Room Type Name "
+                                    id="room_type_name" name="room_type_name" required value="{{ rentaltype.room_type_name}}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="example-search-input" class="col-sm-3 col-form-label text-right">No of Beds<span class="strict">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="noof_beds" class="form-control" placeholder="No of Beds" required="" id="noof_beds"  value="{{ rentaltype.noof_beds}}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="example-email-input" class="col-sm-3 col-form-label text-right">Max. Occupancy<span class="strict">*</span></label>
+                            <div class="col-sm-9">
+                                <input type="text" name="max_occupancy" class="form-control" placeholder="Enter Max Occupancy" required="" id="max_occupancy" value="{{ rentaltype.max_occupancy}}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="example-url-input" class="col-sm-3 col-form-label text-right">No of Rooms<span class="strict">*</span></label>
+                            <div class="col-sm-9">
+                               <input type="text" name="noof_rooms" class="form-control" placeholder="Enter No of Rooms" required="" id="noof_rooms"  value="{{ rentaltype.noof_rooms}}">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="example-tel-input" class="col-sm-3 col-form-label text-right">Upload Picture<span class="strict">*</span></label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="file" name="picture">
+                                <br>
+                                <img src="/media/{{ rentaltype.picture }}" height="40">   
+                            </div>
+                        </div>
+                       
+                          <div class="row mb-3">
+                            <label for="example-tel-input" class="col-sm-3 col-form-label text-right">Description</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" id="elm1" name="rental_description"> {{ rentaltype.rental_description}}</textarea>
+                            </div>
+                        </div>
+                        <div class="row mb-3">  
+                            <label for="example-tel-input" class="col-sm-3 col-form-label text-right ">Status</label>
+                            <div class="col-sm-9">  
+                              <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="status" value="1" class="custom-control-input" {% if rentaltype.status == 1 %} checked {% endif %}>
+                                <label class="custom-control-label" for="customRadio1">Active</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="customRadio2" name="status" value="0" class="custom-control-input" {% if rentaltype.status == 0 %} checked {% endif %}>
+                              <label class="custom-control-label" for="customRadio2">InActive</label>
+                          </div>
+                            </div>
+                        </div> 
+                         <div class="row mb-3">
+                            <label for="example-tel-input" class="col-sm-3 col-form-label text-right"></label>
+                            <div class="col-sm-9">
+                                <button type="submit" class="btn btn-primary waves-effect waves-light me-1">
+                                                        Update
+                                                    </button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+    </div>
+</div>
+
+
+{% include 'users/base/footer.html'%}
+</div> 
+</div>
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+<script src="/static/users/libs/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="/static/users/js/pages/form-element.init.js"></script>
+<script src="/static/users/js/app.js"></script>
+</body>
+</div>
+</html>  
+        

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Bookings</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/agents/images/favicon.png">
+        <link href="/static/agents/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">
+        <link href="/static/agents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/agents/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'agents/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'agents/base/top_nav.html' %}
+        </div>
+
+
+
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Bookings</h4>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/agents/dashboard">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Booking</li>
+                            </ol>
+                        </div>
+                     
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+ 
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+    <tr>  
+        <th>SN</th>
+        <th>ID</th>
+        <th>Rental</th>  
+        <th>Channel</th> 
+        <th>Type</th>  
+        <th> First Name</th>  
+        <th>Last Name</th> 
+        <th>CheckIn</th> 
+        <th>CheckOut</th> 
+        <th>Actions</th>  
+       
+        
+        
+    </tr>  
+    </thead>  
+    <tbody>  
+    {% for booking in bookings%}
+    <tr>  
+        <td>{{forloop.counter}}</td>
+        <td>{{booking.id}}</td>
+        <td>Rental</td>  
+        <td>{{booking.channel}}</td>
+        <td>{{booking.booking_type}}</td>
+        <td>{{booking.first_name}}</td> 
+        <td>{{booking.last_name}}</td>  
+        <td>{{booking.check_in}}</td>
+        <td>{{booking.check_out}}</td>        
+        <td class="text-left"> 
+            <button value="{{ booking.id }}" data-toggle="modal" class="brdn" data-target="#exampleModalCenter" id="ViewBtn{{ booking.id }}"><i class="fas fa-eye text-success font-18"></i></button>                                                        
+            <a href="/agents/booking-edit/{{ booking.id }}"><i class="las la-pen text-info font-18"></i></a>
+            <a href="/agents/tax-delete/" onclick="return DelItem();"  ><i class="las la-trash-alt text-danger font-18"></i></a>
+        </td>
+        
+        
+    </tr>  
+    {% endfor %}
+
+    </tbody>  
+</table>
+<div id="BookingView"></div>
+</div>
+</div>
+</div>
+
+</div> 
+</div>
+{% include 'agents/base/footer.html'%}
+</div>
+<div id="csrf">
+    {% csrf_token %}
+</div>
+<script src="/static/agents/js/jquery.min.js"></script>
+<script src="/static/agents/js/bootstrap.bundle.min.js"></script>
+<script src="/static/agents/js/metismenu.min.js"></script>
+<script src="/static/agents/js/waves.js"></script>
+<script src="/static/agents/js/feather.min.js"></script>
+<script src="/static/agents/js/simplebar.min.js"></script>
+<script src="/static/agents/js/jquery-ui.min.js"></script>
+<script src="/static/agents/js/moment.js"></script>
+<script src="/static/agents/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/agents/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="/static/agents/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+
+
+
+<script>
+
+
+
+    function DelItem() {
+  
+  
+  
+        if(!confirm("Are You Sure to delete this"))
+  
+  
+  
+        event.preventDefault();
+  
+  
+  
+    }
+  
+  
+</script>
+
+<script src="/static/agents/js/app.js"></script>   
+<script>
+    $('#datatable').DataTable();
+</script>
+
+<script>
+    $(document).ready(function() { 
+        $('button[id^="ViewBtn"]').click(function(e) { 
+            e.preventDefault();
+            var BtnID = $(this).attr('value'); 
+           //alert(BtnID);
+           $.ajax({
+            type : 'POST',
+            url :  "/booking-view/"+BtnID,
+            headers: {'X-CSRFToken': document.getElementById('csrf').querySelector('input').value},
+            success : function(response){
+               $('#BookingView').html(response);
+            },
+
+            error : function(response){
+                //console.log(response)
+            }
+        });
+
+        }); 
+        $('.close').click(function(){
+            $("#exampleModalCenter").modal('hide'); 
+        });
+    }); 
+
+    
+</script>
+
+</body>
+
+</html> 
+  

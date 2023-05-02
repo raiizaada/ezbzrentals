@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Invoice Detail </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/agents/images/favicon.png">
+        <link href="/static/agents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/agents/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'agents/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'agents/base/top_nav.html' %}
+        </div>
+
+<div class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+  <div class="col-lg-12">
+      <div class="card">
+          <div class="card-body invoice-head"> 
+              <div class="row">
+                  <div class="col-md-4 align-self-center">                                                
+                      <img src="/static/agents/images/logo.png" alt="logo-small" class="logo-sm mr-1" height="80">                                            
+                     
+                     
+                  </div>
+                  <div class="col-md-8">
+                          
+                      <ul class="list-inline mb-0 contact-detail float-right">                                                   
+                          <li class="list-inline-item">
+                              <div class="pl-3">
+                                  <i class="mdi mdi-web"></i>
+                                  <p class="text-muted mb-0">{{company.name}}</p>
+                                  <p class="text-muted mb-0">{{company.email}}</p>
+                              </div>                                                
+                          </li>
+                          <li class="list-inline-item">
+                              <div class="pl-3">
+                                  <i class="mdi mdi-phone"></i>
+                                  <p class="text-muted mb-0">{{company.phone}}</p>
+                                 
+                              </div>
+                          </li>
+                          <li class="list-inline-item">
+                              <div class="pl-3">
+                                  <i class="mdi mdi-map-marker"></i>
+                                  <p class="text-muted mb-0">{{company.address}}</p>
+                                  
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body"> 
+              <div class="row">
+                  <div class="col-md-3">
+                      <div class="">
+                          <h6 class="mb-0"><b>Order Date :</b> 11/05/2020</h6>
+                          
+                      </div>
+                  </div>
+                  <div class="col-md-3">                                            
+                      <div class="float-left">
+                          <address class="font-13">
+                              <strong class="font-14">Billed To :</strong><br>
+                              {{customer}}<br>
+                              {{billing_address}}<br>
+                              {{customer_email}}<br>
+                              <abbr title="Phone">P:</abbr> 9873218141
+                          </address>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                      <div class="">
+                          <address class="font-13">
+                              <strong class="font-14"></strong><br>
+                             
+                          </address>
+                      </div>
+                  </div> 
+                  
+                  <div class="col-md-3">
+                     
+                        
+                      </div>                                              
+                  </div>
+              
+
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="table-responsive project-invoice">
+                          <table class="table table-bordered mb-0">
+                              <thead class="thead-light">
+                                  <tr>
+                                    <th class="no">#</th>
+                                    <th class="desc">DESCRIPTION</th>
+                                    <th class="unit">RATE</th>
+                                    <th class="qty">QUANTITY</th>
+                                    <th class="total">TOTAL</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                            {% for item in invoiceitem %}
+                                    <tr>
+                                      <td class="no">{{forloop.counter}}</td>
+                                      <td class="desc">{{item.description}}</td>
+                                      <td class="unit">${{item.rate}}</td>
+                                      <td class="qty">{{item.quantity}}</td>
+                                      <td class="total">${{item.amount}}</td>
+                                </tr>
+                            {% endfor %}
+                                  </tbody>
+                                  
+                                  <tr>                                                        
+                                      <td colspan="3" class="border-0"></td>
+                                      <td class="border-0 font-14 text-dark"><b>Sub Total</b></td>
+                                      <td class="border-0 font-14 text-dark"><b>${{invoice_total}}</b></td>
+                                  </tr>
+                                  <tr>
+                                      <th colspan="3" class="border-0"></th>                                                        
+                                      <td class="border-0 font-14 text-dark"><b>Tax Rate</b></td>
+                                      <td class="border-0 font-14 text-dark"><b>0%</b></td>
+                                  </tr>
+                                  <tr class="bg-black text-white">
+                                      <th colspan="3" class="border-0"></th>                                                        
+                                      <td class="border-0 font-14"><b>Total</b></td>
+                                      <td class="border-0 font-14"><b>${{invoice_total}}</b></td>
+                                  </tr>
+                              
+                          </table>
+                      </div>  
+                  </div>  
+              </div>
+
+              <div class="row">
+                  <div class="col-lg-6">
+                      <h5 class="mt-4">Terms And Condition :</h5>
+                      <ul class="pl-3">
+                          <li><small class="font-12">All accounts are to be paid within 7 days from receipt of invoice. </small></li>
+                          <li><small class="font-12">To be paid by cheque or credit card or direct payment online.</small></li>
+                          <li><small class="font-12"> If account is not paid within 7 days the credits details supplied as confirmation of work undertaken will be charged the agreed quoted fee noted above.</small></li>                                            
+                      </ul>
+                  </div> 
+                  <div class="col-lg-6 align-self-end">
+                      <div class="float-right" style="width: 30%;">
+                          <small>Account Manager</small>
+                          <img src="assets/images/signature.png" alt="" class="mt-2 mb-1" height="26">
+                          <p class="border-top">Signature</p>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              <div class="row d-flex justify-content-center">
+                  <div class="col-lg-12 col-xl-4 ml-auto align-self-center">
+                      <div class="text-center"><small class="font-12">Thank you very much for doing business with us.</small></div>
+                  </div>
+                  <div class="col-lg-12 col-xl-4">
+                      <div class="float-right d-print-none">
+                          <a href="javascript:window.print()" class="btn btn-info"><i class="fa fa-print"></i></a>
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+ 
+</div> 
+</div>
+{% include 'agents/base/footer.html'%}
+</div>
+{% include 'agents/base/footer_js.html'%}
+
+</body>
+
+</html>
+
+

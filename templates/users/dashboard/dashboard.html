@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/users/images/favicon.png">
+<link href="/static/users/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet"
+    type="text/css" />
+<link href="/static/users/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
+    type="text/css" />
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+                       
+
+    </head>
+
+    <body data-layout="horizontal">
+        <div id="layout-wrapper">
+            {% include 'users/base/header.html'%}
+           
+		<div class="main-content">
+       <div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-flex align-items-center justify-content-between">
+                    <h4 class="mb-0">Dashboard</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/users/dashboard">Dashboard</a></li>
+                            
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="flex-1 overflow-hidden">
+                                        <p class="text-truncate font-size-14 mb-2">Rentals</p>
+                                        <h4 class="mb-0">{{rentalCount}}</h4>
+                                    </div>
+                                    <div class="text-primary ms-auto">
+                                        <i class="ri-stack-line font-size-24"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="flex-1 overflow-hidden">
+                                        <p class="text-truncate font-size-14 mb-2">Channels Activated</p>
+                                        <h4 class="mb-0">$ 38452</h4>
+                                    </div>
+                                    <div class="text-primary ms-auto">
+                                        <i class="ri-store-2-line font-size-24"></i>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="flex-1 overflow-hidden">
+                                        <p class="text-truncate font-size-14 mb-2">Total Bookings</p>
+                                        <h4 class="mb-0">{{bookingCount}}</h4>
+                                    </div>
+                                    <div class="text-primary ms-auto">
+                                        <i class="ri-briefcase-4-line font-size-24"></i>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="float-end d-none d-md-inline-block">
+                            <div class="btn-group mb-2">
+                                <button type="button" class="btn btn-sm btn-light">Today</button>
+                                <button type="button" class="btn btn-sm btn-light active">Weekly</button>
+                                <button type="button" class="btn btn-sm btn-light">Monthly</button>
+                            </div>
+                        </div>
+                        <h4 class="card-title mb-4">Revenue Analytics</h4>
+                        <div>
+                            <div id="line-column-chart" class="apex-charts" dir="ltr"></div>
+                        </div>
+                    </div>
+
+                    <div class="card-body border-top text-center">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="d-inline-flex">
+                                    <h5 class="me-2">$12,253</h5>
+                                    <div class="text-success">
+                                        <i class="mdi mdi-menu-up font-size-14"> </i>2.2 %
+                                    </div>
+                                </div>
+                                <p class="text-muted text-truncate mb-0">This month</p>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="mt-4 mt-sm-0">
+                                    <p class="mb-2 text-muted text-truncate"><i
+                                            class="mdi mdi-circle text-primary font-size-10 me-1"></i> This Year :</p>
+                                    <div class="d-inline-flex">
+                                        <h5 class="mb-0 me-2">$ 34,254</h5>
+                                        <div class="text-success">
+                                            <i class="mdi mdi-menu-up font-size-14"> </i>2.1 %
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mt-4 mt-sm-0">
+                                    <p class="mb-2 text-muted text-truncate"><i
+                                            class="mdi mdi-circle text-success font-size-10 me-1"></i> Previous Year :
+                                    </p>
+                                    <div class="d-inline-flex">
+                                        <h5 class="mb-0">$ 32,695</h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+        </div>
+
+       
+
+        <div class="row">
+          
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">                      
+
+                        <h4 class="card-title mb-4">Upcoming Bookings</h4>
+
+                        <div class="table-responsive">
+                            <table class="table table-centered datatable dt-responsive nowrap" data-bs-page-length="5"
+                                style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead class="table-light">
+                                    <tr>                                       
+                                        <th>Booking ID</th>
+                                        <th>Channel</th>
+                                        <th>Rental</th>
+                                        <th>Name</th>
+                                        <th>Check-in</th>
+                                        <th>Check-out</th>
+                                        <th>Date</th>
+                                        <th style="width: 120px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for booking in bookings %}
+                                    <tr>
+                                       
+                                        <td><a href="/users/reservation/{{booking.id}}" class="text-dark fw-bold">#{{booking.id}}</a></td>
+                                        <td><img src="https://www.ezbzrentals.com/public/images/channels/1671563781.png" class="img-thumbnail rounded-circle avatar-sm"></td>
+                                        <td>{{booking.rental}}</td>
+        <td>{{booking.first_name}}</td>
+        <td>{{booking.check_in}}</td>
+        <td>{{booking.check_out}}</td>
+        <td>{{booking.created_at}}</td>
+                                        <td id="tooltip-container1">
+                                            <a href="/reservation/{{booking.id}}" class="me-3 text-primary"
+                                                data-bs-container="#tooltip-container1" data-bs-toggle="tooltip"
+                                                data-bs-placement="top" title="View"><i
+                                                    class="mdi mdi-eye font-size-18"></i></a>
+                                            
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                   
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% include 'users/base/footer.html'%}
+	</div>
+
+
+    
+</div> 
+
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+
+<script src="/static/users/libs/apexcharts/apexcharts.min.js"></script>
+
+<script src="/static/users/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/static/users/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-us-merc-en.js"></script>
+
+<script src="/static/users/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/static/users/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="/static/users/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/static/users/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<script src="/static/users/js/pages/datatables.init.js"></script>
+<script src="/static/users/js/app.js"></script>
+
+</body>
+</div>
+</html>  

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Dastyle - Admin & Dashboard Template</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.ico">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body class="dark-sidenav">
+      <div class="left-sidenav">
+          {% include 'super/base/left_sidebar.html' %}
+      </div>
+      
+
+      <div class="page-wrapper">
+          <div class="topbar">            
+              {% include 'super/base/top_nav.html' %}
+      </div>
+
+
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-title-box">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="page-title">Additional Info</h4>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="/super/rentals">Rentals</a></li>
+                                            <li class="breadcrumb-item active">Additional Info</li>
+                                        </ol>
+                                    </div>
+                                </div>                                                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-body">
+                            <h5>Additional Info</h5>
+                            <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+                            <hr>
+                            {% if messages %}
+                            {% for message in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                aria-label="Close"></button>
+                            </div>
+                            {% endfor %}
+                            {%endif%}
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/rentals/cleaning-update/{{rentalcleaning.id}}">
+                              {% csrf_token %}
+                            <div class="card-body">
+                              <div class="mb-3">
+                                <p><strong>Cleaning</strong></p>
+                                <input type="checkbox" class="form-check-input" name="cleaning_available" id="CleaningCheck" value="Yes" {% if rentalcleaning.cleaning_available == 'Yes' %} checked {% endif %}> Cleaning is available
+                                {% comment %} {% if rentalcleaning.cleaning_available == 'Yes' %} checked {% endif %}  {% endcomment %}
+                              </div>
+                              <div class="row mb-3 hide" id="CleaningDiv">
+                                <div class="col-lg-6 mb-3">
+                                  <label class="form-label fw6">Cleaning basis</label>
+                                  <select name="cleaning_basis" id="cleaning_basis" class="form-select">
+                                    <option>--Select--</option>  
+                                    <option value="included" {% if rentalcleaning.cleaning_basis == "included" %} selected {% endif %}>Mandatory - included</option>
+                                    <option value="mandatory" {% if rentalcleaning.cleaning_basis == "mandatory" %} selected {% endif %}>Mandatory - for a fee</option>
+                                    <option value="optional" {% if rentalcleaning.cleaning_basis == "optional" %} selected {% endif %}>Optional</option>                
+                                  </select>
+                              </div>
+                              <div class="col-lg-6 hide" id="CleaningPrice">
+                                <label class="form-label fw6">Price in INR<span class="strict">*</span></label>
+                                <input type="text" class="form-control" name="price" value="{{rentalcleaning.price}}">
+                              </div>
+                            </div>
+                            </div>
+                            <div class="mb-3">
+                              <input type="submit" class="btn btn-primary" value="Save">
+                             </div>
+                          </form>
+                          <form method="POST" enctype="multipart/form-data" class="post-form" action="/rentals/deposit-update/{{rentaldeposit.id}}">
+                            {% csrf_token %}
+                            <div class="card-body">
+                              <div class="mb-3">
+                                <p><strong>Security deposit</strong></p>
+                                <input type="checkbox" class="form-check-input" name="security_deposit" id="SecurityCheck" value="Yes" {% if rentaldeposit.security_deposit == 'Yes' %} checked {% endif %}> I require a security deposit
+                              </div>
+                              <div class="row mb-3 hide" id="SecurityDeposit">                 
+                              <div class="col-lg-6">
+                                <label class="form-label fw6">Amount in INR<span class="strict">*</span></label>
+                                <input type="text" class="form-control" id="SecurityAmount" name="amount" value="{{rentaldeposit.amount}}" required>
+                              </div>
+                            </div>
+                            </div>
+                            <div class="mb-3">
+                              <input type="submit" class="btn btn-primary" value="Save">
+                             </div>
+                          </form>
+                          
+                          <div class="row mb-3">  
+                            <div class="col-lg-12 mb-3"><strong>Taxes</strong></div>
+                            {% for rentaltaxs in rentaltax %}
+                            <div class="col-lg-4">
+                              <div class="card border border-success">                  
+                                  <div class="card-body">
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#taxModalScrollableEdit" class="editTax">
+                                      <i class="mdi mdi-lead-pencil"></i>                    
+                                    </a>
+                                    <a href="/rentals/tax-delete/{{rentaltaxs.id}}" onclick="return DelItem();" class="editTrash">
+                                    <i class="far fa-trash-alt"></i>
+                                    </a>
+                                    <p><strong>{{rentaltaxs.tax_type}}</strong> </p>
+                                    <p>{{rentaltaxs.percentage}} {{rentaltaxs.amountin}} {{rentaltaxs.fee_basis}}</p>
+                                   
+                                  </div>
+                              </div>
+                            </div>
+                            {% endfor %} 
+                            <div class="col-lg-4">
+                              <div class="card border border-success">                  
+                                  <div class="card-body text-center">
+                                      <a href="" data-bs-toggle="modal" data-bs-target="#taxModalScrollable">
+                                          <i class="fas fa-plus"></i>
+                                          <h5 class="card-title mt-0">Add tax</h5>                        
+                                      </a>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+              
+                          <div class="row mb-3">  
+                            <div class="col-lg-12 mb-3"><strong>Optional extras and services</strong></div>
+                            {% for extraservice in extraservices %}
+                            <div class="col-lg-6">
+                              <div class="card border border-success">                  
+                                  <div class="card-body">
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#extraModalScrollableEdit" class="editTax">
+                                      <i class="mdi mdi-lead-pencil"></i>                    
+                                    </a>
+                                    <a href="" onclick="return DelItem();" class="editTrash">
+                                    <i class="far fa-trash-alt"></i>
+                                    </a>
+                                    <p><strong>Service name</strong>: {{extraservice.service_name}} </p>
+                                    <p><strong>Provided</strong>: {{extraservice.service_provided}} </p>
+                                    <p><strong>Fee basis</strong>: {{extraservice.fee_basis}} </p>
+                                    <p><strong>Price in INR</strong>: {{extraservice.service_price}} </p>
+                                    <p><strong>Earliest the guest can order it</strong>: {{extraservice.earliest_guest_order}} </p>
+                                    <p><strong>Latest the guest can order it</strong>: {{extraservice.latest_guest_order}} </p>
+                                    <p><strong>Guest can cancel the order</strong>: {{extraservice.guest_cancel_order}} </p>
+                                    <p><strong>Additional information</strong>: {{extraservice.extra_message}} </p>
+                                  </div>
+                              </div>
+                            </div>
+                            {% endfor %} 
+                            {% for customservice in customservices %}
+                            <div class="col-lg-6">
+                              <div class="card border border-success">                  
+                                  <div class="card-body">
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#customModalScrollableEdit" class="editTax">
+                                      <i class="mdi mdi-lead-pencil"></i>                    
+                                    </a>
+                                    <a href="" onclick="return DelItem();" class="editTrash">
+                                    <i class="far fa-trash-alt"></i>
+                                    </a>
+                                    <p><strong>Service name</strong>: {{customservice.custom_service_name}} </p>
+                                    <p><strong>Provided</strong>: {{customservice.custom_service_provided}} </p>
+                                    <p><strong>Fee basis</strong>: {{customservice.custom_fee_basis}} </p>
+                                    <p><strong>Price in INR</strong>: {{customservice.custom_service_price}} </p>
+                                    <p><strong>Earliest the guest can order it</strong>: {{customservice.custom_earliest_guest_order}} </p>
+                                    <p><strong>Latest the guest can order it</strong>: {{customservice.custom_latest_guest_order}} </p>
+                                    <p><strong>Guest can cancel the order</strong>: {{customservice.custom_guest_cancel_order}} </p>
+                                    <p><strong>Additional information</strong>: {{customservice.custom_extra_message}} </p>
+                                  </div>
+                              </div>
+                            </div>
+                            {% endfor %} 
+                            <div class="col-lg-4">
+                              <div class="card border border-success">                  
+                                  <div class="card-body text-center">
+                                      <a href="" data-bs-toggle="modal" data-bs-target="#extraModalScrollable">
+                                          <i class="fas fa-plus"></i>
+                                          <h5 class="card-title mt-0">Add extra</h5>                        
+                                      </a>
+                                  </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-4">
+                              <div class="card border border-success">                  
+                                  <div class="card-body text-center">
+                                      <a href="" data-bs-toggle="modal" data-bs-target="#customModalScrollable">
+                                          <i class="fas fa-plus"></i>
+                                          <h5 class="card-title mt-0">Add custom field</h5>                        
+                                      </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+               
+                {% include 'super/base/footer.html'%}
+        </div>
+        <script src="/static/super/js/jquery.min.js"></script>
+        <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/super/js/metismenu.min.js"></script>
+        <script src="/static/super/js/waves.js"></script>
+        <script src="/static/super/js/feather.min.js"></script>
+        <script src="/static/super/js/simplebar.min.js"></script>
+        <script src="/static/super/js/jquery-ui.min.js"></script>
+        <script src="/static/super/js/moment.js"></script>
+        <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+        <script src="/static/super/js/app.js"></script>
+        
+    </body>
+
+</html>

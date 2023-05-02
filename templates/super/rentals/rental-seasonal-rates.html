@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Seasonal Rates</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+         
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Seasonal Rates</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/rentals">Rental</a></li>
+                             
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-12">
+                  <h5>Seasonal Rates</h5>
+                  <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+                  <hr>
+                  {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"
+                      aria-label="Close"></button>
+                  </div>
+                  {% endfor %}
+                  {%endif%}
+                  <div class="row">
+                  {% for seasonalrate in seasonalrates %}
+                  <div class="col-lg-6">
+                    <div class="card border border-success">                  
+                        <div class="card-body season_box">
+                          <a href="" data-bs-toggle="modal" data-bs-target="#seasonalModalScrollableEdit" data-id="{{seasonalrate.id}}" class="editTax">
+                            <i class="mdi mdi-lead-pencil"></i>                    
+                          </a>
+                          <a href="/rentals/seasonal-rates-delete/{{seasonalrate.id}}" onclick="return DelItem();" class="editTrash">
+                          <i class="far fa-trash-alt"></i>
+                          </a>
+                          <p><strong>Season name:</strong> {{seasonalrate.season_name}}</p>
+                          <p><strong>Start date:</strong> {{seasonalrate.start_date}}</p>
+                          <p><strong>End date:</strong> {{seasonalrate.end_date}}</p>
+                          <p><strong>Basic night:</strong> {{seasonalrate.basic_night}}</p>
+                          <p><strong>Weekend night:</strong> {{seasonalrate.weekend_night}}</p>
+                          <p><strong>Minimum stay:</strong> {{seasonalrate.minimum_stay}}</p>
+                          <p><strong>Maximum stay:</strong> {{seasonalrate.maximum_stay}}</p>
+                          <p><strong>Checkin days:</strong> {{seasonalrate.checkin_days}}</p>
+                          <p><strong>Checkout days:</strong> {{seasonalrate.checkout_days}}</p>
+                        </div>
+                    </div>
+                  </div>
+                  {% endfor %} 
+                  <hr>
+                  <div class="col-lg-4">
+                    <div class="card border border-success">                  
+                        <div class="card-body text-center">
+                            <a href="" data-bs-toggle="modal" data-bs-target="#seasonalModalScrollable">
+                                <i class="fas fa-plus"></i>
+                                <h5 class="card-title mt-0">Add seasonal price</h5>                        
+                            </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+  
+   
+{% include 'super/base/footer.html'%}
+</div> 
+
+<div class="modal fade" id="seasonalModalScrollable" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="seasonalModalScrollableTitle">Seasonal price</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>What other rooms does your rental have? Whichever rooms you choose here will be shown on your website.</p>
+            
+            <form method="POST" enctype="multipart/form-data" class="post-form" action="/super/seasonal-rates-insert/{{rental.id}}">  {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-lg-12" id="tooltip-container">
+                    <label class="form-label fw6">Season name<span class="strict">*</span> <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="A maximum of 20 characters can be input">
+                        ?
+                    </button></label>
+                    <input type="text" name="season_name" class="form-control">
+                  </div>
+                </div>  
+                <div class="row mb-3">
+                    <div class="col-lg-6" id="datepicker2">
+                        <label class="form-label fw6">Start date<span class="strict">*</span></label>
+                        <div class="input-group" id="datepicker1">
+                            <input type="text" name="start_date" class="form-control" placeholder="dd M, yyyy"
+                                data-date-format="dd M, yyyy" data-date-container='#datepicker1'
+                                data-provide="datepicker" >
+
+                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" id="datepicker2">
+                        <label class="form-label fw6">End date<span class="strict">*</span></label>
+                        <div class="input-group" id="datepicker1">
+                            <input type="text" name="end_date" class="form-control" placeholder="dd M, yyyy"
+                                data-date-format="dd M, yyyy" data-date-container='#datepicker1'
+                                data-provide="datepicker" >
+
+                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                        </div>
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Basic night<span class="strict">*</span></label>
+                        <input type="text" name="basic_night" class="form-control" >
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Weekend night</label>
+                        <input type="text" name="weekend_night" class="form-control" >
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Minimum stay<span class="strict">*</span></label>
+                        <select name="minimum_stay" class="form-control select2" required>
+                            <option>--Select--</option>
+                            <option value="1">1 night</option>
+                            <option value="2">2 nights</option>
+                            <option value="3">3 nights</option>
+                            <option value="4">4 nights</option>
+                            <option value="5">5 nights</option>
+                            <option value="6">6 nights</option>
+                            <option value="7">7 nights</option>
+                            <option value="8">8 nights</option>
+                            <option value="9">9 nights</option>
+                            <option value="10">10 nights</option>
+                            <option value="11">11 nights</option>
+                            <option value="12">12 nights</option>
+                            <option value="13">13 nights</option>
+                            <option value="14">14 nights</option>
+                            <option value="15">15 nights</option>
+                            <option value="16">16 nights</option>
+                            <option value="17">17 nights</option>
+                            <option value="18">18 nights</option>
+                            <option value="19">19 nights</option>
+                            <option value="20">20 nights</option>
+                            <option value="21">21 nights</option>
+                            <option value="22">22 nights</option>
+                            <option value="23">23 nights</option>
+                            <option value="24">24 nights</option>
+                            <option value="25">25 nights</option>
+                            <option value="26">26 nights</option>
+                            <option value="27">27 nights</option>
+                            <option value="28">28 nights</option>
+                            <option value="29">29 nights</option>
+                            <option value="30">30 nights</option>
+                            <option value="31">31 nights</option>
+                          </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Maximum stay<span class="strict">*</span></label>
+                        <select name="maximum_stay" class="form-control select2" required>
+                            <option>--Select--</option>                        
+                            <option value="7">7 nights</option>
+                            <option value="8">8 nights</option>
+                            <option value="9">9 nights</option>
+                            <option value="10">10 nights</option>
+                            <option value="11">11 nights</option>
+                            <option value="12">12 nights</option>
+                            <option value="13">13 nights</option>
+                            <option value="14">14 nights</option>
+                            <option value="15">15 nights</option>
+                            <option value="16">16 nights</option>
+                            <option value="17">17 nights</option>
+                            <option value="18">18 nights</option>
+                            <option value="19">19 nights</option>
+                            <option value="20">20 nights</option>
+                            <option value="21">21 nights</option>
+                            <option value="22">22 nights</option>
+                            <option value="23">23 nights</option>
+                            <option value="24">24 nights</option>
+                            <option value="25">25 nights</option>
+                            <option value="26">26 nights</option>
+                            <option value="27">27 nights</option>
+                            <option value="28">28 nights</option>
+                            <option value="29">29 nights</option>
+                            <option value="30">30 nights</option>
+                            <option value="31">31 nights</option>
+                            <option value="32">32 nights</option>
+                            <option value="33">33 nights</option>
+                            <option value="34">34 nights</option>
+                            <option value="35">35 nights</option>
+                            <option value="36">36 nights</option>
+                            <option value="37">37 nights</option>
+                            <option value="38">38 nights</option>
+                            <option value="39">39 nights</option>
+                            <option value="40">40 nights</option>
+                            <option value="41">41 nights</option>
+                            <option value="42">42 nights</option>
+                            <option value="43">43 nights</option>
+                            <option value="44">44 nights</option>
+                            <option value="45">45 nights</option>
+                            <option value="46">46 nights</option>
+                            <option value="47">47 nights</option>
+                            <option value="48">48 nights</option>
+                            <option value="49">49 nights</option>
+                            <option value="50">50 nights</option>
+                            <option value="51">51 nights</option>
+                            <option value="52">52 nights</option>
+                            <option value="53">53 nights</option>
+                            <option value="54">54 nights</option>
+                            <option value="55">55 nights</option>
+                            <option value="56">56 nights</option>
+                            <option value="57">57 nights</option>
+                            <option value="58">58 nights</option>
+                            <option value="59">59 nights</option>
+                            <option value="60">60 nights</option>
+                            <option value="61">61 nights</option>
+                            <option value="62">62 nights</option>
+                            <option value="63">63 nights</option>
+                            <option value="64">64 nights</option>
+                            <option value="65">65 nights</option>
+                            <option value="66">66 nights</option>
+                            <option value="67">67 nights</option>
+                            <option value="68">68 nights</option>
+                            <option value="69">69 nights</option>
+                            <option value="70">70 nights</option>
+                            <option value="71">71 nights</option>
+                            <option value="72">72 nights</option>
+                            <option value="73">73 nights</option>
+                            <option value="74">74 nights</option>
+                            <option value="75">75 nights</option>
+                            <option value="76">76 nights</option>
+                            <option value="77">77 nights</option>
+                            <option value="78">78 nights</option>
+                            <option value="79">79 nights</option>
+                            <option value="80">80 nights</option>
+                            <option value="81">81 nights</option>
+                            <option value="82">82 nights</option>
+                            <option value="83">83 nights</option>
+                            <option value="84">84 nights</option>
+                            <option value="85">85 nights</option>
+                            <option value="86">86 nights</option>
+                            <option value="87">87 nights</option>
+                            <option value="88">88 nights</option>
+                            <option value="89">89 nights</option>
+                            <option value="90">90 nights</option>
+                            <option value="91">91 nights</option>
+                            <option value="92">92 nights</option>
+                            <option value="93">93 nights</option>
+                            <option value="94">94 nights</option>
+                            <option value="95">95 nights</option>
+                            <option value="96">96 nights</option>
+                            <option value="97">97 nights</option>
+                            <option value="98">98 nights</option>
+                            <option value="99">99 nights</option>
+                            <option value="100">100 nights</option>
+                            <option value="101">101 nights</option>
+                            <option value="102">102 nights</option>
+                            <option value="103">103 nights</option>
+                            <option value="104">104 nights</option>
+                            <option value="105">105 nights</option>
+                            <option value="106">106 nights</option>
+                            <option value="107">107 nights</option>
+                            <option value="108">108 nights</option>
+                            <option value="109">109 nights</option>
+                            <option value="110">110 nights</option>
+                            <option value="111">111 nights</option>
+                            <option value="112">112 nights</option>
+                            <option value="113">113 nights</option>
+                            <option value="114">114 nights</option>
+                            <option value="115">115 nights</option>
+                            <option value="116">116 nights</option>
+                            <option value="117">117 nights</option>
+                            <option value="118">118 nights</option>
+                            <option value="119">119 nights</option>
+                            <option value="120">120 nights</option>
+                            <option value="121">121 nights</option>
+                            <option value="122">122 nights</option>
+                            <option value="123">123 nights</option>
+                            <option value="124">124 nights</option>
+                            <option value="125">125 nights</option>
+                            <option value="126">126 nights</option>
+                            <option value="127">127 nights</option>
+                            <option value="128">128 nights</option>
+                            <option value="129">129 nights</option>
+                            <option value="130">130 nights</option>
+                            <option value="131">131 nights</option>
+                            <option value="132">132 nights</option>
+                            <option value="133">133 nights</option>
+                            <option value="134">134 nights</option>
+                            <option value="135">135 nights</option>
+                            <option value="136">136 nights</option>
+                            <option value="137">137 nights</option>
+                            <option value="138">138 nights</option>
+                            <option value="139">139 nights</option>
+                            <option value="140">140 nights</option>
+                            <option value="141">141 nights</option>
+                            <option value="142">142 nights</option>
+                            <option value="143">143 nights</option>
+                            <option value="144">144 nights</option>
+                            <option value="145">145 nights</option>
+                            <option value="146">146 nights</option>
+                            <option value="147">147 nights</option>
+                            <option value="148">148 nights</option>
+                            <option value="149">149 nights</option>
+                            <option value="150">150 nights</option>
+                            <option value="151">151 nights</option>
+                            <option value="152">152 nights</option>
+                            <option value="153">153 nights</option>
+                            <option value="154">154 nights</option>
+                            <option value="155">155 nights</option>
+                            <option value="156">156 nights</option>
+                            <option value="157">157 nights</option>
+                            <option value="158">158 nights</option>
+                            <option value="159">159 nights</option>
+                            <option value="160">160 nights</option>
+                            <option value="161">161 nights</option>
+                            <option value="162">162 nights</option>
+                            <option value="163">163 nights</option>
+                            <option value="164">164 nights</option>
+                            <option value="165">165 nights</option>
+                            <option value="166">166 nights</option>
+                            <option value="167">167 nights</option>
+                            <option value="168">168 nights</option>
+                            <option value="169">169 nights</option>
+                            <option value="170">170 nights</option>
+                            <option value="171">171 nights</option>
+                            <option value="172">172 nights</option>
+                            <option value="173">173 nights</option>
+                            <option value="174">174 nights</option>
+                            <option value="175">175 nights</option>
+                            <option value="176">176 nights</option>
+                            <option value="177">177 nights</option>
+                            <option value="178">178 nights</option>
+                            <option value="179">179 nights</option>
+                            <option value="180">180 nights</option>
+                          </select>
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-lg-12" id="tooltip-container">
+                        <label class="form-label fw6">Check-in days <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                          data-bs-toggle="tooltip" data-bs-placement="top" title="This will define the days that a guest can choose to check-in to your property. Be as flexible as possible to maximise your occupancy.">
+                          ?
+                      </button></label>
+                      <div class="row">
+                        <div class="col-lg-12 checkin_list">
+                      <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch1" name="checkin_days[]" value="Sun" checked>
+                        <label class="form-check-label" for="customSwitch1">Sun</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch2" name="checkin_days[]" value="Mon" checked>
+                        <label class="form-check-label" for="customSwitch2">Mon</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch3" name="checkin_days[]" value="Tue" checked>
+                        <label class="form-check-label" for="customSwitch3">Tue</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch4" name="checkin_days[]" value="Wed" checked>
+                        <label class="form-check-label" for="customSwitch4">Wed</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch5" name="checkin_days[]" value="Thu" checked>
+                        <label class="form-check-label" for="customSwitch5">Thu</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch6" name="checkin_days[]" value="Fri" checked>
+                        <label class="form-check-label" for="customSwitch6">Fri</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch7" name="checkin_days[]" value="Sat" checked>
+                        <label class="form-check-label" for="customSwitch7">Sat</label>                        
+                     </div>
+                    </div>
+                  </div>
+                      </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-12" id="tooltip-container">
+                        <label class="form-label fw6">Check-out days <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                          data-bs-toggle="tooltip" data-bs-placement="top" title="Define the days that a guest can choose to check-out from your property. Be as flexible as possible to maximise your occupancy.">
+                          ?
+                      </button></label>
+                      <div class="row">
+                        <div class="col-lg-12 checkin_list">
+                      <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch8" value="Sun" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch8">Sun</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch9" value="Mon" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch9">Mon</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch10" value="Tue" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch10">Tue</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch11" value="Wed" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch11">Wed</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch12" value="Thu" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch12">Thu</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch13" value="Fri" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch13">Fri</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch14" value="Sat" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch14">Sat</label>                        
+                     </div>
+                    </div>
+                  </div>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit"
+                      class="btn btn-primary waves-effect waves-light">Save
+                      </button>
+              </div>
+            </form>
+          
+        </div>
+       
+    </div>
+</div>
+</div>
+<div class="modal fade" id="seasonalModalScrollableEdit" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="seasonalModalScrollableTitle">Seasonal price</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>What other rooms does your rental have? Whichever rooms you choose here will be shown on your website.</p>
+            
+            <form method="POST" enctype="multipart/form-data" class="post-form" action="/rentals/seasonal-rates-update/{{rental.id}}">  {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-lg-12" id="tooltip-container">
+                    <label class="form-label fw6">Season name<span class="strict">*</span> <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                        data-bs-toggle="tooltip" data-bs-placement="top" title="A maximum of 20 characters can be input">
+                        ?
+                    </button></label>
+                    <input type="text" name="season_name" class="form-control" ">
+                  </div>
+                </div>  
+                <div class="row mb-3">
+                    <div class="col-lg-6" id="datepicker2">
+                        <label class="form-label fw6">Start date<span class="strict">*</span></label>
+                        <div class="input-group" id="datepicker1">
+                            <input type="text" name="start_date" class="form-control" placeholder="dd M, yyyy"
+                                data-date-format="dd M, yyyy" data-date-container='#datepicker1'
+                                data-provide="datepicker" >
+
+                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" id="datepicker2">
+                        <label class="form-label fw6">End date<span class="strict">*</span></label>
+                        <div class="input-group" id="datepicker1">
+                            <input type="text" name="end_date" class="form-control" placeholder="dd M, yyyy"
+                                data-date-format="dd M, yyyy" data-date-container='#datepicker1'
+                                data-provide="datepicker" >
+
+                            <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
+                        </div>
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Basic night<span class="strict">*</span></label>
+                        <input type="text" name="basic_night" class="form-control" >
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Weekend night</label>
+                        <input type="text" name="weekend_night" class="form-control" >
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Minimum stay<span class="strict">*</span></label>
+                        <select name="minimum_stay" class="form-control select2" required>
+                            <option>--Select--</option>
+                            <option value="1">1 night</option>
+                            <option value="2">2 nights</option>
+                            <option value="3">3 nights</option>
+                            <option value="4">4 nights</option>
+                            <option value="5">5 nights</option>
+                            <option value="6">6 nights</option>
+                            <option value="7">7 nights</option>
+                            <option value="8">8 nights</option>
+                            <option value="9">9 nights</option>
+                            <option value="10">10 nights</option>
+                            <option value="11">11 nights</option>
+                            <option value="12">12 nights</option>
+                            <option value="13">13 nights</option>
+                            <option value="14">14 nights</option>
+                            <option value="15">15 nights</option>
+                            <option value="16">16 nights</option>
+                            <option value="17">17 nights</option>
+                            <option value="18">18 nights</option>
+                            <option value="19">19 nights</option>
+                            <option value="20">20 nights</option>
+                            <option value="21">21 nights</option>
+                            <option value="22">22 nights</option>
+                            <option value="23">23 nights</option>
+                            <option value="24">24 nights</option>
+                            <option value="25">25 nights</option>
+                            <option value="26">26 nights</option>
+                            <option value="27">27 nights</option>
+                            <option value="28">28 nights</option>
+                            <option value="29">29 nights</option>
+                            <option value="30">30 nights</option>
+                            <option value="31">31 nights</option>
+                          </select>
+                    </div>
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Maximum stay<span class="strict">*</span></label>
+                        <select name="maximum_stay" class="form-control select2" required>
+                            <option>--Select--</option>                        
+                            <option value="7">7 nights</option>
+                            <option value="8">8 nights</option>
+                            <option value="9">9 nights</option>
+                            <option value="10">10 nights</option>
+                            <option value="11">11 nights</option>
+                            <option value="12">12 nights</option>
+                            <option value="13">13 nights</option>
+                            <option value="14">14 nights</option>
+                            <option value="15">15 nights</option>
+                            <option value="16">16 nights</option>
+                            <option value="17">17 nights</option>
+                            <option value="18">18 nights</option>
+                            <option value="19">19 nights</option>
+                            <option value="20">20 nights</option>
+                            <option value="21">21 nights</option>
+                            <option value="22">22 nights</option>
+                            <option value="23">23 nights</option>
+                            <option value="24">24 nights</option>
+                            <option value="25">25 nights</option>
+                            <option value="26">26 nights</option>
+                            <option value="27">27 nights</option>
+                            <option value="28">28 nights</option>
+                            <option value="29">29 nights</option>
+                            <option value="30">30 nights</option>
+                            <option value="31">31 nights</option>
+                            <option value="32">32 nights</option>
+                            <option value="33">33 nights</option>
+                            <option value="34">34 nights</option>
+                            <option value="35">35 nights</option>
+                            <option value="36">36 nights</option>
+                            <option value="37">37 nights</option>
+                            <option value="38">38 nights</option>
+                            <option value="39">39 nights</option>
+                            <option value="40">40 nights</option>
+                            <option value="41">41 nights</option>
+                            <option value="42">42 nights</option>
+                            <option value="43">43 nights</option>
+                            <option value="44">44 nights</option>
+                            <option value="45">45 nights</option>
+                            <option value="46">46 nights</option>
+                            <option value="47">47 nights</option>
+                            <option value="48">48 nights</option>
+                            <option value="49">49 nights</option>
+                            <option value="50">50 nights</option>
+                            <option value="51">51 nights</option>
+                            <option value="52">52 nights</option>
+                            <option value="53">53 nights</option>
+                            <option value="54">54 nights</option>
+                            <option value="55">55 nights</option>
+                            <option value="56">56 nights</option>
+                            <option value="57">57 nights</option>
+                            <option value="58">58 nights</option>
+                            <option value="59">59 nights</option>
+                            <option value="60">60 nights</option>
+                            <option value="61">61 nights</option>
+                            <option value="62">62 nights</option>
+                            <option value="63">63 nights</option>
+                            <option value="64">64 nights</option>
+                            <option value="65">65 nights</option>
+                            <option value="66">66 nights</option>
+                            <option value="67">67 nights</option>
+                            <option value="68">68 nights</option>
+                            <option value="69">69 nights</option>
+                            <option value="70">70 nights</option>
+                            <option value="71">71 nights</option>
+                            <option value="72">72 nights</option>
+                            <option value="73">73 nights</option>
+                            <option value="74">74 nights</option>
+                            <option value="75">75 nights</option>
+                            <option value="76">76 nights</option>
+                            <option value="77">77 nights</option>
+                            <option value="78">78 nights</option>
+                            <option value="79">79 nights</option>
+                            <option value="80">80 nights</option>
+                            <option value="81">81 nights</option>
+                            <option value="82">82 nights</option>
+                            <option value="83">83 nights</option>
+                            <option value="84">84 nights</option>
+                            <option value="85">85 nights</option>
+                            <option value="86">86 nights</option>
+                            <option value="87">87 nights</option>
+                            <option value="88">88 nights</option>
+                            <option value="89">89 nights</option>
+                            <option value="90">90 nights</option>
+                            <option value="91">91 nights</option>
+                            <option value="92">92 nights</option>
+                            <option value="93">93 nights</option>
+                            <option value="94">94 nights</option>
+                            <option value="95">95 nights</option>
+                            <option value="96">96 nights</option>
+                            <option value="97">97 nights</option>
+                            <option value="98">98 nights</option>
+                            <option value="99">99 nights</option>
+                            <option value="100">100 nights</option>
+                            <option value="101">101 nights</option>
+                            <option value="102">102 nights</option>
+                            <option value="103">103 nights</option>
+                            <option value="104">104 nights</option>
+                            <option value="105">105 nights</option>
+                            <option value="106">106 nights</option>
+                            <option value="107">107 nights</option>
+                            <option value="108">108 nights</option>
+                            <option value="109">109 nights</option>
+                            <option value="110">110 nights</option>
+                            <option value="111">111 nights</option>
+                            <option value="112">112 nights</option>
+                            <option value="113">113 nights</option>
+                            <option value="114">114 nights</option>
+                            <option value="115">115 nights</option>
+                            <option value="116">116 nights</option>
+                            <option value="117">117 nights</option>
+                            <option value="118">118 nights</option>
+                            <option value="119">119 nights</option>
+                            <option value="120">120 nights</option>
+                            <option value="121">121 nights</option>
+                            <option value="122">122 nights</option>
+                            <option value="123">123 nights</option>
+                            <option value="124">124 nights</option>
+                            <option value="125">125 nights</option>
+                            <option value="126">126 nights</option>
+                            <option value="127">127 nights</option>
+                            <option value="128">128 nights</option>
+                            <option value="129">129 nights</option>
+                            <option value="130">130 nights</option>
+                            <option value="131">131 nights</option>
+                            <option value="132">132 nights</option>
+                            <option value="133">133 nights</option>
+                            <option value="134">134 nights</option>
+                            <option value="135">135 nights</option>
+                            <option value="136">136 nights</option>
+                            <option value="137">137 nights</option>
+                            <option value="138">138 nights</option>
+                            <option value="139">139 nights</option>
+                            <option value="140">140 nights</option>
+                            <option value="141">141 nights</option>
+                            <option value="142">142 nights</option>
+                            <option value="143">143 nights</option>
+                            <option value="144">144 nights</option>
+                            <option value="145">145 nights</option>
+                            <option value="146">146 nights</option>
+                            <option value="147">147 nights</option>
+                            <option value="148">148 nights</option>
+                            <option value="149">149 nights</option>
+                            <option value="150">150 nights</option>
+                            <option value="151">151 nights</option>
+                            <option value="152">152 nights</option>
+                            <option value="153">153 nights</option>
+                            <option value="154">154 nights</option>
+                            <option value="155">155 nights</option>
+                            <option value="156">156 nights</option>
+                            <option value="157">157 nights</option>
+                            <option value="158">158 nights</option>
+                            <option value="159">159 nights</option>
+                            <option value="160">160 nights</option>
+                            <option value="161">161 nights</option>
+                            <option value="162">162 nights</option>
+                            <option value="163">163 nights</option>
+                            <option value="164">164 nights</option>
+                            <option value="165">165 nights</option>
+                            <option value="166">166 nights</option>
+                            <option value="167">167 nights</option>
+                            <option value="168">168 nights</option>
+                            <option value="169">169 nights</option>
+                            <option value="170">170 nights</option>
+                            <option value="171">171 nights</option>
+                            <option value="172">172 nights</option>
+                            <option value="173">173 nights</option>
+                            <option value="174">174 nights</option>
+                            <option value="175">175 nights</option>
+                            <option value="176">176 nights</option>
+                            <option value="177">177 nights</option>
+                            <option value="178">178 nights</option>
+                            <option value="179">179 nights</option>
+                            <option value="180">180 nights</option>
+                          </select>
+                    </div>
+                </div> 
+                <div class="row mb-3">
+                    <div class="col-lg-12" id="tooltip-container">
+                        <label class="form-label fw6">Check-in days <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                          data-bs-toggle="tooltip" data-bs-placement="top" title="This will define the days that a guest can choose to check-in to your property. Be as flexible as possible to maximise your occupancy.">
+                          ?
+                      </button></label>
+                      <div class="row">
+                        <div class="col-lg-12 checkin_list">
+                      <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch1" name="checkin_days[]" value="Sun" checked>
+                        <label class="form-check-label" for="customSwitch1">Sun</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch2" name="checkin_days[]" value="Mon" checked>
+                        <label class="form-check-label" for="customSwitch2">Mon</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch3" name="checkin_days[]" value="Tue" checked>
+                        <label class="form-check-label" for="customSwitch3">Tue</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch4" name="checkin_days[]" value="Wed" checked>
+                        <label class="form-check-label" for="customSwitch4">Wed</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch5" name="checkin_days[]" value="Thu" checked>
+                        <label class="form-check-label" for="customSwitch5">Thu</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch6" name="checkin_days[]" value="Fri" checked>
+                        <label class="form-check-label" for="customSwitch6">Fri</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch7" name="checkin_days[]" value="Sat" checked>
+                        <label class="form-check-label" for="customSwitch7">Sat</label>                        
+                     </div>
+                    </div>
+                  </div>
+                      </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-lg-12" id="tooltip-container">
+                        <label class="form-label fw6">Check-out days <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                          data-bs-toggle="tooltip" data-bs-placement="top" title="Define the days that a guest can choose to check-out from your property. Be as flexible as possible to maximise your occupancy.">
+                          ?
+                      </button></label>
+                      <div class="row">
+                        <div class="col-lg-12 checkin_list">
+                      <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch8" value="Sun" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch8">Sun</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch9" value="Mon" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch9">Mon</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch10" value="Tue" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch10">Tue</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch11" value="Wed" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch11">Wed</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch12" value="Thu" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch12">Thu</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch13" value="Fri" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch13">Fri</label>                        
+                     </div>
+                     <div class="form-check form-switch mb-1" dir="ltr">
+                        <input type="checkbox" class="form-check-input" id="customSwitch14" value="Sat" name="checkout_days[]" checked>
+                        <label class="form-check-label" for="customSwitch14">Sat</label>                        
+                     </div>
+                    </div>
+                  </div>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit"
+                      class="btn btn-primary waves-effect waves-light">Update
+                      </button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>   
+<script src="/static/super/js/jquery.min.js"></script>
+<script src="/static/super/js/bootstrap.bundle.min.js"></script> 
+<script src="/static/super/js/metismenu.min.js"></script>
+<script src="/static/super/js/waves.js"></script>
+<script src="/static/super/js/feather.min.js"></script>
+<script src="/static/super/js/simplebar.min.js"></script>
+<script src="/static/super/js/jquery-ui.min.js"></script>
+<script src="/static/super/js/moment.js"></script>
+<script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/super/js/app.js"></script>
+<script>
+$(".alert-success").fadeTo(5000, 500).slideUp(500, function(){
+    $(".alert-success").slideUp(500);
+});
+</script>
+
+
+
+</body>
+
+</html>                        

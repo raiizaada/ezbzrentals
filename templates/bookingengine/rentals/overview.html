@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="shortcut icon" href="/static/bookingengine/engine/images/favicon.png"> 
+    <link href="/static/bookingengine/engine/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/bookingengine/engine/css/default.css" rel="stylesheet" type="text/css">
+    <link href="/static/bookingengine/engine/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/static/bookingengine/engine/css/plugin.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+</head>
+<body>
+    <header class="main_header_area">
+        <div class="header-content">
+            <div class="container">
+                <div class="links links-left">
+                    <ul>
+                        <li><a href="mailto:info@ezbzrentals.com"><i class="fa fa-envelope" aria-hidden="true"></i> info@ezbzrentals.com</a></li>
+                        <li><a href="tel:+12165395283"><i class="fa fa-phone" aria-hidden="true"></i> +1-216 539 5283</a></li>                       
+                    </ul>
+                </div>
+                <div class="links links-right pull-right">
+                    <ul>                       
+                        <li>
+                            <ul class="social-links">
+                                <li><a href="#" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                 <li><a href="#" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>                               
+                                <li><a href="#" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header_menu affix-top">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/booking-engine/dashboard">
+                            <img alt="logo1" src="/static/bookingengine/engine/images/logo.png" class="logo-black">
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav" id="responsive-menu">
+                            <li><a href="/booking-engine/dashboard">Home</a></li>
+                            <li><a href="rooms.html">Rooms</a> </li>
+                            <li><a href="#">About Us</a></li>
+                   			<li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="slicknav-mobile"></div>
+            </nav>
+        </div>
+    </header>
+    <section class="banner">
+        <div class="slider">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-image:url(static/bookingengine/engine/images/slider/slider-1.jpg)">
+                        <div class="swiper-content">
+                            <h3 data-animation="animated fadeInUp">Room Availability Checker & Booking</h3>
+                            <h1 data-animation="animated fadeInUp">Book Early <span>Save</span> More</h1>
+                            <a href="#" data-animation="animated fadeInUp" class="slider-btn btn-or mar-right-10">Explore Our Rooms</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image:url(/static/bookingengine/engine/images/slider/slider-2.jpg)">
+                        <div class="swiper-content">
+                            <h3 data-animation="animated fadeInUp">The lap of Luxury</h3>
+                            <h1 data-animation="animated fadeInUp">Quality <span>Holiday</span> With Us</h1>
+                            <a href="#" data-animation="animated fadeInUp" class="slider-btn btn-or">Book A Room Now</a>
+                        </div>
+                    </div>
+                    <div class="swiper-slide" style="background-image:url(static/bookingengine/engine/images/slider/slider-1.jpg)">
+                        <div class="swiper-content">
+                            <h3 data-animation="animated fadeInUp">As We Like to Keep It That Way</h3>
+                            <h1 data-animation="animated fadeInUp">A <span>Five Star</span> Hotel</h1>
+                            <a href="#" data-animation="animated fadeInUp" class="slider-btn btn-or mar-right-10">Explore Our Rooms</a>
+                            <a href="#" data-animation="animated fadeInUp" class="slider-btn btn-wt">Book A Room Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <div class="overlay"></div>
+        </div>
+        <div class="banner-form">
+          <form id="search-form"  action="/booking-engine/overview-search" method="get">
+                <div class="container">
+                    <div class="form-content">
+                        <div class="table-item">
+                            <label>Check In</label>
+                            <div class="form-group">
+                                <div class="date-range-inner-wrapper">
+                                    <input id="date-range2" name="checkin_date" id="checkin_date" class="form-control" value="{{checkin}}">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-item">
+                            <label>Check Out</label>
+                            <div class="form-group">
+                                <div class="date-range-inner-wrapper">
+                                    <input id="date-range3" name="checkout_date" id="checkout_date" class="form-control" value="{{checkout}}">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-item">
+                            <label>Adults</label>
+                            <div class="form-group">
+                                <select name="no_of_adult" id="no_of_adult" value="{{adult}}">
+                                    <option value="0"  {% if adult == 0 %} selected {% endif %}>0</option>
+                                    <option value="1"  {% if adult == 1 %} selected {% endif %}>1</option>
+                                    <option value="2"  {% if adult == 2 %} selected {% endif %}>2</option>
+                                    <option value="3"  {% if adult == 3 %} selected {% endif %}>3</option>
+                                    <option value="4"  {% if adult == 4 %} selected {% endif %}>4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-item">
+                            <label>Children</label>
+                            <div class="form-group">
+                                <select name="no_of_child" id="no_of_child" value="{{child}}">
+                                    <option value="0" {% if child == 0 %} selected {% endif %}>0</option>
+                                    <option value="1" {% if child == 1 %} selected {% endif %} >1</option>
+                                    <option value="2" {% if child == 2 %} selected {% endif %}>2</option>
+                                    <option value="3" {% if child == 3 %} selected {% endif %}>3</option>
+                                    <option value="4" {% if child == 4 %} selected {% endif %}>4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-item">
+                            <div class="form-btn mar-top-35">
+                              <input id="search_button" type="submit" value="Check Availabilty" class="btn btn-success" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </form>
+        </div>
+    </section>
+
+
+
+    <section class="room-list bg-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="list-results">
+                        <div class="list-results-sort pull-left pad-top-5">
+                            <p class="mar-0">Showing 1-5 of 80 results</p>
+                        </div>
+                        <div class="click-menu pull-right">
+                            <select class="selectpicker" data-width="120px" title="Sort By">
+                                <option data-icon="fa fa-long-arrow-alt-up" value="0">Price</option>
+                                <option data-icon="fa fa-user" value="1">Name</option>
+                            </select>
+                            <div class="change-list f-active mar-right-10"><a href="#"><i class="fa fa-bars"></i></a></div>
+                            <div class="change-grid"><a href="/booking-engine/overview-grid"><i class="fa fa-th"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="list-content">
+                        <div class="list-grid">
+                            {% if rooms %}
+                          {% for rooms in bookingroom %}           
+                            <div class="room-grid">
+                                <div class="grid-image">
+                                    <img src="/media/{{rooms.image}}" alt="image">
+                                </div>
+                                <div class="grid-content">
+                                    <div class="room-title">
+                                        <h4>{{rooms.name}}</h4>
+                                         <p class="price-ft mar-top-5"><i class="fa fa-tags"></i> ${{rooms.price}} <span>/ per Night</span></p>
+                                       
+                                    </div>
+                                    <div class="room-detail">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ex neque, sodales accumsan sapie</p>
+                                    </div>
+                                    <div class="room-services">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <i class="fa fa-user" aria-hidden="true"></i> {{rooms.max_guest}} Person
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <i class="fa fa-wifi" aria-hidden="true"></i> Quick Service
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid-btn mar-top-20">
+                                        <a href="/booking-engine/room-details/{{rooms.id}}" class="btn btn-black mar-right-10">VIEW DETAILS</a>
+                                        <a href="/booking-engine/book-room?roomid={{rooms.id}}" class="btn btn-green">BOOK NOW</a>
+                                    </div>
+                                </div>
+                            </div>
+                          {% endfor %}
+                          {% endif %}
+                        </div>
+                    </div>
+                    <div class="list-content">
+                        <div class="list-grid">
+                          {% for rooms in rooms %}
+                            <div class="room-grid">
+                                <div class="grid-image">
+                                    <img src="/media/{{rooms.image}}" alt="image">
+                                </div>
+                                <div class="grid-content">
+                                    <div class="room-title">
+                                        <h4>{{rooms.name}}</h4>
+                                         <p class="price-ft mar-top-5"><i class="fa fa-tags"></i> ${{rooms.price}} <span>/ per Night</span></p>
+                                       
+                                    </div>
+                                    <div class="room-detail">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ex neque, sodales accumsan sapie</p>
+                                    </div>
+                                    <div class="room-services">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <i class="fa fa-user" aria-hidden="true"></i> {{rooms.max_guest}} Person
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                                <i class="fa fa-wifi" aria-hidden="true"></i> Quick Service
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid-btn mar-top-20">
+                                        <a href="/booking-engine/room-details/{{rooms.id}}" class="btn btn-black mar-right-10">VIEW DETAILS</a>
+                                        <a href="/booking-engine/book-room?roomid={{rooms.id}}" class="btn btn-green">BOOK NOW</a>
+                                        <span id="session-data">
+                                    </div>
+                                </div>
+                            </div>
+                          {% endfor %}
+                        </div>
+                    </div>
+                    <div class="pagination-content text-center">
+                        <ul class="pagination">
+                            <li><a href="#"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">...</a></li>
+                            <li><a href="#">10</a></li>
+                            <li><a href="#"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>  
+        </div>
+    </section>
+    
+  
+
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-about">
+                                <h4>Company Info</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius tellus vitae justo blandit ultrices.</p>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="quick-links">
+                                <h4>Quick Links</h4>
+                                <ul>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#">Rooms</a></li>                                    
+                                    <li><a href="#">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="Rooms">
+                                <h4>Rooms</h4>
+                                <ul>
+                                    <li><a href="#">Single Rooms</a></li>
+                                    <li><a href="#">Double Rooms</a></li>
+                                    <li><a href="#">Studio Rooms</a></li>
+                                    <li><a href="#">Kingsize Rooms</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-contact">
+                                <h4>Contact info</h4>
+                                <ul>
+                                    <li>Tel: <a href="tel:+12165395283">+12165395283</a></li>
+                                    <li>Email: <a href="mailto:info@ezbzrentals.com">info@ezbzrentals.com</a></li>
+                                    <li>Address: 445 Mount Eden Road, Sundarbasti, Chakrapath</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="copyright-content text-center">
+                    <p class="white">Copyright &copy; EZBZ Rentals 2023. All Rights Reserved.</p>
+                  
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="back-to-top">
+        <a href="#"></a>
+    </div>    
+
+    <script src="/static/bookingengine/engine/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/bookingengine/engine/js/bootstrap.min.js"></script>
+    <script src="/static/bookingengine/engine/js/plugin.js"></script>
+    <script src="/static/bookingengine/engine/js/main.js"></script>
+    <script src="/static/bookingengine/engine/js/custom-nav.js"></script>
+    <script src="/static/bookingengine/engine/js/custom-swiper2.js"></script>
+    <script src="/static/bookingengine/engine/js/custom-singledate.js"></script>
+    {% comment %} <script>
+      function calculateDays() {
+          const checkin = new Date(document.getElementById("checkin_date").value);
+          console.log(checkin);
+          const checkout = new Date(document.getElementById("checkout_date").value);
+          const oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
+          var diffInDays = Math.round(Math.abs((checkout - checkin) / oneDay));
+          document.getElementById("no_of_days").innerHTML = diffInDays;
+          const nightlyRate = {{ room.price }};
+
+
+          const taxPercentage = {{ tax.amount }};
+        
+        
+          const basePrice = diffInDays * nightlyRate;
+          console.log(basePrice);
+        
+        
+          const taxAmount = basePrice * (taxPercentage / 100);
+          console.log(taxAmount);
+        
+        
+        
+          const totalPrice = basePrice + taxAmount;
+          console.log(totalPrice);
+        
+        
+        
+          document.getElementById("total-price").innerHTML = totalPrice.toFixed(2);
+         
+      }
+      document.getElementById("checkin_date").addEventListener("change", calculateDays);
+      document.getElementById("checkout_date").addEventListener("change", calculateDays);
+    </script> {% endcomment %}
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% load static %}
+{% static "img" as baseUrl %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>EZBZ </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Mukta+Mahee:200,300,400|Playfair+Display:400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/magnific-popup.css' %}">
+
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/fonts/ionicons/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/fonts/fontawesome/css/font-awesome.min.css' %}">
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/style.css' %}">
+  </head>
+  <body>
+
+    <header class="site-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-4 site-logo" data-aos="fade"><a href="/booking-engine"><em>EZBZ Rentals</em></a></div>
+          <div class="col-8">
+            <div class="site-menu-toggle js-site-menu-toggle"  data-aos="fade">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <!-- END menu-toggle -->
+
+            <div class="site-navbar js-site-navbar">
+              <nav role="navigation">
+                <div class="container">
+                  <div class="row full-height align-items-center">
+                    <div class="col-md-6 mx-auto text-center">
+                      <ul class="list-unstyled menu">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="rooms/allRooms">Rooms</a></li>
+                        <li><a href="/About">About</a></li>
+                        <li><a href="/Blog">Events</a></li>
+                        <li><a href="/Contact">Contact</a></li>
+                        <li><a href="/Reservation">Reservation Form</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- END head -->
+
+    <section class="site-hero overlay" style="background-image: url({% static 'bookingengine/engine/img/bg.jpg' %})" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row site-hero-inner justify-content-center align-items-center">
+          <div class="col-md-10 text-center" data-aos="fade-up">
+            <h1 class="heading">Beautiful and Wonderful <br> Rooms</h1>
+          </div>
+        </div>
+      </div>
+
+      <a class="mouse smoothscroll" href="#next">
+        <div class="mouse-icon">
+          <span class="mouse-wheel"></span>
+        </div>
+      </a>
+    </section>
+  
+
+    <section>
+        <div id="selected-dates"  class="container-fluid py-5 px-5 ">
+            <form id="search-form"  action="/booking-engine/overview-search" method="get">
+           
+                {% load app_tags %}
+                <div class="col-lg-4">
+                    <label for="">Check in</label>
+                    <input class="form-control mr-sm-2" type="date" id="checkin_date" placeholder="Check in" name="checkin_date" value="{{checkin}}" min={%todays_date%} max={% max_date %} aria-label="Search" required="True">
+                </div>
+                
+                <div class="col-lg-4">
+                    <label for="">Check Out</label>
+                    <input class="form-control mr-sm-2" type="date" id="checkout_date" placeholder="Check out" name="checkout_date" value="{{checkout}}" min={%tommorow%} max={% max_date%} aria-label="Search" required="True">
+                </div>
+                <div class="col-lg-4">
+                    <label for="">Adults</label>
+                    <input class="form-control mr-sm-2" type="number" placeholder="Adults" name="no_of_adult" value="{{adult}}" aria-label="Search" required="True">
+                </div>
+                <div class="col-lg-4">
+                  <label for="">Children</label>
+                  <input class="form-control mr-sm-2" type="number" placeholder="Children" name="no_of_child" value="{{child}}" aria-label="Search" required="True">
+              </div>
+                <div class="col-lg-4">
+                    <input id="search_button" type="submit" value="Check Availabilty" class="form-control mr-sm-2 btn btn-primary my-4" style="position: relative;top: 7px;">
+                </div>
+                {% if rooms %}
+                <p class="text-center text-success">Rooms Available</p>
+                {% endif %}
+                
+            </div>
+            </form>
+
+        </div>
+    </section>
+    <<div class="container-fluid px-0 mx-aut">
+        {% if rooms %}
+        {% for rooms in rooms %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">Information</th>
+                    <th class="text-center">View</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td class="text-center">
+                    <!--Room details-->
+                    <ul class="list-unstyled menu">
+                      <h2>{{rooms.name}}</h2>
+                      <li><b>Details</b></li>
+                      <li >Guests: {{rooms.max_guest}}</li>
+                      <li>Amenities: {{rooms.amenities}}</li>
+                      <li>Size: {{rooms.size}}m²</li>
+                      <li>Bed Type: {{rooms.bed_types}}</li>
+                      <li>Categories: {{rooms.categories}}</li>
+                      <li><b>Prices start at:<b> {{rooms.price}} per night (+ 8% taxes)</li>
+                      <li> <a href="/booking-engine/book-room?roomid={{rooms.id}}"><button class="btn btn-warning">Book Now</button></a></li>
+                    </ul>
+                </td>
+                <td class="text-center">
+                    <!--Room Images-->
+                    <img src="/media/{{rooms.image}}" height="280" width="190">
+                </td>
+                   
+               
+                </tr>
+            </tbody>
+        </table>
+        {% endfor %}
+        {% endif %}
+    </div>
+                         
+
+    <section class="section bg-light">
+      {% for rooms in bookingroom %}
+
+        <div class="container-fluid px-0" style="border:1px solid red">
+          
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">Information</th>
+                        <th class="text-center">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      
+                        <td class="text-center">
+                            <!--Room details-->
+                            <ul class="list-unstyled menu">
+                              <h2>{{rooms.name}}</h2>
+                              <li><b>Details</b></li>
+                              <li >Guests: {{rooms.max_guest}}</li>
+                              <li>Amenities: {{rooms.amenities}}</li>
+                              <li>Size: {{rooms.size}}m²</li>
+                              <li>Bed Type: {{rooms.bed_types}}</li>
+                              <li>Categories: {{rooms.categories}}</li>
+                              <li><b>Prices start at:<b> {{rooms.price}} per night (+ 8% taxes)</li>
+                              <li> <a href="/booking-engine/book-room?roomid={{rooms.id}}"><button class="btn btn-warning">Book Now</button></a></li>
+                            </ul>
+                        </td>
+                        <td class="text-center">
+                            <!--Room Images-->
+                            <img src="/media/{{rooms.image}}" height="280" width="190">
+                        </td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+          
+        </div>
+        {% endfor %}
+    </section>
+  
+      
+   
+    <footer class="section footer-section bg-success">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-md-3 mb-5">
+            <ul class="list-unstyled link">
+              <li><a href="rooms/allRooms">Rooms</a></li>
+                        <li><a href="/About">About</a></li>
+                        <li><a href="/Blog">Events</a></li>
+                        <li><a href="/Contact">Contact</a></li>
+                        <li><a href="/Reservation">Reservation Form</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-5">
+            <ul class="list-unstyled link">
+
+
+            </ul>
+          </div>
+          <div class="col-md-3 mb-5 pr-md-5 contact-info">
+            <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span>Brgy. Enclaro, Binalbagan, Negros Occidental</span></p>
+            <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span>09123456789</span></p>
+            <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span> myrel@gmail.com</span></p>
+          </div>
+
+          <div class="col-md-3 mb-5">
+            <p>Sign up for our newsletter</p>
+            <form action="#" class="footer-newsletter">
+              <div class="form-group">
+                <input type="email" class="form-control" placeholder="Your email...">
+                <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row bordertop pt-5">
+          <p class="col-md-6 text-center">
+            
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script data-cfasync="false"></script><script>document.write(new Date().getFullYear());</script> All Rights Reserved | Hotel Reservation System</i> 
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="{% static 'bookingengine/engine/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/popper.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/jquery.magnific-popup.min.js' %}"></script>
+
+
+    <script src="{% static 'js/aos.js' %}"></script>
+
+    <script src="{% static 'bookingengine/engine/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/jquery.timepicker.min.js' %}"></script>
+
+
+
+    <script src="{% static 'bookingengine/engine/js/main.js' %}"></script>
+    <script>
+      function calculateDays() {
+          const checkin = new Date(document.getElementById("checkin_date").value);
+          console.log(checkin);
+          const checkout = new Date(document.getElementById("checkout_date").value);
+          const oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
+          var diffInDays = Math.round(Math.abs((checkout - checkin) / oneDay));
+          document.getElementById("no_of_days").innerHTML = diffInDays;
+          const nightlyRate = {{ room.price }};
+
+
+          const taxPercentage = {{ tax.amount }};
+        
+        
+          const basePrice = diffInDays * nightlyRate;
+          console.log(basePrice);
+        
+        
+          const taxAmount = basePrice * (taxPercentage / 100);
+          console.log(taxAmount);
+        
+        
+        
+          const totalPrice = basePrice + taxAmount;
+          console.log(totalPrice);
+        
+        
+        
+          document.getElementById("total-price").innerHTML = totalPrice.toFixed(2);
+         
+      }
+      document.getElementById("checkin_date").addEventListener("change", calculateDays);
+      document.getElementById("checkout_date").addEventListener("change", calculateDays);
+    </script>
+
+
+ 
+  </body>
+</html> {% endcomment %}

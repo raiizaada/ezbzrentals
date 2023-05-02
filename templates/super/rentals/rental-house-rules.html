@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> House Rules </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+         
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">House Rules</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/rentals">Rental</a></li>
+                             
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+             
+                  <h5>House Rules</h5>
+                  <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+                  <hr>
+                  {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"
+                      aria-label="Close"></button>
+                  </div>
+                  {% endfor %}
+                  {%endif%}
+                  <form method="POST" enctype="multipart/form-data" class="post-form" action="/super/rental-house-rules-update/{{houserules.id}}">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                        <label class="form-label fw6">Suitable for kids<span class="strict">*</span></label>
+                        <select name="for_kid" class="form-control form-control" required>
+                          <option>--Select--</option>
+                          <option value="Children welcome" {% if houserules.for_kid == "Children welcome" %} selected {% endif %}>Children welcome</option>
+                          <option value="Great for children" {% if houserules.for_kid == "Great for children" %} selected {% endif %}>Great for children</option>
+                          <option value="Not suitable for children" {% if houserules.for_kid == "Not suitable for children" %} selected {% endif %}>Not suitable for children</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-6" id="tooltip-container">
+                        <label class="form-label fw6">Wheelchair access<span class="strict">*</span> <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="All accessible parts of the property are wheelchair friendly, including doorways, bathroom and and toilet.">
+                            ?
+                        </button></label>
+                        <select name="wheelchair_access" class="form-control" required>
+                          <option>--Select--</option>
+                          <option value="Entire house or apartment" {% if houserules.wheelchair_access == "Entire house or apartment" %} selected {% endif %}>Entire house or apartment</option>
+                          <option value="Room with own facilities" {% if houserules.wheelchair_access == "Room with own facilities" %} selected {% endif %}>Room with own facilities</option>
+                          <option value="Room with shared facilities" {% if houserules.wheelchair_access == "Room with shared facilities" %} selected {% endif %}>Room with shared facilities</option>
+                        </select>
+                      </div>
+                      </div>
+                      <div class="row mb-3">
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">Events or parties allowed<span class="strict">*</span></label>
+                        <select name="parties_allowed" class="form-control" required>
+                          <option>--Select--</option>
+                          <option value="Allowed" {% if houserules.parties_allowed == "Allowed" %} selected {% endif %}>Allowed</option>
+                          <option value="Not allowed" {% if houserules.parties_allowed == "Not allowed" %} selected {% endif %}>Not allowed</option>                      
+                        </select>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">Smoking allowed<span class="strict">*</span></label>
+                      <select name="smoking_allowed" class="form-control" required>
+                        <option>--Select--</option>
+                        <option value="No smoking" {% if houserules.smoking_allowed == "No smoking" %} selected {% endif %}>No smoking</option>
+                        <option value="Smoking allowed" {% if houserules.smoking_allowed == "Smoking allowed" %} selected {% endif %}>Smoking allowed</option>
+                        <option value="Smoking outside" {% if houserules.smoking_allowed == "Smoking outside" %} selected {% endif %}>Smoking outside</option>                  
+                      </select>
+                      </div>
+                     
+                      </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6" id="tooltip-container">
+                        <label class="form-label fw6" for="productname">Pets <button type="button" class="btntip" data-bs-container="#tooltip-container"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="All accessible parts of the property are wheelchair friendly, including doorways, bathroom and and toilet.">
+                            ?
+                        </button></label>
+                        <select name="pets" class="form-control" required>
+                            <option>--Select--</option>
+                            <option value="No pets allowed" {% if houserules.pets == "No pets allowed" %} selected {% endif %}>No pets allowed</option>
+                            <option value="Pets allowed" {% if houserules.pets == "Pets allowed" %} selected {% endif %}>Pets allowed</option>
+                            <option value="Pets considered" {% if houserules.pets == "Pets considered" %} selected {% endif %}>Pets considered</option>                  
+                          </select>
+                      </div>                 
+                    </div>
+                    
+                    <div class="mb-3">
+                      <div class="col-lg-12" >
+                        <label class="form-label fw6" for="productname">House rules  </label>
+                        <textarea name="house_rules" rows="8" placeholder="Rules about noise? No shoes in the house? Define additional house rules..." tabindex="10" class="form-control" maxlength="4000">{{houserules.house_rules}}</textarea>
+                      </div>
+                    </div>
+                
+                    <div class="mb-3">
+                     <input type="submit" class="btn btn-primary" value="Save">
+                      
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+   
+
+
+
+
+      {% include 'super/base/footer.html'%}
+    </div> 
+    
+    <script src="/static/super/js/jquery.min.js"></script>
+    <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/super/js/metismenu.min.js"></script>
+    <script src="/static/super/js/waves.js"></script>
+    <script src="/static/super/js/feather.min.js"></script>
+    <script src="/static/super/js/simplebar.min.js"></script>
+    <script src="/static/super/js/jquery-ui.min.js"></script>
+    <script src="/static/super/js/moment.js"></script>
+    <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="/static/super/js/app.js"></script>
+    <script>
+      function previewFile(input){
+          var file = $("input[type=file]").get(0).files[0];
+          if(file){
+            var reader = new FileReader();
+            reader.onload = function(){
+                $("#previewImg").attr("src", reader.result);
+            }
+            reader.readAsDataURL(file);
+          }
+      }
+  
+  
+      
+  </script>
+  
+  <script>
+    $(".alert-success").fadeTo(5000, 500).slideUp(500, function(){
+        $(".alert-success").slideUp(500);
+    });
+  </script>
+    
+  
+  
+  </body>
+  
+  </html>                        

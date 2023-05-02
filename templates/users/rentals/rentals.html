@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Rentals</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/users/images/favicon.png">
+
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body data-layout="horizontal">
+        <div id="layout-wrapper">
+            {% include 'users/base/header.html'%}
+            
+<div class="main-content">
+    <div class="page-content">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row"> 
+                        <div class="col-lg-10">
+                        <h5>Rentals</h5>
+                        <div class="col-lg-4">
+                          <select id="RentalID" class="form-control select2" name="rental_id">
+                            {% for rental in rentals %}
+                              <option value="{{rental.id}}">{{rental.rental_name}}</option>
+                            {% endfor %}
+                          </select>
+                           
+                      </div>
+                    
+                    </div>
+                    <div class="col-lg-2">
+                        <a href="/rentals/overview" class="btn btn-success pull-right mb-2"><i class="mdi mdi-plus me-1"></i> Add Property</a>
+                    </div>
+                    </div>  
+                    <hr>
+        <div class="row"> 
+            <div id="RentalResponse"></div>
+            {% for n in rental %}
+           
+            <div class="col-xl-3 col-sm-6" id="RentalResponseHide">
+                <div class="card brdg">
+
+                    <div class="card-body rentals_image">
+                        <div class="text-center">
+                            <img src="/media/{{n.cover_image}}" alt="img-1" class="img-fluid">
+                            <div class="flex-1 mt-3">
+                                <h5 class="text-truncate"><a  class="text-dark">{{n.rental_name}}</a></h5>
+                               
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="row text-center">
+                            <div class="col-12 rental_btn">
+                                <a href="/calendar/{{n.id}}"><i class="mdi mdi-calendar-month f24" ></i></a>
+                                <a href="/rentals/overview/{{n.id}}"  ><i class="mdi mdi-lead-pencil f24"></i></a>  
+                                <a href="/rentals/preview/{{n.id}}"><i class="mdi mdi-eye f24"></i></a>
+                                <a href="/rental-delete/{{n.id}}" onClick="DelItem()"><i class="mdi mdi-trash-can-outline f24"></i></a>                               
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor%} 
+       
+        </div>  
+    </div>  
+</div>
+
+
+    </div> 
+</div>
+       
+       {% include 'users/base/footer.html'%}
+</div> 
+</div>
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/js/ajax-response.js" type="text/javascript"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+<script src="/static/users/libs/select2/js/select2.min.js"></script>
+<script src="/static/users/js/pages/ecommerce-add-product.init.js"></script>
+<script src="/static/users/js/app.js"></script>
+
+</body>
+
+</html>  
+        
+
+      
+

@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Additional Info | EZBZ Rentals</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="" name="description" />
+<meta content="" name="author" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="/static/users/images/favicon.png">
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+</head>
+<body data-layout="horizontal">
+<div id="layout-wrapper">
+{% include 'users/base/header.html'%}
+<div class="main-content">
+<div class="page-content">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-3 mrgbp brdr">
+              {% include 'users/rentals/rental_nav.html'%}
+            </div>
+            <div class="col-lg-9">
+              <h5>Additional Info</h5>
+              <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+              <hr>
+              {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"
+                  aria-label="Close"></button>
+              </div>
+              {% endfor %}
+              {%endif%}
+              <form method="POST" enctype="multipart/form-data" class="post-form" action="/rentals/cleaning-update/{{rentalcleaning.id}}">
+                {% csrf_token %}
+              <div class="cleaning_services">
+                {% if rentalcleaning.cleaning_available %}
+                <div class="mb-3">
+                  <p><strong>Cleaning</strong></p>
+                  <input type="checkbox" class="form-check-input" name="cleaning_available" id="CleaningCheck2" value="Yes" {% if rentalcleaning.cleaning_available == 'Yes' %} checked {% endif %}> Cleaning is available
+                </div>
+                {% else %}
+                <div class="mb-3">
+                  <p><strong>Cleaning</strong></p>
+                  <input type="checkbox" class="form-check-input" name="cleaning_available" id="CleaningCheck" value="Yes" {% if rentalcleaning.cleaning_available == 'Yes' %} checked {% endif %}> Cleaning is available
+                </div>
+                {% endif %}
+
+                {% if rentalcleaning.cleaning_available %}
+                <div class="row mb-3" id="CleaningDiv2">
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label fw6">Cleaning basis</label>
+                    <select name="cleaning_basis" id="cleaning_basis2" class="form-select">
+                      <option value="">--Select--</option>  
+                      <option value="included" {% if rentalcleaning.cleaning_basis == "included" %} selected {% endif %}>Mandatory - included</option>
+                      <option value="mandatory" {% if rentalcleaning.cleaning_basis == "mandatory" %} selected {% endif %}>Mandatory - for a fee</option>
+                      <option value="optional" {% if rentalcleaning.cleaning_basis == "optional" %} selected {% endif %}>Optional</option>                
+                    </select>
+                  </div>
+                  {% if rentalcleaning.cleaning_basis == "mandatory" or rentalcleaning.cleaning_basis == "optional" %}
+                  <div class="col-lg-6" id="CleaningPrice2">
+                    <label class="form-label fw6">Price in INR<span class="strict">*</span></label>
+                    <input type="text" class="form-control" name="price" value="{{rentalcleaning.price}}">
+                  </div>
+                  {% else %}
+                  <div class="col-lg-6 hide" id="CleaningPrice2">
+                    <label class="form-label fw6">Price in INR<span class="strict">*</span></label>
+                    <input type="text" class="form-control" name="price" value="{{rentalcleaning.price}}">
+                  </div>
+                  {% endif %}
+                </div>
+                {% else %}
+                <div class="row mb-3 hide" id="CleaningDiv">
+                  <div class="col-lg-6 mb-3">
+                    <label class="form-label fw6">Cleaning basis</label>
+                    <select name="cleaning_basis" id="cleaning_basis" class="form-select">
+                      <option value="">--Select--</option>  
+                      <option value="included" {% if rentalcleaning.cleaning_basis == "included" %} selected {% endif %}>Mandatory - included</option>
+                      <option value="mandatory" {% if rentalcleaning.cleaning_basis == "mandatory" %} selected {% endif %}>Mandatory - for a fee</option>
+                      <option value="optional" {% if rentalcleaning.cleaning_basis == "optional" %} selected {% endif %}>Optional</option>                
+                    </select>
+                  </div>
+                  <div class="col-lg-6 hide" id="CleaningPrice">
+                    <label class="form-label fw6">Price in INR<span class="strict">*</span></label>
+                    <input type="text" class="form-control" name="price" value="{{rentalcleaning.price}}">
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+              
+              
+              <div class="mb-3">
+                <input type="submit" class="btn btn-primary" value="Save">
+               </div>
+            </form>
+            <form method="POST" enctype="multipart/form-data" class="post-form" action="/rentals/deposit-update/{{rentaldeposit.id}}">
+              {% csrf_token %}
+              <div class="cleaning_services">
+                {% if rentaldeposit.security_deposit %}
+                <div class="mb-3">
+                  <p><strong>Security deposit</strong></p>
+                  <input type="checkbox" class="form-check-input" name="security_deposit" id="SecurityCheck2" value="Yes" {% if rentaldeposit.security_deposit == 'Yes' %} checked {% endif %}> I require a security deposit
+                </div>
+                {% else %}
+                <div class="mb-3">
+                  <p><strong>Security deposit</strong></p>
+                  <input type="checkbox" class="form-check-input" name="security_deposit" id="SecurityCheck" value="Yes" > I require a security deposit
+                </div>
+                {% endif %}
+                {% if rentaldeposit.security_deposit %}
+                <div class="row mb-3 " id="SecurityDeposit2">                 
+                  <div class="col-lg-6">
+                    <label class="form-label fw6">Amount in INR<span class="strict">*</span></label>
+                    <input type="text" class="form-control" name="amount" value="{{rentaldeposit.amount}}" >
+                    {% else %}
+                <div class="row mb-3 hide" id="SecurityDeposit">                 
+                <div class="col-lg-6">
+                  <label class="form-label fw6">Amount in INR<span class="strict">*</span></label>
+                  <input type="text" class="form-control" name="amount" >
+                </div>
+                {% endif %}
+              </div>
+              </div>
+              <div class="mb-3">
+                <input type="submit" class="btn btn-primary" value="Save">
+               </div>
+            </form>
+            
+            <div class="row mb-3">  
+              <div class="col-lg-12 mb-3"><strong>Taxes</strong></div>
+              {% for rentaltaxs in rentaltax %}
+              <div class="col-lg-4">
+                <div class="card border border-success">                  
+                    <div class="card-body">
+                      <a href="" data-bs-toggle="modal" data-bs-target="#taxModalScrollableEdit" data-id="{{ rentaltaxs.id }}" class="editTax">
+                        <i class="mdi mdi-lead-pencil"></i>                    
+                      </a>
+                      <a href="/rentals/tax-delete/{{rentaltaxs.id}}" onclick="return DelItem();" class="editTrash">
+                      <i class="far fa-trash-alt"></i>
+                      </a>
+                      <p><strong>{{rentaltaxs.tax_type}}</strong> </p>
+                      <p>{{rentaltaxs.percentage}} {{rentaltaxs.amountin}} {{rentaltaxs.fee_basis}}</p>
+                     
+                    </div>
+                </div>
+              </div>
+              {% endfor %} 
+              <div class="col-lg-4">
+                <div class="card border border-success">                  
+                    <div class="card-body text-center">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#taxModalScrollable">
+                            <i class="fas fa-plus"></i>
+                            <h5 class="card-title mt-0">Add tax</h5>                        
+                        </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-3">  
+              <div class="col-lg-12 mb-3"><strong>Optional extras and services</strong></div>
+              {% for extraservice in extraservices %}
+              <div class="col-lg-6">
+                <div class="card border border-success">                  
+                    <div class="card-body">
+                      <a href="" data-bs-toggle="modal" data-bs-target="#extraModalScrollableEdit" data-id="{{ extraservice.id }}" class="editTax">
+                        <i class="mdi mdi-lead-pencil"></i>                    
+                      </a>
+                      <a href="/rentals/extra-services-delete/{{extraservice.id}}" onclick="return DelItem();" class="editTrash">
+                      <i class="far fa-trash-alt"></i>
+                      </a>
+                      <p><strong>Service name</strong>: {{extraservice.service_name}} </p>
+                      <p><strong>Provided</strong>: {{extraservice.service_provided}} </p>
+                      <p><strong>Fee basis</strong>: {{extraservice.fee_basis}} </p>
+                      <p><strong>Price in INR</strong>: {{extraservice.service_price}} </p>
+                      <p><strong>Earliest the guest can order it</strong>: {{extraservice.earliest_guest_order}} </p>
+                      <p><strong>Latest the guest can order it</strong>: {{extraservice.latest_guest_order}} </p>
+                      <p><strong>Guest can cancel the order</strong>: {{extraservice.guest_cancel_order}} </p>
+                      <p><strong>Additional information</strong>: {{extraservice.extra_message}} </p>
+                    </div>
+                </div>
+              </div>
+              {% endfor %} 
+              {% for customservice in customservices %}
+              <div class="col-lg-6">
+                <div class="card border border-success">                  
+                    <div class="card-body">
+                      <a href="" data-bs-toggle="modal" data-bs-target="#customModalScrollableEdit" data-id="{{ customservice.id }}" class="editTax">
+                        <i class="mdi mdi-lead-pencil"></i>                    
+                      </a>
+                      <a href="/rentals/custom-services-delete/{{customservice.id}}" onclick="return DelItem();" class="editTrash">
+                      <i class="far fa-trash-alt"></i>
+                      </a>
+                      <p><strong>Service name</strong>: {{customservice.custom_service_name}} </p>
+                      <p><strong>Provided</strong>: {{customservice.custom_service_provided}} </p>
+                      <p><strong>Fee basis</strong>: {{customservice.custom_fee_basis}} </p>
+                      <p><strong>Price in INR</strong>: {{customservice.custom_service_price}} </p>
+                      <p><strong>Earliest the guest can order it</strong>: {{customservice.custom_earliest_guest_order}} </p>
+                      <p><strong>Latest the guest can order it</strong>: {{customservice.custom_latest_guest_order}} </p>
+                      <p><strong>Guest can cancel the order</strong>: {{customservice.custom_guest_cancel_order}} </p>
+                      <p><strong>Additional information</strong>: {{customservice.custom_extra_message}} </p>
+                    </div>
+                </div>
+              </div>
+              {% endfor %} 
+              <div class="col-lg-4">
+                <div class="card border border-success">                  
+                    <div class="card-body text-center">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#extraModalScrollable">
+                            <i class="fas fa-plus"></i>
+                            <h5 class="card-title mt-0">Add extra</h5>                        
+                        </a>
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card border border-success">                  
+                    <div class="card-body text-center">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#customModalScrollable">
+                            <i class="fas fa-plus"></i>
+                            <h5 class="card-title mt-0">Add custom field</h5>                        
+                        </a>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>    
+    </div>
+</div>
+{% include 'users/base/footer.html'%} 
+</div>
+</div>
+<div class="modal fade" id="taxModalScrollable" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="taxModalScrollableTitle">Tax</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+          <form method="POST" enctype="multipart/form-data" class="post-form" action="/rentals/tax-insert/{{rental.id}}">
+            {% csrf_token %}
+             
+             
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Tax type<span class="strict">*</span></label>
+                        <select name="tax_type" class="form-select" required>
+                            <option value="" disabled="disabled" selected>--Select--</option>
+                            <option value="City tax">City tax</option>
+                            <option value="Destination fee">Destination fee</option>
+                            <option value="Goods and services tax">Goods and services tax</option>
+                            <option value="Government tax">Government tax</option>
+                            <option value="Local tax">Local tax</option>
+                            <option value="Resort fee">Resort fee</option>
+                            <option value="Tax">Tax</option>
+                            <option value="Tourism fee">Tourism fee</option>
+                            <option value="VAT (Value Added Tax)">VAT (Value Added Tax)</option>
+                           
+                          </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Fee basis<span class="strict">*</span></label>
+                        <select name="fee_basis" class="form-select" id="feeBasis" required>
+                            <option value="" disabled="disabled" selected>--Select--</option>                        
+                            <option value="% of Rental Amount">% of Rental Amount</option>
+                            <option value="Per adult / day">Per adult / day</option>
+                            <option value="Per adult / stay">Per adult / stay</option>
+                            <option value="Per adult / week">Per adult / week</option>
+                            <option value="Per day">Per day</option>
+                            <option value="Per person / day">Per person / day</option>
+                            <option value="Per person / stay">Per person / stay</option>
+                            <option value="Per person / week">Per person / week</option>
+                            <option value="Per stay">Per stay</option>
+                            <option value="Per week">Per week</option>                            
+                          </select>
+                    </div>
+                </div> 
+
+                <div class="row mb-3 hide" id="TaxPercentage">
+                  <div class="col-lg-6">
+                      <label class="form-label fw6">Percentage<span class="strict">*</span></label>
+                      <input type="text" name="percentage" class="form-control">
+                  </div>
+              </div> 
+              <div class="row mb-3 hide" id="TaxAmount">
+                <div class="col-lg-6">
+                    <label class="form-label fw6">Amount in<span class="strict">*</span></label>
+                    <input type="text" name="amountin" class="form-control">
+                </div>
+            </div> 
+            <div class="modal-footer">
+              
+              <button type="submit"
+                  class="btn btn-primary waves-effect waves-light">Save
+                  </button>
+          </div>
+             
+            </form>
+          
+        </div>
+        
+    </div>
+</div>
+</div>
+<div class="modal fade" id="taxModalScrollableEdit" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="taxModalScrollableTitle">Tax</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+          <form method="POST" enctype="multipart/form-data" class="post-form" >
+            {% csrf_token %}
+             
+             
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Tax type<span class="strict">*</span></label>
+                        <select name="tax_type" class="form-select" id="tax_type">
+                            <option value="" disabled="disabled" selected>--Select--</option>
+                            <option value="City tax" {% if tax.tax_type == "City tax" %} selected {% endif %}>City tax</option>
+                            <option value="Destination fee" {% if tax.tax_type == "Destination fee" %} selected {% endif %}>Destination fee</option>
+                            <option value="Goods and services tax" {% if tax.tax_type == "Goods and services tax" %} selected {% endif %}>Goods and services tax</option>
+                            <option value="Government tax" {% if tax.tax_type == "Government tax" %} selected {% endif %}>Government tax</option>
+                            <option value="Local tax" {% if tax.tax_type == "Local tax" %} selected {% endif %}>Local tax</option>
+                            <option value="Resort fee" {% if tax.tax_type == "Resort fee" %} selected {% endif %}>Resort fee</option>
+                            <option value="Tax" {% if tax.tax_type == "Tax" %} selected {% endif %}>Tax</option>
+                            <option value="Tourism fee" {% if tax.tax_type == "Tourism fee" %} selected {% endif %}>Tourism fee</option>
+                            <option value="VAT" {% if tax.tax_type == "VAT" %} selected {% endif %}>VAT (Value Added Tax)</option>
+                           
+                          </select>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Fee basis<span class="strict">*</span></label>
+                        <select name="fee_basis" class="form-select" id="fee" id="fee_basis3">
+                            <option value="" disabled="disabled" selected>--Select--</option>                        
+                            <option value="% of Rental Amount"  {% if tax.fee_basis == "% of Rental Amount" %} selected {% endif %}>% of Rental Amount</option>
+                            <option value="Per adult / day"  {% if tax.fee_basis == "Per adult / day" %} selected {% endif %}>Per adult / day</option>
+                            <option value="Per adult / stay"  {% if tax.fee_basis == "Per adult / stay" %} selected {% endif %}>Per adult / stay</option>
+                            <option value="Per adult / week"  {% if tax.fee_basis == "Per adult / week" %} selected {% endif %}>Per adult / week</option>
+                            <option value="Per day"  {% if tax.fee_basis == "Per day" %} selected {% endif %}>Per day</option>
+                            <option value="Per person / day"  {% if tax.fee_basis == "Per person / day" %} selected {% endif %}>Per person / day</option>
+                            <option value="Per person / stay"  {% if tax.fee_basis == "Per person / stay" %} selected {% endif %}>Per person / stay</option>
+                            <option value="Per person / week"  {% if tax.fee_basis == "Per person / week" %} selected {% endif %}>Per person / week</option>
+                            <option value="Per stay"  {% if tax.fee_basis == "Per stay" %} selected {% endif %}>Per stay</option>
+                            <option value="Per week"  {% if tax.fee_basis == "Per week" %} selected {% endif %}>Per week</option>                            
+                          </select>
+                    </div>
+                </div> 
+              
+                <div class="row mb-3 hide" id="TaxPercentage2">
+                  <div class="col-lg-6">
+                      <label class="form-label fw6">Percentage<span class="strict">*</span></label>
+                      <input type="text" name="percentage" class="form-control" id="percentage">
+                  </div>
+              </div> 
+              <div class="row mb-3 hide" id="TaxAmount2">
+                <div class="col-lg-6">
+                    <label class="form-label fw6">Amount in<span class="strict">*</span></label>
+                    <input type="text" name="amountin" class="form-control" id="amountin" >
+                </div>
+            </div> 
+            <div class="modal-footer">
+              
+              <button type="submit" id="save-btntax"
+                  class="btn btn-primary waves-effect waves-light">Update
+                  </button>
+          </div>
+             
+            </form>
+          
+        </div>
+        
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="extraModalScrollable" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="extraModalScrollableTitle">Optional extra services</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+          <form method="POST" enctype="multipart/form-data" class="post-form" action="/rentals/extra-services-insert/{{rental.id}}">
+            {% csrf_token %}
+             
+             
+             
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Service name<span class="strict">*</span></label>
+                        <select name="service_name" class="form-select">
+                            <option value="" disabled="disabled" selected>--Select--</option>
+                            <option value="Additional Cleaning">Additional Cleaning</option>
+                            <option value="Air-conditioning">Air-conditioning</option>
+                            <option value="Airport transfer">Airport transfer</option>
+                            <option value="Baby cot">Baby cot</option>
+                            <option value="Barbecue">Barbecue</option>
+                            <option value="Bed linen">Bed linen</option>
+                            <option value="Bike rental">Bike rental</option>
+                            <option value="Boat berth">Boat berth</option>
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Car rental">Car rental</option>
+                            <option value="Early check-in">Early check-in</option>
+                            <option value="Electricity">Electricity</option>
+                            <option value="Heated Pool">Heated Pool</option>
+                            <option value="Heating">Heating</option>
+                            <option value="High chair">High chair</option>
+                            <option value="Internet">Internet</option>
+                            <option value="Jacuzzi">Jacuzzi</option>
+                            <option value="Kitchen linen">Kitchen linen</option>
+                            <option value="Late check-out">Late check-out</option>
+                            <option value="Laundry service">Laundry service</option>
+                            <option value="Linen package (bed linen + towel)">Linen package (bed linen + towel)</option>
+                            <option value="Meditation class">Meditation class</option>
+                            <option value="Muay Thai Gym">Muay Thai Gym</option>
+                            <option value="Parking">Parking</option>
+                            <option value="Pool">Pool</option>
+                            <option value="Sunbed">Sunbed</option>
+                            <option value="Tennis class">Tennis class</option>
+                            <option value="Tennis court">Tennis court</option>
+                            <option value="Towel">Towels</option>
+                            <option value="Transfer">Transfer</option>
+                            <option value="Umbrella">Umbrella</option>
+                            <option value="Waste sorting">Waste sorting</option>
+                            <option value="Welcome package">Welcome package</option>
+                            <option value="Yoga class">Yoga class</option>                           
+                          </select>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label fw6">Provided</label>
+                      <select name="service_provided" id="serviceProvided" class="form-select">
+                          <option value="" disabled="disabled" selected>--Select--</option>
+                          <option value="Free">Free</option>
+                          <option value="For a fee">For a fee</option>                          
+                        </select>
+                  </div>
+                  </div>
+                  <div class="hide" id="extraServices">
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Fee basis</label>
+                        <select name="fee_basis" class="form-select" >
+                            <option value="" disabled="disabled" selected>--Select--</option>                        
+                            <option value="Per cleaning">Per cleaning</option>
+                            <option value="Per person / cleaning">Per person / cleaning</option>                                                   
+                          </select>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label fw6">Price in INR<span class="strict">*</span></label>
+                      <input type="text" class="form-control" name="service_price">
+                  </div>
+                </div> 
+                <div class="row mb-3">
+                  <div class="col-lg-6">
+                      <label class="form-label fw6">Earliest the guest can order it</label>
+                      <select name="earliest_guest_order" class="form-select">
+                          <option value="" disabled="disabled" selected>--Select--</option>                        
+                          <option value="At the time of booking">At the time of booking</option>
+                          <option value="48 hours before check-in">48 hours before check-in</option>
+                          <option value="24 hours before check-in">24 hours before check-in</option>
+                          <option value="48 hours before check-out">48 hours before check-out</option>
+                          <option value="24 hours before check-out">24 hours before check-out</option>                                                  
+                        </select>
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label fw6">Latest the guest can order it</label>
+                    <select name="latest_guest_order" class="form-select">
+                      <option value="" disabled="disabled" selected>--Select--</option>                        
+                      <option value="At the time of booking">At the time of booking</option>
+                      <option value="48 hours before check-in">48 hours before check-in</option>
+                      <option value="24 hours before check-in">24 hours before check-in</option>
+                      <option value="48 hours before check-out">48 hours before check-out</option>
+                      <option value="24 hours before check-out">24 hours before check-out</option>
+                      <option value="No restriction">No restriction</option>                                                   
+                    </select>
+                </div>
+              </div> 
+              <div class="row mb-3">
+                <div class="col-lg-6">
+                    <label class="form-label fw6">Guest can cancel the order</label>
+                    <select name="guest_cancel_order" class="form-select">
+                        <option value="" disabled="disabled" selected>--Select--</option>                        
+                        <option value="24 hours before check-in">24 hours before check-in</option>
+                        <option value="Any time before check-out">Any time before check-out</option> 
+                        <option value="Guest cannot cancel order">Guest cannot cancel order</option>                                                  
+                    </select>
+                </div>               
+            </div>  
+          </div>
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                  <label class="form-label fw6">Additional information for the guest</label>
+                 <textarea class="form-control" name="extra_message"></textarea>
+              </div>               
+          </div> 
+          <div class="modal-footer">
+            
+            <button type="submit"
+                class="btn btn-primary waves-effect waves-light">Save
+                </button>
+        </div>
+       
+            </form>
+          
+        </div>
+        
+    </div>
+</div>
+</div>
+<div class="modal fade" id="extraModalScrollableEdit" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="extraModalScrollableTitle">Optional extra services</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" enctype="multipart/form-data" class="post-form">
+            {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Service name<span class="strict">*</span></label>
+                        <select name="service_name" class="form-select" id="service_name">
+                            <option value="" disabled="disabled" selected>--Select--</option>
+                            <option value="Additional Cleaning"{% if extra.service_name == "Additional Cleaning" %} selected {% endif %}>Additional Cleaning</option>
+                            <option value="Air-conditioning" {% if extra.service_name == "Air-conditioning" %} selected {% endif %}>Air-conditioning</option>
+                            <option value="Airport transfer" {% if extra.service_name == "Airport transfer" %} selected {% endif %}>Airport transfer</option>
+                            <option value="Baby cot" {% if extra.service_name == "Baby cot" %} selected {% endif %}>Baby cot</option>
+                            <option value="Barbecue" {% if extra.service_name == "Barbecue " %} selected {% endif %}>Barbecue</option>
+                            <option value="Bed linen" {% if extra.service_name == "Bed linen " %} selected {% endif %}>Bed linen</option>
+                            <option value="Bike rental" {% if extra.service_name == "Bike rental " %} selected {% endif %}>Bike rental</option>
+                            <option value="Boat berth" {% if extra.service_name == "Boat berth " %} selected {% endif %}>Boat berth</option>
+                            <option value="Breakfast" {% if extra.service_name == "Breakfast " %} selected {% endif %}>Breakfast</option>
+                            <option value="Car rental" {% if extra.service_name == "Car rental " %} selected {% endif %}>Car rental</option>
+                            <option value="Early check-in" {% if extra.service_name == "Early check-in " %} selected {% endif %}>Early check-in</option>
+                            <option value="Electricity" {% if extra.service_name == "Electricity " %} selected {% endif %}>Electricity</option>
+                            <option value="Heated Pool" {% if extra.service_name == "Heated Pool " %} selected {% endif %}>Heated Pool</option>
+                            <option value="Heating" {% if extra.service_name == "Additional " %} selected {% endif %}>Heating</option>
+                            <option value="High chair" {% if extra.service_name == "High chair " %} selected {% endif %}>High chair</option>
+                            <option value="Internet" {% if extra.service_name == "Internet " %} selected {% endif %}>Internet</option>
+                            <option value="Jacuzzi" {% if extra.service_name == "Jacuzzi " %} selected {% endif %}>Jacuzzi</option>
+                            <option value="Kitchen linen" {% if extra.service_name == "Kitchen linen" %} selected {% endif %}>Kitchen linen</option>
+                            <option value="Late check-out" {% if extra.service_name == "Late check-out" %} selected {% endif %}>Late check-out</option>
+                            <option value="Laundry service" {% if extra.service_name == "Laundry service" %} selected {% endif %}>Laundry service</option>
+                            <option value="Linen package (bed linen + towel)" {% if extra.service_name == "Linen package (bed linen + towel)" %} selected {% endif %}>Linen package (bed linen + towel)</option>
+                            <option value="Meditation class" {% if extra.service_name == "Meditation class " %} selected {% endif %}>Meditation class</option>
+                            <option value="Muay Thai Gym" {% if extra.service_name == "Muay Thai Gym " %} selected {% endif %}>Muay Thai Gym</option>
+                            <option value="Parking" {% if extra.service_name == "Parking " %} selected {% endif %}>Parking</option>
+                            <option value="Pool" {% if extra.service_name == "Pool " %} selected {% endif %}>Pool</option>
+                            <option value="Sunbed" {% if extra.service_name == "Sunbed " %} selected {% endif %}>Sunbed</option>
+                            <option value="Tennis class" {% if extra.service_name == "Tennis class " %} selected {% endif %}>Tennis class</option>
+                            <option value="Tennis court" {% if extra.service_name == "Tennis court " %} selected {% endif %}>Tennis court</option>
+                            <option value="Towel" {% if extra.service_name == "Towel " %} selected {% endif %} >Towels</option>
+                            <option value="Transfer" {% if extra.service_name == "Transfer " %} selected {% endif %}>Transfer</option>
+                            <option value="Umbrella" {% if extra.service_name == "Umbrella " %} selected {% endif %}>Umbrella</option>
+                            <option value="Waste sorting" {% if extra.service_name == "Waste sorting " %} selected {% endif %}>Waste sorting</option>
+                            <option value="Welcome package" {% if extra.service_name == "Welcome package " %} selected {% endif %}>Welcome package</option>
+                            <option value="Yoga class" {% if extra.service_name == "Yoga class " %} selected {% endif %}>Yoga class</option>                           
+                          </select>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label fw6">Provided</label>
+                      <select name="service_provided" id="Provided2" class="form-select">
+                          <option value="" disabled="disabled" selected>--Select--</option>
+                          <option value="Free"{% if extra.service_provided == "Free" %} selected {% endif %}>Free</option>
+                          <option value="For a fee"{% if extra.service_provided == "For a fee" %} selected {% endif %}>For a fee</option>                          
+                        </select>
+                  </div>
+                  </div>
+                  <div class="hide" id="Services2">
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Fee basis</label>
+                        <select name="fee_basis" id="fee_basis2" class="form-select" >
+                            <option value="" disabled="disabled" selected>--Select--</option>                        
+                            <option value="Per cleaning"  {% if extra.fee_basis == "Per cleaning" %} selected {% endif %}>Per cleaning</option>
+                            <option value="Per person / cleaning"  {% if extra.fee_basis == "Per person / cleaning" %} selected {% endif %}>Per person / cleaning</option>                                                   
+                          </select>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label fw6">Price in INR<span class="strict">*</span></label>
+                      <input type="text" class="form-control" name="service_price" id="service_prices" id="custom_service_price">
+                  </div>
+                </div> 
+                <div class="row mb-3">
+                  <div class="col-lg-6">
+                      <label class="form-label fw6">Earliest the guest can order it</label>
+                      <select name="earliest_guest_order" class="form-select" id="earliest_guest_order2">
+                          <option value="" disabled="disabled" >--Select--</option>                        
+                          <option value="At the time of booking" {% if extra.earliest_guest_order == "At the time of booking" %} selected {% endif %}>At the time of booking</option>
+                          <option value="48 hours before check-in"  {% if extra.earliest_guest_order == "48 hours before check-in" %} selected {% endif %}>48 hours before check-in</option>
+                          <option value="24 hours before check-in"  {% if extra.earliest_guest_order == "24 hours before check-in" %} selected {% endif %}>24 hours before check-in</option>
+                          <option value="48 hours before check-out"  {% if extra.earliest_guest_order == "48 hours before check-out" %} selected {% endif %}>48 hours before check-out</option>
+                          <option value="24 hours before check-out"  {% if extra.earliest_guest_order == "24 hours before check-out" %} selected {% endif %}>24 hours before check-out</option>                                                  
+                        </select>
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label fw6">Latest the guest can order it</label>
+                    <select name="latest_guest_order" class="form-select" id="latest_guest_order2">
+                      <option value="" disabled="disabled" >--Select--</option>                        
+                      <option value="At the time of booking" {% if extra.latest_guest_order == "At the time of booking" %} selected {% endif %}>At the time of booking</option>
+                      <option value="48 hours before check-in" {% if extra.latest_guest_order == "48 hours before check-in" %} selected {% endif %}>48 hours before check-in</option>
+                      <option value="24 hours before check-in" {% if extra.latest_guest_order == "24 hours before check-in" %} selected {% endif %}>24 hours before check-in</option>
+                      <option value="48 hours before check-out" {% if extra.latest_guest_order == "48 hours before check-out" %} selected {% endif %}>48 hours before check-out</option>
+                      <option value="24 hours before check-out" {% if extra.latest_guest_order == "24 hours before check-out" %} selected {% endif %}>24 hours before check-out</option>
+                      <option value="No restriction" {% if extra.latest_guest_order == "No restriction" %} selected {% endif %}>No restriction</option>                                                   
+                    </select>
+                </div>
+              </div> 
+              <div class="row mb-3">
+                <div class="col-lg-6">
+                    <label class="form-label fw6">Guest can cancel the order</label>
+                    <select name="guest_cancel_order" class="form-select" id="guest_cancel_order2">
+                        <option value="" disabled="disabled" >--Select--</option>                        
+                        <option value="24 hours before check-in"  {% if extra.guest_cancel_order == "24 hours before check-in" %} selected {% endif %}>24 hours before check-in</option>
+                        <option value="Any time before check-out"  {% if extra.guest_cancel_order == "Any time before check-out" %} selected {% endif %}>Any time before check-out</option> 
+                        <option value="Guest cannot cancel order"  {% if extra.guest_cancel_order == "Guest cannot cancel order" %} selected {% endif %}>Guest cannot cancel order</option>                                                  
+                    </select>
+                </div>               
+            </div>  
+          </div>
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                  <label class="form-label fw6">Additional information for the guest</label>
+                 <textarea class="form-control" name="extra_message" id="extra_message"></textarea>
+              </div>               
+          </div> 
+          <div class="modal-footer">
+            
+            <button type="submit" id="save-btn"
+                class="btn btn-primary waves-effect waves-light">Update
+                </button>
+        </div>
+       
+            </form>
+          
+        </div>
+        
+    </div>
+</div>
+</div>
+<div class="modal fade" id="customModalScrollable" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="customModalScrollableTitle">Optional custom services</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+          <form method="POST" enctype="multipart/form-data" class="post-form" action="/rentals/custom-services-insert/{{rental.id}}">
+            {% csrf_token %}
+             
+             
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Service name<span class="strict">*</span></label>
+                        <input type="text" name="custom_service_name" class="form-control" required>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label fw6">Provided</label>
+                      <select name="custom_service_provided" id="customProvided" class="form-select">
+                          <option value="" disabled="disabled" selected>--Select--</option>
+                          <option value="Free">Free</option>
+                          <option value="For a fee">For a fee</option>                          
+                        </select>
+                  </div>
+                  </div>
+                  <div class="hide" id="CustomServices">
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Fee basis<span class="strict">*</span></label>
+                        <select name="custom_fee_basis" class="form-select" >
+                            <option value="" disabled="disabled" selected>--Select--</option>                        
+                            <option value="Per day">Per day</option>
+                            <option value="Per night">Per night</option>
+                            <option value="Per person">Per person</option>
+                            <option value="Per person / night">Per person / night</option>
+                            <option value="Per person / stay">Per person / stay</option>
+                            <option value="Per person / week">Per person / week</option>
+                            <option value="Per stay">Per stay</option>
+                            <option value="Per unit">Per unit</option>
+                            <option value="Per unit / day">Per unit / day</option>
+                            <option value="Per week">Per week</option>
+                            <option value="Per hour">Per hour</option>                                                 
+                          </select>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label fw6">Price in INR<span class="strict">*</span></label>
+                      <input type="text" class="form-control" name="custom_service_price">
+                  </div>
+                </div> 
+                <div class="row mb-3">
+                  <div class="col-lg-6">
+                      <label class="form-label fw6">Earliest the guest can order it</label>
+                      <select name="custom_earliest_guest_order" class="form-select">
+                          <option value="" disabled="disabled" selected>--Select--</option>                        
+                          <option value="At the time of booking">At the time of booking</option>
+                          <option value="48 hours before check-in">48 hours before check-in</option>
+                          <option value="24 hours before check-in">24 hours before check-in</option>
+                          <option value="48 hours before check-out">48 hours before check-out</option>
+                          <option value="24 hours before check-out">24 hours before check-out</option>                                                
+                        </select>
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label fw6">Latest the guest can order it</label>
+                    <select name="custom_latest_guest_order" class="form-select">
+                      <option value="" disabled="disabled" selected>--Select--</option>                        
+                      <option value="At the time of booking">At the time of booking</option>
+                      <option value="48 hours before check-in">48 hours before check-in</option>
+                      <option value="24 hours before check-in">24 hours before check-in</option>
+                      <option value="48 hours before check-out">48 hours before check-out</option>
+                      <option value="24 hours before check-out">24 hours before check-out</option>
+                      <option value="No restriction">No restriction</option>                                                  
+                    </select>
+                </div>
+              </div> 
+              <div class="row mb-3">
+                <div class="col-lg-6">
+                    <label class="form-label fw6">Guest can cancel the order</label>
+                    <select name="custom_guest_cancel_order" class="form-select">
+                        <option value="" disabled="disabled" selected>--Select--</option>                        
+                        <option value="24 hours before check-in">24 hours before check-in</option>
+                        <option value="Any time before check-out">Any time before check-out</option> 
+                        <option value="Guest cannot cancel order">Guest cannot cancel order</option>                                                   
+                    </select>
+                </div>               
+            </div> 
+          </div>
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                  <label class="form-label fw6">Additional information for the guest</label>
+                 <textarea class="form-control" name="custom_extra_message"></textarea>
+              </div>               
+          </div> 
+          <div class="modal-footer">
+            <button type="submit"
+                class="btn btn-primary waves-effect waves-light">Save
+                </button>
+        </div>
+            </form>
+          
+        </div>
+       
+    </div>
+</div>
+</div>
+<div class="modal fade" id="customModalScrollableEdit" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title mt-0" id="customModalScrollableTitle">Optional custom services</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+          <form method="POST" enctype="multipart/form-data" class="post-form" >
+            {% csrf_token %}
+           
+                <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Service name<span class="strict">*</span></label>
+                        <input type="text" name="custom_service_name" class="form-control"  id="custom_service_name" >
+                    </div>
+                 
+                    <div class="col-lg-6">
+                      <label class="form-label fw6">Provided</label>
+                      <select name="custom_service_provided" id="customProvided2" class="form-select">
+                          <option value="" disabled="disabled">--Select--</option>
+                          <option value="Free" {% if custom_service_provided == "Free" %} selected {% endif %}>Free</option>
+                          <option value="For a fee"  {% if custom_service_provided == "For a fee" %} selected {% endif %}>For a fee</option>                          
+                        </select>
+                  </div>
+                  </div>
+                  <div class="hide" id="customServices2">
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                        <label class="form-label fw6">Fee basis<span class="strict">*</span></label>
+                        <select name="custom_fee_basis" class="form-select" id="custom_fee_basis2" >
+                            <option value="" disabled="disabled" >--Select--</option>                        
+                            <option value="Per day" {% if custom_fee_basis == "Per day" %} selected {% endif %}>Per day</option>
+                            <option value="Per night" {% if custom_fee_basis == "Per night" %} selected {% endif %}>Per night</option>
+                            <option value="Per person" {% if custom_fee_basis == "Per person" %} selected {% endif %}>Per person</option>
+                            <option value="Per person / night" {% if custom_fee_basis == "Per person / night" %} selected {% endif %}>Per person / night</option>
+                            <option value="Per person / stay" {% if custom_fee_basis == "Per person / stay" %} selected {% endif %}>Per person / stay</option>
+                            <option value="Per person / week" {% if custom_fee_basis == "Per person / week" %} selected {% endif %}>Per person / week</option>
+                            <option value="Per stay" {% if custom_fee_basis == "Per stay" %} selected {% endif %}>Per stay</option>
+                            <option value="Per unit" {% if custom_fee_basis == "Per unit" %} selected {% endif %}>Per unit</option>
+                            <option value="Per unit / day" {% if custom_fee_basis == "Per unit / day" %} selected {% endif %}>Per unit / day</option>
+                            <option value="Per week" {% if custom_fee_basis == "Per week" %} selected {% endif %}>Per week</option>
+                            <option value="Per hour" {% if custom_fee_basis == "Per hour" %} selected {% endif %}>Per hour</option>                                                 
+                          </select>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label fw6">Price in INR<span class="strict">*</span></label>
+                      <input type="text" class="form-control" name="custom_service_price" id="custom_service_prices"  >
+                  </div>
+                  </div> 
+                <div class="row mb-3">
+                  <div class="col-lg-6">
+                      <label class="form-label fw6">Earliest the guest can order it</label>
+                      <select name="custom_earliest_guest_order" class="form-select" id="custom_earliest_guest_order2">
+                        <option value="" disabled="disabled" selected>--Select--</option>                        
+                        <option value="At the time of booking" {% if custom.custom_earliest_guest_order == "At the time of booking" %} selected {% endif %}>At the time of booking</option>
+                        <option value="48 hours before check-in"  {% if custom.custom_earliest_guest_order == "48 hours before check-in" %} selected {% endif %}>48 hours before check-in</option>
+                        <option value="24 hours before check-in"  {% if custom.custom_earliest_guest_order == "24 hours before check-in" %} selected {% endif %}>24 hours before check-in</option>
+                        <option value="48 hours before check-out"  {% if custom.custom_earliest_guest_order == "48 hours before check-out" %} selected {% endif %}>48 hours before check-out</option>
+                        <option value="24 hours before check-out"  {% if custom.custom_earliest_guest_order == "24 hours before check-out" %} selected {% endif %}>24 hours before check-out</option>                                                                                              
+                        </select>
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label fw6">Latest the guest can order it</label>
+                    <select name="custom_latest_guest_order" class="form-select" id="custom_latest_guest_order2">
+                      <option value="" disabled="disabled" selected>--Select--</option>                        
+                      <option value="At the time of booking"  {% if custom.custom_latest_guest_order == "At the time of booking" %} selected {% endif %}>At the time of booking</option>
+                      <option value="48 hours before check-in"  {% if custom.custom_latest_guest_order == "48 hours before check-in" %} selected {% endif %}>48 hours before check-in</option>
+                      <option value="24 hours before check-in"  {% if custom.custom_latest_guest_order == "24 hours before check-in" %} selected {% endif %}>24 hours before check-in</option>
+                      <option value="48 hours before check-out"  {% if custom.custom_latest_guest_order == "48 hours before check-out" %} selected {% endif %}>48 hours before check-out</option>
+                      <option value="24 hours before check-out"  {% if custom.custom_latest_guest_order == "24 hours before check-out" %} selected {% endif %}>24 hours before check-out</option>
+                      <option value="No restriction"  {% if custom.custom_latest_guest_order == "24 hours before check-out" %} selected {% endif %}>No restriction</option>                                                  
+                    </select>
+                </div>
+              </div> 
+              <div class="row mb-3">
+                <div class="col-lg-6">
+                    <label class="form-label fw6">Guest can cancel the order</label>
+                    <select name="custom_guest_cancel_order" class="form-select" id="custom_guest_cancel_order2">
+                        <option value="" disabled="disabled" selected>--Select--</option>                        
+                        <option value="24 hours before check-in"  {% if custom.custom_guest_cancel_order == "24 hours before check-in" %} selected {% endif %}>24 hours before check-in</option>
+                        <option value="Any time before check-out"  {% if custom.custom_guest_cancel_order == "Any time before check-out" %} selected {% endif %}>Any time before check-out</option> 
+                        <option value="Guest cannot cancel order"  {% if custom.custom_guest_cancel_order == "Guest cannot cancel order" %} selected {% endif %}>Guest cannot cancel order</option>                                                   
+                    </select>
+                </div>               
+            </div> 
+          </div>
+            <div class="row mb-3">
+              <div class="col-lg-12">
+                  <label class="form-label fw6">Additional information for the guest</label>
+                 <textarea class="form-control" name="custom_extra_message" id="custom_extra_message"> </textarea>
+              </div>               
+          </div> 
+        
+      
+       
+         
+          <div class="modal-footer">
+            <button type="submit " id="custom-save-btn"
+                class="btn btn-primary waves-effect waves-light">Update
+                </button>
+        </div>
+            </form>
+          
+        </div>
+       
+    </div>
+</div>
+</div>
+<script src="/static/users/libs/jquery/jquery.min.js"></script>
+<script src="/static/users/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/users/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/users/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/users/libs/node-waves/waves.min.js"></script>
+<script src="/static/users/libs/select2/js/select2.min.js"></script>
+<script src="/static/users/js/pages/ecommerce-add-product.init.js"></script>
+<script src="/static/users/js/app.js"></script>
+<script type="text/javascript">
+  //security
+  $(function () {
+    $("#SecurityCheck").click(function () {
+        if ($(this).is(":checked")) {
+            $("#SecurityDeposit").show();
+        } else {
+            $("#SecurityDeposit").hide();
+        }
+    });
+});
+
+$(function () {
+  $("#SecurityCheck2").click(function () {
+      if ($(this).is(":checked")) {
+          $("#SecurityDeposit2").show();
+      } else {
+          $("#SecurityDeposit2").hide();
+      }
+  });
+});
+
+//security end
+
+//cleaning
+$(function () {
+  $("#CleaningCheck").click(function () {
+      if ($(this).is(":checked")) {
+          $("#CleaningDiv").show();
+      } else {
+          $("#CleaningDiv").hide();
+      }
+  });
+});
+
+$(function () {
+  $("#CleaningCheck2").click(function () {
+      if ($(this).is(":checked")) {
+          $("#CleaningDiv2").show();
+      } else {
+          $("#CleaningDiv2").hide();
+      }
+  });
+});
+
+$(document).ready(function(){
+  $('#cleaning_basis').on('change', function(){
+    var getSelectValue = $(this).val();
+   
+  if(getSelectValue == "mandatory" || getSelectValue == "optional"){
+    document.getElementById("CleaningPrice").style.display="block";
+  }else{
+      document.getElementById("CleaningPrice").style.display="none";
+  }
+});
+});
+
+$(document).ready(function(){
+  var cleaning_basis = "{{ rentalcleaning.cleaning_basis }}";
+  $('#cleaning_basis2').val(cleaning_basis);
+
+  $('#cleaning_basis2').on('change', function(){
+    var getSelectValue = $(this).val();
+   
+  if(getSelectValue == "mandatory" || getSelectValue == "optional"){
+    document.getElementById("CleaningPrice2").style.display="block";
+  }else{
+      document.getElementById("CleaningPrice2").style.display="none";
+  }
+});
+});
+
+//cleaning end
+
+//tax start
+$(document).ready(function(){
+  $('#feeBasis').on('change', function(){
+    var getSelectValue = $(this).val();
+   
+  if(getSelectValue == "% of Rental Amount"){
+    document.getElementById("TaxPercentage").style.display="block";
+    document.getElementById("TaxAmount").style.display="none";
+  }else{
+      document.getElementById("TaxPercentage").style.display="none";
+      document.getElementById("TaxAmount").style.display="block";
+  }
+});
+});
+
+
+
+
+$(document).ready(function(){
+  var fee_basis = "{{ tax.fee_basis }}";
+  var tax_type = "{{ tax.tax_type }}";
+  $('#feeBasis2').val(fee_basis);
+
+  if (fee_basis == "% of Rental Amount") {
+    $('#TaxPercentage2').show();
+    $('#TaxAmount2').hide();
+  } else {
+    $('#TaxPercentage2').hide();
+    $('#TaxAmount2').show();
+  }
+
+  if (tax_type == "City tax" || tax_type == "Local tax" || tax_type == "Resort fee" || tax_type == "Tourism fee") {
+    $('#feeBasis2 option[value="Per person / day"]').remove();
+    $('#feeBasis2 option[value="Per adult / day"]').remove();
+    $('#feeBasis2 option[value="Per person / stay"]').remove();
+    $('#feeBasis2 option[value="Per adult / stay"]').remove();
+    $('#feeBasis2 option[value="Per person / week"]').remove();
+    $('#feeBasis2 option[value="Per adult / week"]').remove();
+  }
+
+  $('#feeBasis2').on('change', function(){
+    var getSelectValue = $(this).val();
+   
+    if (getSelectValue == "% of Rental Amount") {
+      $('#TaxPercentage2').show();
+      $('#TaxAmount2').hide();
+    } else {
+      $('#TaxPercentage2').hide();
+      $('#TaxAmount2').show();
+    }
+  });
+});
+
+//tax end
+
+// extra service start
+
+$(document).ready(function(){
+  $('#serviceProvided').on('change', function(){
+    var getSelectValue = $(this).val();
+   
+  if(getSelectValue == "For a fee"){
+    document.getElementById("extraServices").style.display="block";
+  }else{
+      document.getElementById("extraServices").style.display="none";
+  }
+});
+});
+
+
+
+$(document).ready(function(){
+  var service_basis = "{{  extra.service_provided }}";
+  var service_name = "{{ extra.service_name }}";
+  $('#serviceBasis2').val(service_basis);
+
+  if (service_basis == "For a fee") {
+    $('#extraServices2').show();
+    
+  } else {
+    $('#extraServices2').hide();
+   
+  }
+
+  
+
+  $('#serviceBasis2').on('change', function(){
+    var getSelectValue = $(this).val();
+   
+    if (getSelectValue == "For a fee") {
+      $('#extraServices2').show();
+    
+  } else {
+    $('#extraServices2').hide();
+   
+    }
+  });
+});
+
+
+
+// extra service end
+
+$(document).ready(function(){
+  $('#customProvided').on('change', function(){
+    var getSelectValue = $(this).val();
+   
+  if(getSelectValue == "For a fee"){
+    document.getElementById("CustomServices").style.display="block";
+  }else{
+      document.getElementById("CustomServices").style.display="none";
+  }
+});
+});
+
+
+$(document).ready(function(){
+  var custom_basis = "{{customServices.custom_service_provided}}";
+    
+    $('#customProvided2').val(custom_basis);
+
+    if (custom_basis == "For a fee") {
+      $('#customServices2').show();
+      
+    } else {
+      $('#customServices2').hide();
+    
+    }
+  
+
+  $('#customProvided2').on('change', function(){
+    var getSelectValue = $(this).val();
+   
+    if (getSelectValue == "For a fee") {
+      $('#customServices2').show();
+    
+    } else {
+      $('#customServices2').hide();
+   
+    }
+  });
+});
+
+
+</script>
+<script>
+  $(document).on('click', '[data-bs-target="#customModalScrollableEdit"]', function() {
+    const id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+      url: "/get_data_for_id/",
+      data: { id: id },
+      success: function(data) {
+    
+        $("#custom_service_name").val(data.custom_service_name);
+        $("#custom_extra_message").val(data.custom_extra_message);
+        $("#custom_fee_basis2").val(data.custom_fee_basis);
+        $("#custom_service_prices").val(data.custom_service_price);
+        $("#custom_earliest_guest_order2").val(data.custom_earliest_guest_order);
+        $("#custom_latest_guest_order2").val(data.custom_latest_guest_order);
+        $("#custom_guest_cancel_order2").val(data.custom_guest_cancel_order);
+        $("#custom-save-btn").data('id', id);
+        var customServiceProvided = data.custom_service_provided;
+        $("#customProvided2").val(customServiceProvided);
+        if (customServiceProvided == "For a fee") {
+          $("#customServices2").show();
+         
+        } else {
+          $("#customServices2").hide();
+         
+        }
+   
+      },
+      error: function(xhr, status, error) {
+
+        console.log(xhr.responseText);
+      }
+    });
+
+
+  });
+  $("#customProvided2").change(function() {
+    if ($(this).val() == "For a fee") {
+      $("#customServices2").show();
+     
+    } else {
+      $("#customServices2").hide();
+     
+    }
+  });
+
+
+  $(document).on('click', '#custom-save-btn', function() {
+    const id = $(this).data('id');
+    console.log(id);
+    const service_name = $("#custom_service_name").val();
+    const service_provided = $("#customProvided2").val();
+    const fee_basis = $("#custom_fee_basis2").val();
+    const service_price = $("#custom_service_prices").val();
+    const earliest_guest_order = $("#custom_earliest_guest_order2").val();
+    const latest_guest_order = $("#custom_latest_guest_order2").val();
+    const guest_cancel_order = $("#custom_guest_cancel_order2").val();
+    const extra_message = $("#custom_extra_message").val();
+
+    $.ajax({
+      url: `/rentals/custom-services-update/${id}`,
+      method: 'POST',
+      data: {
+        'custom_service_name': service_name,
+        'custom_service_provided': service_provided,
+        'custom_fee_basis': fee_basis,
+        'custom_service_price': service_price,
+        'custom_earliest_guest_order': earliest_guest_order,
+        'custom_latest_guest_order': latest_guest_order,
+        'custom_guest_cancel_order': guest_cancel_order,
+        'custom_extra_message': extra_message,
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function(data) {
+        console.log(data);
+        
+        $("#custom-modal-title").text("Data updated successfully.");
+        $("#custom-modal-body").text("The data was updated successfully.");
+        $("#custom-save-btn").hide();
+      },
+      error: function(xhr, status, error) {
+        console.log(xhr.responseText);
+      }
+    });
+  });
+
+
+</script>
+
+<script>
+  $(document).on('click', '[data-bs-target="#extraModalScrollableEdit"]', function() {
+    const id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+      url: "/get_data_for_extra/",
+      data: { id: id },
+      success: function(data) {
+    
+        $("#service_name").val(data.service_name);
+        $("#extra_message").val(data.extra_message);
+        $("#fee_basis2").val(data.fee_basis);
+        $("#service_prices").val(data.service_price);
+        $("#earliest_guest_order2").val(data.earliest_guest_order);
+        $("#latest_guest_order2").val(data.latest_guest_order);
+        $("#guest_cancel_order2").val(data.guest_cancel_order);
+        $("#save-btn").data('id', id);
+        var ServiceProvided = data.service_provided;
+        $("#Provided2").val(ServiceProvided);
+        if (ServiceProvided == "For a fee") {
+          $("#Services2").show();
+         
+        } else {
+          $("#Services2").hide();
+         
+        }
+   
+      },
+      error: function(xhr, status, error) {
+
+        console.log(xhr.responseText);
+      }
+    });
+
+
+  });
+  $("#Provided2").change(function() {
+    if ($(this).val() == "For a fee") {
+      $("#Services2").show();
+     
+    } else {
+      $("#Services2").hide();
+     
+    }
+  });
+
+
+  $(document).on('click', '#save-btn', function() {
+    const id = $(this).data('id');
+    console.log(id);
+    const service_name = $("#service_name").val();
+    const service_provided = $("#Provided2").val();
+    const fee_basis = $("#fee_basis2").val();
+    const service_price = $("#service_prices").val();
+    const earliest_guest_order = $("#earliest_guest_order2").val();
+    const latest_guest_order = $("#latest_guest_order2").val();
+    const guest_cancel_order = $("#guest_cancel_order2").val();
+    const extra_message = $("#extra_message").val();
+
+    $.ajax({
+      url: `/rentals/extra-services-update/${id}`,
+      method: 'POST',
+      data: {
+        'service_name': service_name,
+        'service_provided': service_provided,
+        'fee_basis': fee_basis,
+        'service_price': service_price,
+        'earliest_guest_order': earliest_guest_order,
+        'latest_guest_order': latest_guest_order,
+        'guest_cancel_order': guest_cancel_order,
+        'extra_message': extra_message,
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function(data) {
+        console.log(data);
+        
+        $("#modal-title").text("Data updated successfully.");
+        $("#modal-body").text("The data was updated successfully.");
+        $("#save-btn").hide();
+      },
+      error: function(xhr, status, error) {
+        console.log(xhr.responseText);
+      }
+    });
+  });
+
+
+</script>
+
+
+<script>
+  $(document).on('click', '[data-bs-target="#taxModalScrollableEdit"]', function() {
+    const id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+      url: "/get_data_for_tax/",
+      data: { id: id },
+      success: function(data) {
+    
+        $("#tax_type").val(data.tax_type);
+        $("#percentage").val(data.percentage);
+        $("#amountin").val(data.amountin);
+        $("#save-btntax").data('id', id);
+        var ServiceProvided = data.fee_basis;
+        $("#fee").val(ServiceProvided);
+        if (ServiceProvided == "% of Rental Amount") {
+          $('#TaxPercentage2').show();
+          $('#TaxAmount2').hide();
+        } else {
+          $('#TaxPercentage2').hide();
+          $('#TaxAmount2').show();
+         
+        }
+   
+      },
+      error: function(xhr, status, error) {
+
+        console.log(xhr.responseText);
+      }
+    });
+
+
+  });
+  $("#fee").change(function() {
+    if ($(this).val() == "% of Rental Amount") {
+      $('#TaxPercentage2').show();
+      $('#TaxAmount2').hide();
+    } else {
+      $('#TaxPercentage2').hide();
+      $('#TaxAmount2').show();
+     
+    }
+  });
+
+
+  $(document).on('click', '#save-btntax', function() {
+    const id = $(this).data('id');
+    console.log(id);
+    const tax_type = $("#tax_type").val();
+    const fee_basis3 = $("#fee").val();
+    const percentage = $("#percentage").val();
+    const amountin = $("#amountin").val();
+    
+    $.ajax({
+      url: `/rentals/tax-update/${id}`,
+      method: 'POST',
+      data: {
+        'tax_type': tax_type,
+        'fee_basis': fee_basis3,
+        'percentage': percentage,
+        'amountin': amountin,
+        
+        csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+      success: function(data) {
+        console.log(data);
+        
+        $("#modal-title").text("Data updated successfully.");
+        $("#modal-body").text("The data was updated successfully.");
+        $("#save-btntax").hide();
+      },
+      error: function(xhr, status, error) {
+        console.log(xhr.responseText);
+      }
+    });
+  });
+
+
+</script>
+
+
+  
+<script>
+  $(".alert-success").fadeTo(3000, 500).slideUp(500, function(){
+      $(".alert-success").slideUp(500);
+  });
+</script>
+<script>
+  function DelItem() {
+
+      if(!confirm("Are You Sure to delete this"))
+      event.preventDefault();
+  }
+</script>
+</body>
+</html>

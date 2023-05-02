@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Analytics | EZBZ Rentals</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="" name="description" />
+<meta content="" name="author" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="shortcut icon" href="/static/users/images/favicon.png">
+<link href="/static/users/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/users/css/custom.css" rel="stylesheet" type="text/css" />
+</head>
+<body data-layout="horizontal">
+<div id="layout-wrapper">
+{% include 'users/base/header.html'%}
+<div class="main-content">  
+
+
+        <div class="page-content">
+    <div class="container-fluid">
+
+        <!-- start page title -->
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Apex charts</h4>
+
+                    <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Charts</a></li>
+                            <li class="breadcrumb-item active">Apex charts</li>
+                        </ol>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end page title -->
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Line with Data Labels</h4>
+
+                        <div id="line_chart_datalabel" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+                <!--end card-->
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Dashed Line</h4>
+
+                        <div id="line_chart_dashed" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+                <!--end card-->
+            </div>
+        </div>
+        <!-- end row -->
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Spline Area</h4>
+
+                        <div id="spline_area" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+                <!--end card-->
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Column Charts</h4>
+
+                        <div id="column_chart" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+                <!--end card-->
+            </div>
+        </div>
+        <!-- end row -->
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Column with Data Labels</h4>
+
+                        <div id="column_chart_datalabel" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+                <!--end card-->
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Bar Chart</h4>
+
+                        <div id="bar_chart" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+                <!--end card-->
+            </div>
+        </div>
+        <!-- end row -->
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Line, Column & Area Chart</h4>
+
+                        <div id="mixed_chart" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+                <!--end card-->
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Radial Chart</h4>
+
+                        <div id="radial_chart" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+                <!--end card-->
+
+            </div>
+        </div>
+        <!-- end row -->
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Pie Chart</h4>
+
+                        <div id="pie_chart" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Donut Chart</h4>
+
+                        <div id="donut_chart" class="apex-charts" dir="ltr"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div> <!-- container-fluid -->
+</div>
+<!-- End Page-content -->
+{% include 'users/base/footer.html'%}
+      </div> 
+
+<!-- apexcharts -->
+<script src="/static/users/libs/apexcharts/apexcharts.min.js"></script>
+
+<!-- apexcharts init -->
+<script src="/static/users/js/pages/apexcharts.init.js"></script>
+ </body>
+  </html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Invoice List </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/agents/images/favicon.png">
+        <link href="/static/agents/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/agents/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/agents/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'agents/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'agents/base/top_nav.html' %}
+        </div>
+<div class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-title-box">
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="page-title">Invoice List</h4>
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Invoice</li>
+                            </ol>
+                        </div>
+                        <div class="col-auto align-self-center">
+                            <a href="/agents/invoice-create/" class="btn btn-sm btn-outline-primary">                                           
+                                <i data-feather="plus" class="align-self-center icon-xs ml-1"></i>&nbsp; Add New
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+ 
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <thead>
+                        <tr>
+                            {% comment %} <th></th> {% endcomment %}
+                            <th>INVOICE</th>
+                            <th>CUSTOMER</th>
+                            <th>TOTAL</th>
+                            <th>STATUS</th>
+                            <th>View</th>
+                            <th>DOWNLOAD</th>
+
+                        </tr>
+                    </thead>
+                    {% for invoice in invoices %}
+                    <tbody>
+                    <tr>
+                        {% comment %} <td><input class="checkbox" type="checkbox" value="{{invoice.id}}" name="invoice_id" size="1" />
+                        </td> {% endcomment %}
+                        <td>#{{invoice.id}}</td>
+                        <td >{{invoice.customer}}</td> 
+                        <td>{{invoice.total_amount}}</td>
+                        <td class="level-right">
+                            {% if invoice.get_status %}
+                            <a class="button is-small is-success" href="#">Paid</a>
+                            {% else %}
+                            <a class="button is-small is-warning" href="#">Not Paid</a>
+                            {% endif %}
+                        </td>
+                        <td width="1%"><a href="/agents/invoice-detail/{{invoice.id}}">
+                            <div class="button is-small is-info">View</div>
+                        </a></td>
+                        <td width="1%"><a href="/agents/invoice-download/{{invoice.id}}">Download</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% include 'agents/base/footer.html'%}
+</div> 
+
+<script src="/static/agents/js/jquery.min.js"></script>
+<script src="/static/agents/js/bootstrap.bundle.min.js"></script>
+<script src="/static/agents/js/metismenu.min.js"></script>
+<script src="/static/agents/js/waves.js"></script>
+<script src="/static/agents/js/feather.min.js"></script>
+<script src="/static/agents/js/simplebar.min.js"></script>
+<script src="/static/agents/js/jquery-ui.min.js"></script>
+<script src="/static/agents/js/moment.js"></script>
+<script src="/static/agents/plugins/daterangepicker/daterangepicker.js"></script>
+<script src="/static/agents/js/app.js"></script>
+   
+   
+
+
+  
+
+<script>
+    $('#datatable').DataTable();
+</script>
+</body>
+</html>
+

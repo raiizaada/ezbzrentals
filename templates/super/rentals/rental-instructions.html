@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Policy</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+         
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title">Policy</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/rentals">Rental</a></li>
+                             
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+                  <h5>Instructions</h5>
+                  <p>Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard</p>
+                  <hr>
+                  {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+                      <button type="button" class="btn-close" data-bs-dismiss="alert"
+                      aria-label="Close"></button>
+                  </div>
+                  {% endfor %}
+                  {%endif%}
+                  <form method="POST" enctype="multipart/form-data" class="post-form" action="/super/rental-instruction-update/{{rentalinstruction.id}}">
+                    {% csrf_token %}
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                        <label class="form-label fw6">Check-in<span class="strict">*</span></label>
+                        <select name="checkin_instruction" class="form-control form-control" required>
+                          <option>--Select--</option>
+                          <option value="00:00" {% if rentalinstruction.checkin_instruction == "00:00" %} selected {% endif %}>00:00</option>
+                          <option value="01:00" {% if rentalinstruction.checkin_instruction == "01:00" %} selected {% endif %}>01:00</option>
+                          <option value="02:00" {% if rentalinstruction.checkin_instruction == "02:00" %} selected {% endif %}>02:00</option>
+                          <option value="03:00" {% if rentalinstruction.checkin_instruction == "03:00" %} selected {% endif %}>03:00</option>
+                          <option value="04:00" {% if rentalinstruction.checkin_instruction == "04:00" %} selected {% endif %}>04:00</option>
+                          <option value="05:00" {% if rentalinstruction.checkin_instruction == "05:00" %} selected {% endif %}>05:00</option>
+                          <option value="06:00" {% if rentalinstruction.checkin_instruction == "06:00" %} selected {% endif %}>06:00</option>
+                          <option value="07:00" {% if rentalinstruction.checkin_instruction == "07:00" %} selected {% endif %}>07:00</option>
+                          <option value="08:00" {% if rentalinstruction.checkin_instruction == "08:00" %} selected {% endif %}>08:00</option>
+                          <option value="09:00" {% if rentalinstruction.checkin_instruction == "09:00" %} selected {% endif %}>09:00</option>
+                          <option value="10:00" {% if rentalinstruction.checkin_instruction == "10:00" %} selected {% endif %}>10:00</option>
+                          <option value="11:00" {% if rentalinstruction.checkin_instruction == "11:00" %} selected {% endif %}>11:00</option>
+                          <option value="12:00" {% if rentalinstruction.checkin_instruction == "12:00" %} selected {% endif %}>12:00</option>
+                          <option value="13:00" {% if rentalinstruction.checkin_instruction == "13:00" %} selected {% endif %}>13:00</option>
+                          <option value="14:00" {% if rentalinstruction.checkin_instruction == "14:00" %} selected {% endif %}>14:00</option>
+                          <option value="15:00" {% if rentalinstruction.checkin_instruction == "15:00" %} selected {% endif %}>15:00</option>
+                          <option value="16:00" {% if rentalinstruction.checkin_instruction == "16:00" %} selected {% endif %}>16:00</option>
+                          <option value="17:00" {% if rentalinstruction.checkin_instruction == "17:00" %} selected {% endif %}>17:00</option>
+                          <option value="18:00" {% if rentalinstruction.checkin_instruction == "18:00" %} selected {% endif %}>18:00</option>
+                          <option value="19:00" {% if rentalinstruction.checkin_instruction == "19:00" %} selected {% endif %}>19:00</option>
+                          <option value="20:00" {% if rentalinstruction.checkin_instruction == "20:00" %} selected {% endif %}>20:00</option>
+                          <option value="21:00" {% if rentalinstruction.checkin_instruction == "21:00" %} selected {% endif %}>21:00</option>
+                          <option value="22:00" {% if rentalinstruction.checkin_instruction == "22:00" %} selected {% endif %}>22:00</option>
+                          <option value="23:00" {% if rentalinstruction.checkin_instruction == "23:00" %} selected {% endif %}>23:00</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">Check-out<span class="strict">*</span></label>
+                        <select name="checkout_instruction" class="form-control" required>
+                          <option>--Select--</option>
+                          <option value="00:00" {% if rentalinstruction.checkout_instruction == "00:00" %} selected {% endif %}>00:00</option>
+                          <option value="01:00" {% if rentalinstruction.checkout_instruction == "01:00" %} selected {% endif %}>01:00</option>
+                          <option value="02:00" {% if rentalinstruction.checkout_instruction == "02:00" %} selected {% endif %}>02:00</option>
+                          <option value="03:00" {% if rentalinstruction.checkout_instruction == "03:00" %} selected {% endif %}>03:00</option>
+                          <option value="04:00" {% if rentalinstruction.checkout_instruction == "04:00" %} selected {% endif %}>04:00</option>
+                          <option value="05:00" {% if rentalinstruction.checkout_instruction == "05:00" %} selected {% endif %}>05:00</option>
+                          <option value="06:00" {% if rentalinstruction.checkout_instruction == "06:00" %} selected {% endif %}>06:00</option>
+                          <option value="07:00" {% if rentalinstruction.checkout_instruction == "07:00" %} selected {% endif %}>07:00</option>
+                          <option value="08:00" {% if rentalinstruction.checkout_instruction == "08:00" %} selected {% endif %}>08:00</option>
+                          <option value="09:00" {% if rentalinstruction.checkout_instruction == "09:00" %} selected {% endif %}>09:00</option>
+                          <option value="10:00" {% if rentalinstruction.checkout_instruction == "10:00" %} selected {% endif %}>10:00</option>
+                          <option value="11:00" {% if rentalinstruction.checkout_instruction == "11:00" %} selected {% endif %}>11:00</option>
+                          <option value="12:00" {% if rentalinstruction.checkout_instruction == "12:00" %} selected {% endif %}>12:00</option>
+                          <option value="13:00" {% if rentalinstruction.checkout_instruction == "13:00" %} selected {% endif %}>13:00</option>
+                          <option value="14:00" {% if rentalinstruction.checkout_instruction == "14:00" %} selected {% endif %}>14:00</option>
+                          <option value="15:00" {% if rentalinstruction.checkout_instruction == "15:00" %} selected {% endif %}>15:00</option>
+                          <option value="16:00" {% if rentalinstruction.checkout_instruction == "16:00" %} selected {% endif %}>16:00</option>
+                          <option value="17:00" {% if rentalinstruction.checkout_instruction == "17:00" %} selected {% endif %}>17:00</option>
+                          <option value="18:00" {% if rentalinstruction.checkout_instruction == "18:00" %} selected {% endif %}>18:00</option>
+                          <option value="19:00" {% if rentalinstruction.checkout_instruction == "19:00" %} selected {% endif %}>19:00</option>
+                          <option value="20:00" {% if rentalinstruction.checkout_instruction == "20:00" %} selected {% endif %}>20:00</option>
+                          <option value="21:00" {% if rentalinstruction.checkout_instruction == "21:00" %} selected {% endif %}>21:00</option>
+                          <option value="22:00" {% if rentalinstruction.checkout_instruction == "22:00" %} selected {% endif %}>22:00</option>
+                          <option value="23:00" {% if rentalinstruction.checkout_instruction == "23:00" %} selected {% endif %}>23:00</option>
+                        </select>
+                      </div>
+                      </div>
+                      <div class="row mb-3">
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">Check-in contact person<span class="strict">*</span></label>
+                       <input type="text" name="checkin_contact" class="form-control" value="{{rentalinstruction.checkin_contact}}">
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">Key collection point<span class="strict">*</span></label>
+                      <select name="key_collection" class="form-control" required>
+                        <option>--Select--</option>
+                        <option value="At the property" {% if rentalinstruction.key_collection == "At the property" %} selected {% endif %}>At the property</option>
+                        <option value="From another location" {% if rentalinstruction.key_collection == "From another location" %} selected {% endif %}>From another location</option>
+                        <option value="Key code entrance" {% if rentalinstruction.key_collection == "Key code entrance" %} selected {% endif %}>Key code entrance</option>
+                        <option value="Keys are in a lock box" {% if rentalinstruction.key_collection == "Keys are in a lock box" %} selected {% endif %}>Keys are in a lock box</option>
+                        <option value="There is a reception" {% if rentalinstruction.key_collection == "There is a reception" %} selected {% endif %}>There is a reception</option>            
+                      </select>
+                      </div>
+                     
+                      </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6" id="tooltip-container">
+                        <label class="form-label fw6" for="productname">Telephone country <span class="strict">*</span></label>
+                        <select name="telephone_country" class="form-control select2" required>
+                          {% for country in country %}
+                          <option value="{{country.code}}" {% if rentalinstruction.telephone_country == country.code %} selected {% endif %}>{{country.name}}</option>
+                          {% endfor %}                                      
+                          </select>
+                      </div>  
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">Telephone number<span class="strict">*</span></label>
+                       <input type="text" name="telephone_number" class="form-control" value="{{rentalinstruction.telephone_number}}">
+                      </div>               
+                    </div>
+                    
+                    <div class="mb-3">
+                      <div class="col-lg-12" >
+                        <label class="form-label fw6" for="productname">Instructions  </label>
+                        <textarea name="instructions" rows="8" placeholder="Rules about noise? No shoes in the house? Define additional house rules..." tabindex="10" class="form-control" maxlength="4000">{{rentalinstruction.instructions}}</textarea>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-lg-12" >
+                          <label class="form-label fw6" for="productname">Attach instructions </label>
+                          <input type="file" name="attach_instruction" class="form-control">
+                          {% if rentalinstruction.attach_instruction != "" %}
+                          <br>
+                          <img src="/media/{{rentalinstruction.attach_instruction}}" height="40">
+                          {% endif %}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-lg-12" >
+                          <label class="form-label fw6" for="productname">Instructions are shared with the guest</label>
+                          
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-lg-6">
+                        <label class="form-label fw6">From</label>
+                        <select name="checkin_from" class="form-control form-control">
+                          <option>--Select--</option>
+                          <option value="0" {% if rentalinstruction.checkin_from == "0" %} selected {% endif %}>As soon as the booking is made</option>
+                          <option value="24" {% if rentalinstruction.checkin_from == "24" %} selected {% endif %}>24 hours before check-in</option>
+                          <option value="48" {% if rentalinstruction.checkin_from == "48" %} selected {% endif %}>48 hours before check-in</option>
+                          <option value="72" {% if rentalinstruction.checkin_from == "72" %} selected {% endif %}>72 hours before check-in</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-6">
+                        <label class="form-label fw6">Until</label>
+                        <select name="checkout_until" class="form-control form-control">
+                          <option>--Select--</option>
+                          <option value="0" {% if rentalinstruction.checkout_until == "0" %} selected {% endif %}>Right after check-out</option>
+                          <option value="2" {% if rentalinstruction.checkout_until == "2" %} selected {% endif %}>2 hours after check-out</option>
+                          <option value="4" {% if rentalinstruction.checkout_until == "4" %} selected {% endif %}>4 hours after check-out</option>
+                          <option value="6" {% if rentalinstruction.checkout_until == "6" %} selected {% endif %}>6 hours after check-out</option>
+                          <option value="12" {% if rentalinstruction.checkout_until == "12" %} selected {% endif %}>12 hours after check-out</option>
+                          <option value="24" {% if rentalinstruction.checkout_until == "24" %} selected {% endif %}>24 hours after check-out</option>
+                        </select>
+                      </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="col-lg-12" >
+                          <label class="form-label fw6" for="productname">Closest airports</label>
+                          <p>Choose the most common airports that guests can use to travel to your property. Type in the airport name (e.g. Copenhagen) or IATA code (e.g. CPH) and choose from the selections presented.</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-lg-12" >
+                          <label class="form-label fw6" for="productname">Type in the airport or city name </label>
+                          <input type="text" name="airport_instruction" class="form-control" value="{{rentalinstruction.airport_instruction}}">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-lg-12" >
+                          <label class="form-label fw6" for="productname">Directions</label>
+                          <p>Directions to your property are private and only shared with confirmed guests.</p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="col-lg-12" >
+                          <label class="form-label fw6" for="productname">Write directions to your property below  </label>
+                          <textarea name="property_directions" rows="8" tabindex="10" class="form-control" maxlength="4000">{{rentalinstruction.property_directions}}</textarea>
+                        </div>
+                      </div>
+                    <div class="mb-3">
+                     <input type="submit" class="btn btn-primary" value="Save">                  
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    
+    {% include 'users/base/footer.html'%} 
+    </div>
+    </div>
+      <script src="/static/super/js/jquery.min.js"></script>
+      <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+      <script src="/static/super/js/metismenu.min.js"></script>
+      <script src="/static/super/js/waves.js"></script>
+      <script src="/static/super/js/feather.min.js"></script>
+      <script src="/static/super/js/simplebar.min.js"></script>
+      <script src="/static/super/js/jquery-ui.min.js"></script>
+      <script src="/static/super/js/moment.js"></script>
+      <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+      <script src="/static/super/js/app.js"></script>
+     
+    <script>
+      $(".alert-success").fadeTo(5000, 500).slideUp(500, function(){
+          $(".alert-success").slideUp(500);
+      });
+    </script>
+    </body>
+    </html>     

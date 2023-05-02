@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Booking</title>
+    <link rel="shortcut icon" href="/static/bookingengine/engine/images/favicon.png"> 
+    <link href="/static/bookingengine/engine/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/bookingengine/engine/css/default.css" rel="stylesheet" type="text/css">
+    <link href="/static/bookingengine/engine/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/static/bookingengine/engine/css/plugin.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+</head>
+<body>
+
+     <header class="main_header_area">
+        <div class="header-content">
+            <div class="container">
+                <div class="links links-left">
+                    <ul>
+                        <li><a href="mailto:info@ezbzrentals.com"><i class="fa fa-envelope" aria-hidden="true"></i> info@ezbzrentals.com</a></li>
+                        <li><a href="tel:+12165395283"><i class="fa fa-phone" aria-hidden="true"></i> +1-216 539 5283</a></li>                       
+                    </ul>
+                </div>
+                <div class="links links-right pull-right">
+                    <ul>                       
+                        <li>
+                            <ul class="social-links">
+                                <li><a href="#" target="_blank"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                                 <li><a href="#" target="_blank"><i class="fab fa-linkedin" aria-hidden="true"></i></a></li>
+                                <li><a href="#" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>                               
+                                <li><a href="#" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header_menu affix-top">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/booking-engine">
+                            <img alt="logo1" src="/static/bookingengine/engine/images/logo.png" class="logo-black">
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav" id="responsive-menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Rooms</a> </li>
+                            <li><a href="#">About Us</a></li>
+                   			<li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="slicknav-mobile"></div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="breadcrumb-outer">
+        <div class="container">
+            <div class="breadcrumb-content">
+                <h2>Booking</h2>
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/booking-engine">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Booking</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </section>
+   
+    <section class="content reservation-main">
+        <div class="container">
+            <form method="POST" enctype="multipart/form-data" class="post-form" action="/booking-engine/booking-information"> 
+                {% csrf_token %}
+            <div class="booking">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="booking-content">
+                            <div class="booking-image">
+                                <img src="/media/{{room.image}}" alt="image">
+                                <div class="booking-title">
+                                    <div class="title-left">
+                                        <h3>{{room.name}}</h3>
+                                        
+                                       
+                                    </div>
+                                    <div class="title-right pull-right">
+                                        <div class="title-price">
+                                            <h4 class="pad-top-15"><a href="#">${{room.price}}<span>/Night</span></a></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="booking-desc mar-top-50">
+                                <ul class="mar-bottom-15">
+                                  {% for amenities in my_lists %}
+                                  <li><i class="fa fa-check" aria-hidden="true"></i> {{amenities }}</li>
+                                  {% endfor %}
+                                </ul>
+                                <p>{{room.description|safe}}</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ultrices felis est, vitae suscipit odio suscipit a. Integer sit amet eleifend nisi. Nam eu pulvinar eros. </p>
+                            </div>
+                            <div class="extra-services mar-top-50">
+                                <h4 class="mar-bottom-30">Add Extra Services</h4>
+                                <ul>
+                                    {% for extra_service in extra_service %}
+                                    <li>
+                                        <span class="pretty p-default p-thick p-pulse mar-bottom-15">   
+                                            <input type="checkbox" name="name[]" value="{{extra_service.price}}" id="{{ extra_service.name }}" />
+                                            <span class="state p-warning-o">
+                                                <label>{{extra_service.title}}</label>
+                                            </span>
+                                           
+                                        </span>
+                                    </li>
+                                    {% endfor %}
+                                    
+                                </ul>
+                            </div>
+                            <div class="personal-info mar-top-50">
+                                <div class="form-title">
+                                    <span>1</span>
+                                    <h4 class="mar-bottom-30">Personal Information</h4>
+                                </div>
+                               
+                                    <div class="row">
+                                     	<div class="col-md-2 colpad">
+                                            <div class="form-group">
+                                                <select name="honorific">
+                                                 <option value="">--Select--</option>    
+                                                                            
+                                                  <option value="DR">Dr.</option>
+                                                                            
+                                                  <option value="JN">Jn.</option>
+                                                                            
+                                                  <option value="MAM">Mam.</option>
+                                                                            
+                                                  <option value="MR">Mr.</option>
+                                                                            
+                                                  <option value="MRS">Mrs.</option>
+                                                                            
+                                                  <option value="MS">Ms.</option>
+                                                                            
+                                                  <option value="SIR">Sir</option>
+                                                                            
+                                                  <option value="SR">Sr.</option>
+                                                                            
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 colpad">
+                                            <div class="form-group">
+                                                <input type="text" name="first_name" placeholder="First Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 colpad">
+                                            <div class="form-group">
+                                                <input type="text" name="last_name" placeholder="Last Name">
+                                            </div>
+                                        </div>
+                                         <div class="col-md-6 colpad">                                            
+                                            <div class="form-group">
+                                                <input type="email" name="email" placeholder="Email">
+                                            </div>
+                                        </div>
+                                        
+                                         <div class="col-md-6 colpad">
+                                            <div class="form-group">
+                                                <input type="text" name="phone" placeholder="Phone">
+                                            </div>
+                                        </div>
+                                        
+                                       
+                                        <div class="col-md-6 colpad">
+                                            <div class="form-group">
+                                                <input type="text" name="address" placeholder="Address">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 colpad">
+                                            <div class="form-group">
+                                                <input type="text" name="zip_code" placeholder="Zip Code">
+                                            </div>
+                                        </div>
+                                         <div class="col-md-3 colpad">
+                                            <div class="form-group">
+                                                <input type="text" name="city" placeholder="City">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 colpad">
+                                            <div class="form-group">
+                                                <input type="text" name="state" placeholder="State">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 colpad">
+                                            <div class="form-group">
+                                               <select name="country">
+                                               <option value="-1">Country</option>
+                                               </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 colpad">
+                                            <div class="form-group mar-0">
+                                                <textarea name="notes">Notes</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                              
+                            </div>
+                            <div class="card-info mar-top-50">
+                                <div class="form-title">
+                                    <span>2</span>
+                                    <h4 class="mar-bottom-30">Payment Information</h4>
+                                </div>
+                              
+                                    <div class="row">
+                                        <div class="col-md-6 colpad">
+                                            <div class="form-group">
+                                                <input type="text" name="card_holder_name" placeholder="Name of Card Holder">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 colpad">
+                                            <div class="form-group">
+                                                <input type="text" name="credit_card_number" placeholder="Credit Card Number">
+                                            </div>
+                                        </div>
+                                       
+                                      
+                                        <div class="col-md-3 colpad">                                            
+                                            <div class="form-group">
+                                               <select name="expiry_month" id="expirymonth" required="required">
+                                                   <option value="MM">MM</option>
+                                                   <option value="01">January</option>
+                                                   <option value="02">February</option>
+                                                   <option value="03">March</option>
+                                                   <option value="04">April</option>
+                                                   <option value="05">May</option>
+                                                   <option value="06">June</option>
+                                                   <option value="07">July</option>
+                                                   <option value="08">August</option>
+                                                   <option value="09">September</option>
+                                                   <option value="10">October</option>
+                                                   <option value="11">November</option>
+                                                   <option value="12">December</option>
+                                               </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 colpad">
+                                            <div class="form-group">
+                                                <select name="expiry_year" id="expiryyear" required="required">
+                                                   <option value="YYYY">YYYY</option>
+                                                   <option value="2023">2023</option>
+                                                   <option value="2024">2024</option>
+                                                   <option value="2025">2025</option>
+                                                   <option value="2026">2026</option>
+                                                   <option value="2027">2027</option>
+                                                   <option value="2028">2028</option>
+                                                   <option value="2029">2029</option>
+                                                   <option value="2030">2030</option>
+                                                   <option value="2031">2031</option>
+                                                   <option value="2032">2032</option>
+                                               </select>
+                                            </div>
+                                        </div>
+                                         <div class="col-md-6 colpad">
+                                            <div class="form-group">
+                                                <input name="cvv" type="text" placeholder="CVV">
+                                            </div>
+                                        </div>
+                                        <div id="termsconditions">
+                                          <div class="col-md-12 mar-top-15 colpad terms-and-conditions">
+                                            {% for tc in tc %}
+                                          <h2>{{tc.title}}</h2>
+                                          <p>{{tc.description|safe}}</p>
+                                          {% endfor %}
+                                          </div>
+                                          </div>
+                                        <div class="col-md-12 mar-top-15 colpad">
+                                            <div class="form-group mar-bottom-30">
+                                                <input type="checkbox" name="term_condition" value="1"> I agree to the <a href="#termsconditions" class="terms-link" id="termsConditions">Terms and Conditions</a>
+                                            </div>
+                                            <div class="card-btn">
+                                                <button type="submit"  class="btn btn-orange">CONFIRM BOOKING</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-4">
+                        <div class="detail-sidebar">
+                            <div class="sidebar-reservation">
+                                <h3>Your reservation</h3>
+                                <div class="reservation-detail">
+                                    <div class="rd-top">
+                                        <div class="rd-box">
+                                            <label>Check in</label>
+                                            <p class="bold"  id="checkin"></p>
+                                            <input type="hidden" name="check_in" value="{{ request.session.checkin }}">
+                                        </div>
+                                        <div class="rd-box">
+                                            <label>Check out</label>
+                                         
+                                            <p class="bold" id="checkout" ></p>
+                                            <input type="hidden" name="check_out" value="{{request.session.checkout}}">
+                                        </div>
+                                    </div>
+                                    <div class="rd-top">
+                                        <div class="rd-box">
+                                            <p class="bold" id="guest"></p>
+                                            <input type="hidden" name="adult" value="{{request.session.adult}}">
+                                            <input type="hidden" name="child" value="{{request.session.child}}">
+                                            <input type="hidden" name="room_id" value="{{room.name}}">
+                                            <input type="hidden" name="room" value="{{room.id}}">
+                                            
+                                            <input type="hidden" name="no_of_guest" value="{{request.session.no_of_guest}}">
+                                            <p>Guest</p>
+                                        </div>
+                                        <div class="rd-box">
+                                            <p class="bold" id="numdays"></p>
+                                            <input type="hidden" name="no_of_nights"  id="dayDiffInput">
+                                            <p>Night</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="reservation-table table">
+                                    <tbody>
+                                        <tr>
+                                            <td>1 Room x <span id="numday"></span> Nights</td>
+                                            <td>$<span id="basePrice"></span></td>
+                                            <input type="hidden" name="price"  id="Baseprice">
+                                        </tr>
+                                        <tr>
+                                            <td>Tax</td>
+                                            <td>$<span id="tax"></td>
+                                            <input type="hidden" name="tax"  id="taxamount">
+                                        </tr>
+                                        <tr>
+                                              <tbody id="extra-services-list">
+                                                <input type="hidden" name="tax"  id="esl">
+                                              </tbody>
+                                            </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>Total</td>
+                                            
+                                            <td><p><span id="total-price">$0.00</span></p></td>
+                                            <input type="hidden" name="total_price"  id="totalprice">
+                                           
+                                        </tr>
+                                        {% comment %} <div>
+                                            <h2>Extra Services</h2>
+                                            <ul id="extra-services-list">
+                                              <!-- extra services will be added dynamically here -->
+                                            </ul>
+                                            <p>Total Price: <span id="total-price">$0.00</span></p>
+                                          </div> {% endcomment %}
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="sidebar-support">
+                                <h3>Help and Support</h3>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut arnare</p>
+                                <p><i class="fa fa-phone"></i>  977 - 222 - 444 - 666</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        </div>
+    </section>
+  
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="row">
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-about">
+                                <h4>Company Info</h4>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius tellus vitae justo blandit ultrices.</p>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="quick-links">
+                                <h4>Quick Links</h4>
+                                <ul>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">About</a></li>
+                                    <li><a href="#">Rooms</a></li>                                    
+                                    <li><a href="#">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="Rooms">
+                                <h4>Rooms</h4>
+                                <ul>
+                                    <li><a href="#">Single Rooms</a></li>
+                                    <li><a href="#">Double Rooms</a></li>
+                                    <li><a href="#">Studio Rooms</a></li>
+                                    <li><a href="#">Kingsize Rooms</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="footer-contact">
+                                <h4>Contact info</h4>
+                                <ul>
+                                    <li>Tel: <a href="tel:+12165395283">+12165395283</a></li>
+                                    <li>Email: <a href="mailto:info@ezbzrentals.com">info@ezbzrentals.com</a></li>
+                                    <li>Address: 445 Mount Eden Road, Sundarbasti, Chakrapath</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="copyright-content text-center">
+                    <p class="white">Copyright &copy; EZBZ Rentals 2023. All Rights Reserved.</p>
+                  
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="back-to-top">
+        <a href="#"></a>
+    </div>
+    
+    <script src="/static/bookingengine/engine/js/jquery-3.3.1.min.js"></script>
+    <script src="/static/bookingengine/engine/js/bootstrap.min.js"></script>
+    <script src="/static/bookingengine/engine/js/plugin.js"></script>
+    <script src="/static/bookingengine/engine/js/main.js"></script>
+    <script src="/static/bookingengine/engine/js/custom-nav.js"></script>
+    
+<script>
+  $(document).ready(function(){
+    $("#termsConditions").click(function(){
+    $(".terms-and-conditions").slideToggle();
+    });
+  
+  });
+</script>
+<script>
+    $(document).ready(function() {
+      $.get('/booking-engine/get_session_data', function(data) {
+        $('#checkin').text(data.checkin);
+        $('#checkout').text(data.checkout);
+        $('#adult').text(data.adult);
+        $('#child').text(data.child);
+        $('#guest').text(data.no_of_guest);
+        var checkinDate = new Date(data.checkin);
+        var checkoutDate = new Date(data.checkout);
+        var timeDiff = checkoutDate.getTime() - checkinDate.getTime();
+        var dayDiff = Math.round(timeDiff / (1000 * 3600 * 24));
+        $('#numdays').text(dayDiff);
+        $('#numday').text(dayDiff);
+        $('#dayDiffInput').val(dayDiff);
+
+        const nightlyRate = {{ room.price }};
+        const taxPercentage = {{ tax.amount }}; 
+        const basePrice = dayDiff * nightlyRate;
+        $('#basePrice').text(basePrice);
+        $('#Baseprice').val(basePrice);
+      
+
+        const taxAmount = basePrice * (taxPercentage / 100);
+        document.getElementById("tax").innerHTML = taxAmount
+        $('#taxamount').val(taxAmount);
+        console.log(taxAmount);
+
+
+        tPrice = basePrice + taxAmount;
+        
+        document.getElementById("total-price").innerHTML = tPrice.toFixed(2);
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        const totalPriceSpan = document.querySelector('#total-price');
+        const baseprice = tPrice;
+        console.log(baseprice);
+
+        checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            let extraServicesTotal = 0.00;
+            const selectedServices = [];
+
+            checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const serviceName = checkbox.parentElement.textContent.trim();
+                const servicePrice = parseFloat(checkbox.value);
+                extraServicesTotal += servicePrice;
+                selectedServices.push({ name: serviceName, price: servicePrice });
+            }
+            });
+
+            const totalPrice = baseprice + extraServicesTotal;
+            
+            totalPriceSpan.innerText = `$${totalPrice.toFixed(2)}`;
+            $('#totalprice').val(totalPrice);
+
+            const extraServicesList = document.querySelector('#extra-services-list');
+            extraServicesList.innerHTML = '';
+            selectedServices.forEach(service => {
+            const row = document.createElement('tr');
+            const nameCell = document.createElement('td');
+            const priceCell = document.createElement('td');
+            nameCell.innerText = service.name;
+            priceCell.innerText = `$${service.price.toFixed(2)}`;
+            row.appendChild(nameCell);
+            row.appendChild(priceCell);
+            extraServicesList.appendChild(row);
+            });
+        });
+        });
+      });
+    });
+
+   
+  </script>
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% load static %}
+{% static "img" as baseUrl %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>EZBZ </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Mukta+Mahee:200,300,400|Playfair+Display:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/owl.carousel.min.css '%}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/aos.css '%}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/bootstrap-datepicker.css '%}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/jquery.timepicker.css '%}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/magnific-popup.css '%}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/fonts/ionicons/css/ionicons.min.css '%}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/fonts/fontawesome/css/font-awesome.min.css '%}">
+    <link rel="stylesheet" href="{% static 'bookingengine/engine/css/style.css' %}">
+  </head>
+  <body>
+
+    <header class="site-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-4 site-logo" data-aos="fade"><a href="/booking-engine"><em>EZBZ Rentals</em></a></div>
+          <div class="col-8">
+            <div class="site-menu-toggle js-site-menu-toggle"  data-aos="fade">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <!-- END menu-toggle -->
+
+            <div class="site-navbar js-site-navbar">
+              <nav role="navigation">
+                <div class="container">
+                  <div class="row full-height align-items-center">
+                    <div class="col-md-6 mx-auto text-center">
+                      <ul class="list-unstyled menu">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="rooms/allRooms">Rooms</a></li>
+                        <li><a href="/About">About</a></li>
+                        <li><a href="/Blog">Events</a></li>
+                        <li><a href="/Contact">Contact</a></li>
+                        <li><a href="/Reservation">Reservation Form</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- END head -->
+
+    <section class="site-hero overlay" style="background-image: url({% static 'bookingengine/engine/img/bg.jpg' %})" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row site-hero-inner justify-content-center align-items-center">
+          <div class="col-md-10 text-center" data-aos="fade-up">
+            <h1 class="heading">Booking <br> Confirmation</h1>
+          </div>
+        </div>
+      </div>
+
+      <a class="mouse smoothscroll" href="#next">
+        <div class="mouse-icon">
+          <span class="mouse-wheel"></span>
+        </div>
+      </a>
+    </section>
+
+    
+
+
+    
+    <section onload="calculateDays()" class="section contact-section" id="next">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12" data-aos="fade-up" data-aos-delay="100">
+            <form action="/user/book-room/book" method="POST">
+                {%csrf_token%}
+                {%load app_tags%}
+                  <h2 style="background-color:#33475b"> Accomodation Type : {{room.name}}<h2>
+                    <br>
+                  <div class="form-group">
+                      <label for="checkin">Check in:</label>
+                      <input class="form-condivol" type="date" placeholder="Check in" id="checkin_date" name="checkin_date" value="{{checkin}}" min={%todays_date%} max={% max_date %} aria-label="Search" required="True">
+                  </div>
+                  <div class="form-group">
+                      <label for="checkout">Check Out:</label>
+                      <input class="form-condivol" type="date" placeholder="Check out" id="checkout_date" name="checkout_date" value="{{checkout}}" min={%tommorow%} max={% max_date%} aria-label="Search" required="True">
+                  </div>  
+                  <div>
+                    Number of days: <span id="no_of_days"></span>
+                  </div>
+                  <div class="form-group">
+                    <label for="person"> Adults:</label>
+                    <select name="adults" class="form-condivol form-select" required>
+                      <option>--Select--</option>
+                      <option value="1" >1</option>
+                      <option value="2" >2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select> 
+                </div>
+                <div class="form-group">
+                  <label for="person"> Children:</label>
+                  <select name="children" class="form-condivol form-select" required>
+                    <option>--Select--</option>
+                    <option value="1" >1</option>
+                    <option value="2" >2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select> 
+                </div>
+                  <div class="form-group">
+                      <label for="person"> Full Guest Name:</label>
+                      <input type="text" class="form-condivol " id="username" name="full_guest_name"  >
+                  </div>
+                  
+                  <br>
+                  <h2 style="background-color:#33475b">Price breakdown<h2>
+                    <br>
+
+                  <div class="form-group">
+                      <label for="person">Room Charge:</label>
+                      <input type="text" class="form-condivol " id="baseRate" name="baseRate"  value="{{room.price}}" >
+                  </div>
+                  <div class="form-group">
+                    <label for="person">Taxes :</label>
+                    <input type="text" class="form-condivol " id="taxRate" name="taxRate"  value="{{tax.amount}}" >
+                </div>
+               
+                <div>
+                  Total amount: $<span id="total-price"></span>
+                </div>
+              <br>
+              <h2 style="background-color:#33475b">Your Information <h2>
+                <br>
+                  <div class="form-group">
+                      <label for="password2">First Name:</label>
+                      <input type="text" class="form-condivol " id="price"  name="price" >
+                  </div>
+                  <div class="form-group">
+                    <label for="password2">Last Name:</label>
+                    <input type="text" class="form-condivol " id="price"  name="total" >
+                </div>
+                <div class="form-group">
+                  <label for="person">Email:</label>
+                  <input type="text" class="form-condivol " id="username" name="apply_taxes" >
+              </div>
+                <div class="form-group">
+                  <label for="person"> Phone:</label>
+                  <input type="text" class="form-condivol " id="username" name="apply_taxes" >
+              </div>
+                <div class="form-group">
+                  <label for="person"> Country of residence:</label>
+                  <input type="text" class="form-condivol " id="username" name="apply_taxes" >
+              </div>
+              <div class="form-group">
+                <label for="person">Address :</label>
+                <input type="text" class="form-condivol " id="username" name="apply_taxes" >
+            </div>
+              <div class="form-group">
+                <label for="person">City :</label>
+                <input type="text" class="form-condivol " id="username" name="apply_taxes" >
+            </div>
+                <div class="form-group">
+                  <label for="person">Room Charge:</label>
+                  <input type="text" class="form-condivol " id="username" name="apply_taxes" >
+              </div>
+                <div class="form-group">
+                  <label for="person">  Zip:</label>
+                  <input type="text" class="form-condivol " id="username" name="apply_taxes" >
+              </div>
+                <div class="form-group">
+                  <label for="person">Notes :</label>
+                  <input type="text" class="form-condivol " id="username" name="apply_taxes" >
+              </div>
+                  <input type="submit" value="Submit">
+              </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+   
+    <footer class="section footer-section bg-success">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-md-3 mb-5">
+            <ul class="list-unstyled link">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Terms &amp; Conditions</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Help</a></li>
+             <li><a href="#">Rooms</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-5">
+            <ul class="list-unstyled link">
+              <li><a href="#">Our Location</a></li>
+              <li><a href="#">The Rooms &amp; Suites</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Restaurant</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 mb-5 pr-md-5 contact-info">
+            <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span>Brgy. Enclaro, Binalbagan, Negros Occidental</span></p>
+            <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span>09123456789</span></p>
+            <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span> myrel@gmail.com</span></p>
+          </div>
+          <div class="col-md-3 mb-5">
+            <p>Sign up for our newsletter</p>
+            <form action="#" class="footer-newsletter">
+              <div class="form-group">
+                <input type="email" class="form-condivol" placeholder="Your email...">
+                <button type="submit" class="btn"><span class="fa fa-paper-plane"></span></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row bordertop pt-5">
+          <p class="col-md-6 text-center">
+            
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script data-cfasync="false"></script><script>document.write(new Date().getFullYear());</script> All Rights Reserved | Hotel Reservation System</i> 
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            
+          </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="{% static 'bookingengine/engine/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/popper.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/bootsdivap.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/aos.js'%}"></script>
+    <script src="{% static 'bookingengine/engine/js/bootsdivap-datepicker.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static 'bookingengine/engine/js/main.js' %}"></script>
+  <script>
+          const checkin = new Date("{{checkin}}");
+          const checkout = new Date("{{checkout}}");
+          const oneDay = 24 * 60 * 60 * 1000; // one day in milliseconds
+          var diffInDays = Math.round(Math.abs((checkout.getTime() - checkin.getTime()) / oneDay));
+          document.getElementById("no_of_days").innerHTML = diffInDays;
+          const nightlyRate = {{ room.price }};
+          const taxPercentage = {{ tax.amount }}; 
+          const basePrice = diffInDays * nightlyRate;
+          console.log(basePrice);
+
+          const taxAmount = basePrice * (taxPercentage / 100);
+          console.log(taxAmount);
+          const totalPrice = basePrice + taxAmount;
+          console.log(totalPrice);
+          document.getElementById("total-price").innerHTML = totalPrice.toFixed(2);
+         
+  
+    
+    </script>
+
+
+  </body>
+</html> {% endcomment %}

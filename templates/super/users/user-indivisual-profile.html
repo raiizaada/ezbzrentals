@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> User Indivisual Profile</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-title-box">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="page-title">Profile</h4>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="/super/users">Users</a></li>
+                                            <li class="breadcrumb-item active">Profile</li>
+                                        </ol>
+                                    </div>
+                                  
+                                </div>                                                           
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                              
+                                <div class="card-body p-0">
+                                {% if property_logo  %}
+                                    <img src="/media/{{user_profile.property_logo}}" class="img-fluid">
+                                {% else %}
+                                      <img src="/static/super/images/user_icon.png" class="img-fluid">
+                                {% endif %}
+
+
+                                </div>                              
+                                <div class="card-body">
+                                    <div class="dastyle-profile">
+                                        <div class="row">
+                                            <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
+                                                <div class="dastyle-profile-main">
+                                                    
+                                                    <div class="dastyle-profile_user-detail">
+                                                        <h5 class="dastyle-user-name">{{user_indivisual.first_name}} {{user_indivisual.last_name}}</h5>                                                        
+                                                                                                                
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                            
+                                            <div class="col-lg-4 ml-auto align-self-center">
+                                                <ul class="list-unstyled personal-detail mb-0">
+                                                    <li class=""><i class="las la-phone mr-2 text-secondary font-22 align-middle"></i> <b> Phone </b> : {{user_profile.phone}}</li>
+                                                    <li class="mt-2"><i class="las la-envelope text-secondary font-22 align-middle mr-2"></i> <b> Email </b> : {{user_indivisual.email}}</li>
+                                                    <li class="mt-2"><i class="las la-globe text-secondary font-22 align-middle mr-2"></i> <b> Website </b> : 
+                                                        <a href="" class="font-14 text-primary" target="_blank"> {{user_profile.website}}</a> 
+                                                    </li>                                                   
+                                                </ul>
+                                               
+                                            </div>
+                                           
+                                        </div>
+                                    </div>                                                                              
+                                </div>          
+                            </div>   
+                        </div>
+                    </div>
+                    <div class="pb-4">
+                        <ul class="nav-border nav nav-pills mb-0" id="pills-tab" role="tablist">
+                           
+                            <li class="nav-item">
+                                <a class="nav-link" id="settings_detail_tab" data-toggle="pill" href="#Profile_Settings">Profile Settings</a>
+                            </li>
+                        </ul>        
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="tab-content" id="pills-tabContent">
+                              
+                                <div class="tab-pane fade show active" id="Profile_Settings" role="tabpanel" aria-labelledby="settings_detail_tab">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row align-items-center">
+                                                        <div class="col">                      
+                                                            <h4 class="card-title">User Information</h4>                      
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body"> 
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">User Type</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                           {% if user.is_superuser == 1 %}
+                                                                Admin
+                                                            {% elif user.is_staff == 1 %}
+                                                                Staff
+                                                            {% elif user.is_active == 1 %}
+                                                                User
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>                                                                  
+                                                   
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Username:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                           {{user_indivisual.username}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Registered Email:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_indivisual.email}}
+                                                        </div>
+                                                    </div>
+                                                                                                   
+                                                </div>                                            
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-6 col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title">Change Password</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    {% if messages %}
+                                                    {% for message in messages %}
+                                                    <div class="alert alert-success border-0" role="alert">{{message}}</div>
+                                                    {% endfor %}
+                                                    {%endif%}
+                                                    <form name="form" method="post" action="/super/user-indivisual-profile/{{user_profile.id}}">
+                                                        {% csrf_token %}  
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">New Password</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <input class="form-control" type="password" placeholder="New Password" name="password">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Confirm Password</label>
+                                                        <div class="col-lg-9 col-xl-8">
+                                                            <input class="form-control" type="password" placeholder="Re-Password" name="cpassword">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-9 col-xl-8 offset-lg-3">
+                                                            <button type="submit" class="btn btn-primary btn-sm">Change Password</button>
+                                                        </div>
+                                                    </div>   
+                                                </form>
+                                                </div>
+                                            </div>
+                  
+                                        </div> 
+                                                                              
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-xl-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <div class="row align-items-center">
+                                                        <div class="col">                      
+                                                            <h4 class="card-title">Personal Information</h4>                      
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body"> 
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Name:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_indivisual.first_name}} {{user_indivisual.last_name}}
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Phone:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            <div class="input-group">
+                                                                <div class="input-group-prepend"></div>
+                                                                {{user_profile.phone}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Address:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_profile.address}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">City:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_profile.city}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">State:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_profile.state}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Country:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_profile.country}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Zip / Postal Code:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_profile.postal_code}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Property Phone Number:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_profile.property_phone_number}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Toll Free:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_profile.property_phone_number}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Website:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {{user_profile.website}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-xl-3 col-lg-3 col-form-label">Logo:</label>
+                                                        <div class="col-lg-9 col-xl-8 mt-2">
+                                                            {% if property_logo %}
+                                                             <img src="/media/{{ user_profile.property_logo}}" height="40">
+                                                            {% else %}
+                                                              <img src="/static/super/images/no_img.png" height="40">
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                                                                   
+                                                </div>                                            
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+           
+        
+            {% include 'super/base/footer.html'%}
+            </div>
+        </div> 
+ </div>
+        {% include 'super/base/footer_js.html'%}
+        
+    </body>
+
+</html>

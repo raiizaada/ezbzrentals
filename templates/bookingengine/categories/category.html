@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Categories</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        
+        <link rel="shortcut icon" href="/static/bookingengine/images/favicon.ico">
+
+<link href="/static/bookingengine/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/icons.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/libs/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="/static/bookingengine/css/custom.css" rel="stylesheet" type="text/css" />
+
+                                
+
+    </head>
+
+    <body>
+        <div id="layout-wrapper">
+            {% include 'bookingengine/base/top_nav.html'%}
+            {% include 'bookingengine/base/left_sidebar.html'%}
+	
+<div class="main-content">
+<div class="page-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                    <h4 class="mb-sm-0">Category</h4>
+                  
+
+                    <div class="page-title-right">
+                         <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="/bookingengine/dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item active">Category</li>
+                        </ol>
+                        
+                                      
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">{{message}}   
+            <button type="button" class="btn-close" data-bs-dismiss="alert"
+            aria-label="Close"></button>
+    </div>
+        {% endfor %}
+        {%endif%}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">   
+                    <div class="pt-3 pr-2">
+                            <a href="/booking-engine/category-add" class="btn btn-success pull-right mb-2"><i class="mdi mdi-plus me-1"></i> Add New</a>
+                    </div>                 
+                    <div class="card-body">                                              
+                         
+                        <table id="datatable" class="table table-bordered dt-responsive nowrap"
+                            style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>  
+                                    <th>SN</th>
+                                    <th>ID</th>
+                                    <th>Name</th>  
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>  
+                            </thead>  
+    <tbody>  
+ {% for aman in category %}  
+    <tr>  
+        <td>{{forloop.counter}}</td>
+        <td>{{aman.id }}</td>
+        <td>{{aman.name }}</td>  
+        <td>{{aman.description }}</td> 
+        <td class="level-right">
+            {% if aman.status == 1 %}
+            <a class="badge badge-soft-success" >Active</a>
+            {% else %}
+            <a class="badge badge-soft-danger">InActive</a>
+            {% endif %}
+        </td>
+        
+        <td class="text-left">                                                       
+            <a href="/booking-engine/category-edit/{{ aman.id}}" class="me-1 text-primary" data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Edit" aria-label="Edit"><i class="mdi mdi-pencil font-size-18"></i></a>
+            <a href="/booking-engine/category-delete/{{ aman.id}}"class="text-danger" onclick="return DelItem();"  data-bs-toggle="tooltip" data-placement="top" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="mdi mdi-trash-can font-size-18"></i></a>
+        </td>
+       
+        
+    </tr>  
+ {% endfor %}  
+</tbody>  
+</table> 
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% include 'bookingengine/base/footer.html'%}
+</div> 
+
+<script src="/static/bookingengine/libs/jquery/jquery.min.js"></script>
+<script src="/static/bookingengine/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/bookingengine/libs/metismenu/metisMenu.min.js"></script>
+<script src="/static/bookingengine/libs/simplebar/simplebar.min.js"></script>
+<script src="/static/bookingengine/libs/node-waves/waves.min.js"></script>
+<script src="/static/bookingengine/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/static/bookingengine/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/bookingengine/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/static/bookingengine/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="/static/bookingengine/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="/static/bookingengine/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script src="/static/bookingengine/js/pages/datatables.init.js"></script>
+<script src="/static/bookingengine/js/app.js"></script>
+<script>
+    $(".alert-success").fadeTo(5000, 500).slideUp(500, function(){
+        $(".alert-success").slideUp(500);
+    });
+  </script>
+<script>
+
+
+
+    function DelItem() {
+  
+  
+  
+        if(!confirm("Are You Sure to delete this"))
+  
+  
+  
+        event.preventDefault();
+  
+  
+  
+    }
+  
+  
+   </script>
+</body>
+</html> 
+ 
+

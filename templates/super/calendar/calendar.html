@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Create Invoice </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="/static/super/images/favicon.ico">
+
+         <!--calendar css-->
+      	<link href="/static/super/plugins/fullcalendar/packages/core/main.css" rel="stylesheet" />
+      	<link href="/static/super/plugins/fullcalendar/packages/daygrid/main.css" rel="stylesheet" />
+      	<link href="/static/super/plugins/fullcalendar/packages/bootstrap/main.css" rel="stylesheet" />
+      	<link href="/static/super/plugins/fullcalendar/packages/timegrid/main.css" rel="stylesheet" />
+        <link href="/static/super/plugins/fullcalendar/packages/list/main.css" rel="stylesheet" />
+        
+        <link href="/static/super/plugins/lightpick/lightpick.css" rel="stylesheet" />
+
+
+        <!-- App css -->
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css" />
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include "super/base/left_sidebar.html" %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include "super/base/top_nav.html" %}
+        </div>
+
+            <!-- Page Content-->
+            <div class="page-content">
+                <div class="container-fluid">
+                    <!-- Page-Title -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page-title-box">
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="page-title">Calendar</h4>
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
+                                          
+                                            <li class="breadcrumb-item active">Calendar</li>
+                                        </ol>
+                                    </div><!--end col-->
+                                    <div class="col-auto align-self-center">
+                                        <a href="#" class="btn btn-sm btn-outline-primary" id="Dash_Date">
+                                            <span class="day-name" id="Day_Name">Today:</span>&nbsp;
+                                            <span class="" id="Select_date">Jan 11</span>
+                                            <i data-feather="calendar" class="align-self-center icon-xs ml-1"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-sm btn-outline-primary">
+                                            <i data-feather="download" class="align-self-center icon-xs"></i>
+                                        </a>
+                                    </div><!--end col-->  
+                                </div><!--end row-->                                                              
+                            </div><!--end page-title-box-->
+                        </div><!--end col-->
+                    </div><!--end row-->
+                    <!-- end page title end breadcrumb -->
+                    <div class="row">  
+                        <div class="col-12">
+                            <div class="card calendar-cta">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <img src="/static/super/images/widgets/calendar.svg" alt="" class="" height="150">
+                                        </div><!--end col-->
+                                       
+                                        
+                                    </div><!--end row-->
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                    </div><!-- End row -->
+                    <div class="row">  
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="dash-datepick">
+                                        <input type="hidden" id="light_datepick"/>
+                                    </div>
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                            <div class="card">
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item align-items-center d-flex">
+                                            <div class="media">
+                                                <img src="/static/super/images/widgets/project1.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="/static/super.">
+                                                <div class="media-body align-self-center"> 
+                                                    <h5 class="m-0 font-13">Meeting with UI/UX Designers</h5>
+                                                    <p class="text-muted mb-0">Today 07:30 AM</p>                                                                                             
+                                                </div><!--end media body-->
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item align-items-center ">
+                                            <div class="media">
+                                                <img src="/static/super/images/users/user-5.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="/static/super.">
+                                                <div class="media-body align-self-center"> 
+                                                    <h5 class="m-0 font-13">Lunch with my friend</h5>
+                                                    <p class="text-muted mb-0">Today 12:30 PM</p>                                                                                            
+                                                </div><!--end media body-->
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item align-items-center">
+                                            <div class="media">
+                                                <img src="/static/super/images/widgets/project3.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="/static/super.">
+                                                <div class="media-body align-self-center"> 
+                                                    <h5 class="m-0 font-13">Call for payment Project ID : #254136</h5>
+                                                    <p class="text-muted mb-0">Tomorrow 10:30 AM</p>                                                                                           
+                                                </div><!--end media body-->
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item align-items-center ">
+                                            <div class="media">
+                                                <img src="/static/super/images/users/user-4.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="/static/super.">
+                                                <div class="media-body align-self-center"> 
+                                                    <h5 class="m-0 font-13">Picnic with my Family</h5>
+                                                    <p class="text-muted mb-0">01 June 2019 - 09:30 AM</p>                                                                                           
+                                                </div><!--end media body-->
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item align-items-center">
+                                            <div class="media">
+                                                <img src="/static/super/images/widgets/project4.jpg" class="mr-3 thumb-sm align-self-center rounded-circle" alt="/static/super.">
+                                                <div class="media-body align-self-center"> 
+                                                    <h5 class="m-0 font-13">Meeting with Developers</h5>
+                                                    <p class="text-muted mb-0">04 June 2019 - 07:30 AM</p>                                                                                            
+                                                </div><!--end media body-->
+                                            </div>
+                                        </li>
+                                    </ul> 
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->                      
+                        <div class="col-lg-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div id="calendar"></div>
+                                    <div style="clear:both"></div>
+                                </div><!--end card-body-->
+                            </div><!--end card-->
+                        </div><!--end col-->
+                    </div><!-- End row -->
+
+                </div><!-- container -->
+
+                {% include 'super/base/footer.html'%}
+        </div>
+        <!-- end page-wrapper -->
+
+        
+
+
+        <!-- jQuery  -->
+        <script src="/static/super/js/jquery.min.js"></script>
+        <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/super/js/metismenu.min.js"></script>
+        <script src="/static/super/js/waves.js"></script>
+        <script src="/static/super/js/feather.min.js"></script>
+        <script src="/static/super/js/simplebar.min.js"></script>
+        <script src="/static/super/js/jquery-ui.min.js"></script>
+        <script src="/static/super/js/moment.js"></script>
+        <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+
+        <script src="/static/super/plugins/fullcalendar/packages/core/main.js"></script>
+        <script src="/static/super/plugins/fullcalendar/packages/daygrid/main.js"></script>
+        <script src="/static/super/plugins/fullcalendar/packages/timegrid/main.js"></script>
+        <script src="/static/super/plugins/fullcalendar/packages/interaction/main.js"></script>
+        <script src="/static/super/plugins/fullcalendar/packages/list/main.js"></script>
+        <script src="/static/super/plugins/lightpick/lightpick.js"></script>
+        <script src="/static/super/pages/jquery.calendar.js"></script>
+
+        <!-- App js -->
+        <script src="/static/super/js/app.js"></script>
+        
+    </body>
+
+</html>

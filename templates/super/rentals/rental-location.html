@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Location</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="/static/super/images/favicon.png">
+        <link href="/static/super/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/jquery-ui.min.css" rel="stylesheet">
+        <link href="/static/super/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/static/super/css/custom.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body class="dark-sidenav">
+        <div class="left-sidenav">
+            {% include 'super/base/left_sidebar.html' %}
+        </div>
+        
+
+        <div class="page-wrapper">
+            <div class="topbar">            
+                {% include 'super/base/top_nav.html' %}
+        </div>
+         
+<div class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="page-title-box">
+                  <div class="row">
+                      <div class="col">
+                          <h4 class="page-title"> Location</h4>
+                          <ol class="breadcrumb">
+                              <li class="breadcrumb-item"><a href="/super/dashboard">Dashboard</a></li>
+                              <li class="breadcrumb-item"><a href="/super/location">Location</a></li>
+                             
+                          </ol>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-header">
+                      <div class="row align-items-center">
+                          <div class="col">                      
+                              <h4 class="card-title">Location</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">
+                        <div class="col-lg-2"></div>
+                          <div class="col-lg-8">
+                            <form method="POST" enctype="multipart/form-data" class="post-form" action="/super/rental-location-update/{{rentallocation.id}}">
+                                {% csrf_token %}
+                                <div class="row mb-3">
+                                  <div class="col-lg-6">
+                                    <label class="form-label fw6" for="productname">Country</label>
+                                    <select name="country" class="form-control select2" required>
+                                      {% for country in country %}
+                                      <option value="{{country.code}}">{{country.name}}</option>
+                                      {% endfor %}
+                                    </select>
+                                  </div>
+                                </div>  
+                                <div class="row mb-3">
+                                  <div class="col-lg-12">
+                                    <label class="form-label fw6" for="productname">Address</label>
+                                    <input id="rental_address" name="address" type="text" class="form-control" value="{{rentallocation.address}}">
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col-lg-12">
+                                    <label class="form-label fw6" for="manufacturername">Apartment, floor, building</label>
+                                    <input id="rental_apartment" name="apartment" type="text" class="form-control" value="{{rentallocation.apartment}}">
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col-lg-6">
+                                    <label class="form-label fw6" for="manufacturername">City<span class="strict">*</span></label>
+                                    <input id="rental_city" name="city" type="text" value="{{rentallocation.city}}" class="form-control" required>
+                                  </div>
+                                  <div class="col-lg-6">
+                                    <label class="form-label fw6" for="manufacturername">State or region<span class="strict">*</span></label>
+                                    <input id="rental_state" name="state" type="text" value="{{rentallocation.state}}" class="form-control" required>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                
+                                  <div class="col-lg-6">
+                                    <label class="form-label fw6" for="manufacturername">Postal / Zip code<span class="strict">*</span></label>
+                                    <input id="rental_postalcode" name="postal" type="text" value="{{rentallocation.postal}}" class="form-control" required>
+                                  </div>
+                                </div>
+                                <div class="row mb-3">
+                                  <div class="col-lg-6">                    
+                                    <button name="submit" type="submit" class="btn btn-primary">Save</button>
+                                  </div>
+                              </form>
+                      </div> 
+                  </div> 
+                </div> 
+              </div> 
+            </div> 
+           </div> 
+   </div> 
+   {% include 'super/base/footer.html'%}
+  </div> 
+  
+  <script src="/static/super/js/jquery.min.js"></script>
+  <script src="/static/super/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/super/js/metismenu.min.js"></script>
+  <script src="/static/super/js/waves.js"></script>
+  <script src="/static/super/js/feather.min.js"></script>
+  <script src="/static/super/js/simplebar.min.js"></script>
+  <script src="/static/super/js/jquery-ui.min.js"></script>
+  <script src="/static/super/js/moment.js"></script>
+  <script src="/static/super/plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="/static/super/js/app.js"></script>
+  <script>
+    function previewFile(input){
+        var file = $("input[type=file]").get(0).files[0];
+        if(file){
+          var reader = new FileReader();
+          reader.onload = function(){
+              $("#previewImg").attr("src", reader.result);
+          }
+          reader.readAsDataURL(file);
+        }
+    }
+
+
+    
+</script>
+
+<script>
+  $(".alert-success").fadeTo(5000, 500).slideUp(500, function(){
+      $(".alert-success").slideUp(500);
+  });
+</script>
+  
+
+
+</body>
+
+</html>                        
